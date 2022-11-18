@@ -1,0 +1,5 @@
++ conditions:
+
+    - first and last lines contains only 1
+    - first and last character of each line contains 1
+    - the 0 must be surrounded by 1 from top,bottum,right,left
