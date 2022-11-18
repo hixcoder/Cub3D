@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubunto <ubunto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:38:47 by hboumahd          #+#    #+#             */
-/*   Updated: 2021/11/07 11:07:11 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:50:09 by ubunto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = -1;
-	if (s != '\0')
+	if (s == NULL)
 	{
 		while (s[++i])
 			ft_putchar_fd(s[i], fd);

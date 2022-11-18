@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubunto <ubunto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 21:17:31 by hboumahd          #+#    #+#             */
-/*   Updated: 2021/11/13 14:13:23 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:49:41 by ubunto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	inds = 0;
 	j = 0;
-	if (s1 == '\0' || set == '\0')
+	if (s1 == NULL || set == NULL)
 		return (NULL);
 	inde = (int)ft_strlen(s1);
 	while (s1[inds] && ft_check(set, s1[inds]) == 1)

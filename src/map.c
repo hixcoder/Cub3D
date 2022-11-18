@@ -6,21 +6,13 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/18 12:30:21 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:55:02 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 
-// ft_check_map(t_data *data)
-// {
-//     int i;
-//     int j;
-
-//     ft_map_dimensions(char *map_path)
-    
-// }
-
+// this function for get the width and the hight of the map
 void	ft_map_dimensions(char *map_path, t_map *obj_map)
 {
 	int		fd;
@@ -46,6 +38,7 @@ void	ft_map_dimensions(char *map_path, t_map *obj_map)
 	close(fd);
 }
 
+// this function for convert the map file to 2D char array
 void    ft_fill_map(char *map_path, t_map *obj_map)
 {
     int     i;
@@ -54,6 +47,8 @@ void    ft_fill_map(char *map_path, t_map *obj_map)
     char    *line;
 
     map = (char **) malloc(sizeof(char *) * (obj_map->map_height + 1));
+    printf("the h = %d\n", obj_map->map_height);
+    printf("the w = %d\n\n", obj_map->map_width);
     if (!map)
         ft_maloc_error(map);
     fd = open(map_path, O_RDONLY);
@@ -61,7 +56,7 @@ void    ft_fill_map(char *map_path, t_map *obj_map)
     line = get_next_line(fd);
     while (line)
     {
-        map[i] = ft_strdup(line);
+        map[i] = ft_strdup_cub3D(line, obj_map->map_width);
         if (!map[i])
             ft_maloc_error(map[i]);
         free(line);
@@ -79,17 +74,16 @@ void    ft_print_map(char **map)
     i = -1;
     while (map[++i])
     {
-        printf("%s", map[i]);
+        printf("%s\n", map[i]);
     }
 }
 
+
 void    ft_map_init(char *map_path, t_map *obj_map)
 {
-    int i;
-    int j;
-   
     ft_map_dimensions(map_path, obj_map);
     ft_fill_map(map_path, obj_map);
-    
+    // ft_check_characters(obj_map);
     ft_print_map(obj_map->map);
+    // ft_check_walls(obj_map);
 }

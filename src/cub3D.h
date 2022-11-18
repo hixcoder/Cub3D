@@ -6,14 +6,14 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/18 12:05:09 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:07:39 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 
 # define CUB3D_H
-# include "mlx.h"
+// # include "mlx.h"
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 
@@ -32,7 +32,10 @@ typedef struct s_data
 }   t_data;
 
 
-void ft_maloc_error(void *var);
+void	ft_maloc_error(void *var);
 void    ft_map_init(char *map_path, t_map *obj_map);
+void	ft_map_errors(t_map *obj_map, int error_num);
+void    ft_check_characters(t_map *obj_map);
+void    ft_check_walls(t_map * obj_map);
 #endif
  
