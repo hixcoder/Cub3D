@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:38:47 by hboumahd          #+#    #+#             */
-/*   Updated: 2021/11/07 11:07:11 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:57:00 by ahammam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void ft_putstr_fd(char *s, int fd)
 {
-	int	i;
+	int i;
 
 	i = -1;
-	if (s != '\0')
+	if (s != 0)
 	{
 		while (s[++i])
 			ft_putchar_fd(s[i], fd);

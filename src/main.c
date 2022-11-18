@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/17 10:53:58 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:59:18 by ahammam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 
 int main(int ac, char **av)
 {
-    printf("hello ac = %d and av[1] = %s\n", ac, av[1]);
+    if (ac != 2)
+        return (0);
+    if (!ft_verifie(av[1]))
+    {
+        printf("invalid Map");
+        return (0);
+    }
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/17 10:54:40 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/18 11:57:28 by ahammam          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ BONUS = cub3D_bonus
 
 # madatory
 SRC_FOLDER = ./src/
-SRC = main.c 
+SRC = main.c ft_verifie_utils.c ft_verifie.c
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
 
@@ -52,7 +52,8 @@ $(NAME) : ${SRCOBJ} $(OTHER_SRCS)
 	@echo "make the get_next_line.a"
 	@echo "make the libft.a"
 	@echo "make the cub3D program"
-	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS)  -o $(NAME) 
+	# -lmlx -framework OpenGL -framework AppKit
 
 bonus:
 	@echo "did not make it yet!"
