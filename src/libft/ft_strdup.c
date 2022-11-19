@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:41:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/18 17:49:37 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:51:40 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ char	*ft_strdup_cub3D(const char *s1, int row_len)
 		return (NULL);
 	while (i < row_len)
 	{
-		if (s1[i] != '\0' && s1[i] != '\n')
+		if (end == 0 && s1[i] != '\0' && s1[i] != '\n')
 			pdst[i] = s1[i];
 		else
 			end = 1;
 		if (end == 1)
-			pdst[i] = '*';
+			pdst[i] = ' ';
 		i++;
 	}
 	pdst[i] = '\0';

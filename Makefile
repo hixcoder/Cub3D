@@ -6,7 +6,7 @@
 #    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/18 16:39:06 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/19 09:17:21 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,12 @@ CC = cc
 $(NAME) : ${SRCOBJ} $(OTHER_SRCS)
 	@$(MAKE) -C $(GET_NEXT_LINE_FOLDER)
 	@$(MAKE) -C $(LIBFT_FOLDER)
-	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
+	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "|+| make the get_next_line.a [${GREEN}DONE${RESET}]"
-	@echo "|+| make the libft.a [${GREEN}DONE${RESET}]"
-	@echo "|+| make the $(NAME) program [${GREEN}DONE${RESET}]"
+	@echo "|+| make the libft.a         [${GREEN}DONE${RESET}]"
+	@echo "|+| make the $(NAME) program   [${GREEN}DONE${RESET}]"
 
-# @$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# @$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
 
 bonus:
 	@echo "did not make it yet!"
@@ -63,7 +63,7 @@ all : $(NAME)
 
 clean :
 	@rm -f $(LIBS) $(OTHER_OBJ) $(SRCOBJ) $(SRCOBJ_B)
-	@echo "|-| remove object files ==> ${RED}DONE${RESET}"
+	@echo "|-| remove object files [${RED}DONE${RESET}]"
 
 fclean : clean
 	@rm -f ${NAME}

@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/18 17:03:23 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:35:33 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ void	ft_map_errors(t_map *obj_map, int error_num)
 	else if (error_num == 2)
 		printf("a map must contain only one Player.\n");
 	else if (error_num == 3)
-		printf("The map must be surrounded by walls [1].\n");
+		printf("a map must be surrounded by walls [1].\n");
+	else if (error_num == 4)
+	{
+		printf("a map can't be separated by new line.\n");
+		exit(0);
+	}
 	i = -1;
 	while (obj_map->map[++i] != NULL)
 		free(obj_map->map[i]);

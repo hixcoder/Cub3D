@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:54:43 by ubunto            #+#    #+#             */
-/*   Updated: 2022/11/18 17:15:46 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:02:30 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void    ft_is_wall_exist(t_map * obj_map, int y, int x)
     char **map;
 
     map = obj_map->map;
-    if (!map[y - 1][x] || map[y - 1][x] == ' '
-        || !map[y + 1][x] || map[y + 1][x] == ' '
-        || !map[y][x - 1] || map[y][x - 1] == ' '
-        || !map[y][x + 1] || map[y][x + 1] == ' ')
-        ft_map_errors(obj_map, 3);
+    printf("y = %d and x = %d\n", y, x);
+    printf("h = %d and w = %d\n----\n", obj_map->map_height, obj_map->map_width);
+    if ( y == 0 || y == obj_map->map_height - 1
+        || x == 0 || x == obj_map->map_width
+        || map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+        || map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+        printf("y = %d and x = %d\n", y, x),ft_map_errors(obj_map, 3);
 }
 
 // this function check if the map surrounded by walls.
@@ -77,7 +79,7 @@ void    ft_check_walls(t_map * obj_map)
         x = -1;
         while (map[y][++x])
         {
-            if (map[y][x] != '1' || map[y][x] != ' ')
+            if (map[y][x] != '1' && map[y][x] != ' ')
                 ft_is_wall_exist(obj_map, y, x);
         }
     } 
