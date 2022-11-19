@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/18 12:29:17 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:26:08 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ static int ft_information(char *file)
     fd = open(file, O_RDONLY);
     re = 1;
     len = 0;
-    while ((line = get_next_line(fd)) && len < 6)
+    while ((line = get_next_line(fd))  )
     {
-        if (line[0] != '\n')
+        if (line[0] != '\n' && len < 6)
         {
             split = ft_split(line, ' ');
             if (ft_len_split(split) != 2)
