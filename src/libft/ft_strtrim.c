@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubunto <ubunto@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 21:17:31 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/18 14:49:41 by ubunto           ###   ########.fr       */
+/*   Updated: 2022/11/19 14:24:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_check(const char *set, char c)
+static int ft_check(const char *set, char c)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (set[i] != '\0')
@@ -26,13 +26,13 @@ static int	ft_check(const char *set, char c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	int		inds;
-	int		inde;
-	int		j;
-	char	*dst;
-	int		len;
+	int inds;
+	int inde;
+	int j;
+	char *dst;
+	int len;
 
 	inds = 0;
 	j = 0;
