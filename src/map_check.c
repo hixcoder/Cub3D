@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:54:43 by ubunto            #+#    #+#             */
-/*   Updated: 2022/11/19 14:02:30 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/19 22:10:43 by ahammam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
+#include "cub3D.h"
 
 // this function for get the player position and check if there is more than one player.
-static void    ft_update_plyr(t_map *obj_map, int nbr_plyrs, int x, int y)
+static void ft_update_plyr(t_map *obj_map, int nbr_plyrs, int x, int y)
 {
     if (nbr_plyrs > 1)
         ft_map_errors(obj_map, 2);
@@ -22,7 +22,7 @@ static void    ft_update_plyr(t_map *obj_map, int nbr_plyrs, int x, int y)
 }
 
 // this function check if there is more than one player and if there is unwanted characters.
-void    ft_check_characters(t_map *obj_map)
+void ft_check_characters(t_map *obj_map)
 {
     int x;
     int y;
@@ -37,12 +37,9 @@ void    ft_check_characters(t_map *obj_map)
         x = -1;
         while (map[y][++x])
         {
-            if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'N' 
-                && map[y][x] != 'W' && map[y][x] != 'S' && map[y][x] != 'E'
-                && map[y][x] != ' ')
+            if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'N' && map[y][x] != 'W' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != ' ')
                 ft_map_errors(obj_map, 1);
-            else if (map[y][x] == 'W' || map[y][x] == 'S' || map[y][x] == 'E'
-                || map[y][x] == 'N')
+            else if (map[y][x] == 'W' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'N')
             {
                 nbr_plyrs++;
                 ft_update_plyr(obj_map, nbr_plyrs, x, y);
@@ -51,22 +48,17 @@ void    ft_check_characters(t_map *obj_map)
     }
 }
 
-void    ft_is_wall_exist(t_map * obj_map, int y, int x)
+void ft_is_wall_exist(t_map *obj_map, int y, int x)
 {
     char **map;
 
     map = obj_map->map;
-    printf("y = %d and x = %d\n", y, x);
-    printf("h = %d and w = %d\n----\n", obj_map->map_height, obj_map->map_width);
-    if ( y == 0 || y == obj_map->map_height - 1
-        || x == 0 || x == obj_map->map_width
-        || map[y - 1][x] == ' ' || map[y + 1][x] == ' '
-        || map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-        printf("y = %d and x = %d\n", y, x),ft_map_errors(obj_map, 3);
+    if (y == 0 || y == obj_map->map_height - 1 || x == 0 || x == obj_map->map_width || map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+        ft_map_errors(obj_map, 3);
 }
 
 // this function check if the map surrounded by walls.
-void    ft_check_walls(t_map * obj_map)
+void ft_check_walls(t_map *obj_map)
 {
     int x;
     int y;
@@ -82,5 +74,5 @@ void    ft_check_walls(t_map * obj_map)
             if (map[y][x] != '1' && map[y][x] != ' ')
                 ft_is_wall_exist(obj_map, y, x);
         }
-    } 
+    }
 }

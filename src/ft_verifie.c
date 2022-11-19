@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/19 13:26:08 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:02:55 by ahammam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int ft_extension(char *str)
     i = 0;
     len = ft_strlen(str);
     exte = ".cub";
-    while (str && str[len - 4 + i])
+    while (str && str[len - 4 + i] && i < 4)
     {
         if (str[len - 4 + i] != exte[i])
             return (0);
@@ -63,7 +63,7 @@ static int identifier(char *str, char *info)
     if (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"))
     {
         if (!ft_is_gbr_valid(info))
-            return (printf("Error.\nGBR not valid\n"),0);
+            return (0);
         split = ft_split(info, ',');
         while (ft_len_split(split) == 3 && i != -1 && split[i])
         {
@@ -74,7 +74,7 @@ static int identifier(char *str, char *info)
         }
         ft_free_split(split);
         if (i == 0 || i == -1)
-            return (printf("Error.\nGBR not valid\n"),0);
+            return (0);
     }
     return (1);
 }
@@ -88,22 +88,24 @@ static int ft_information(char *file)
     int len;
 
     fd = open(file, O_RDONLY);
+    if (fd < 0)
+        return (printf("Error.\nError fd\n"), 0);
     re = 1;
     len = 0;
-    while ((line = get_next_line(fd))  )
+    while ((line = get_next_line(fd)))
     {
         if (line[0] != '\n' && len < 6)
         {
             split = ft_split(line, ' ');
-            if (ft_len_split(split) != 2)
+            if (ft_len_split(split) != 2 && split[ft_len_split(split) - 1][0] != '\n')
                 re = 0;
-            re = identifier(split[0], split[1]);
+            re = re * identifier(split[0], split[1]);
             ft_free_split(split);
             len++;
         }
         free(line);
         if (!re)
-            return (0);
+            return (printf("Error.\nError info\n"), 0);
     }
     close(fd);
     return (1);
@@ -112,7 +114,7 @@ static int ft_information(char *file)
 int ft_verifie(char *file)
 {
     if (!ft_extension(file))
-        return (printf("Error.\nExtension must be .cub\n"),0);
+        return (printf("Error.\nExtension must be .cub\n"), 0);
     if (!ft_information(file))
         return (0);
     return (1);

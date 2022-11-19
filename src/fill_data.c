@@ -3,49 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/19 13:28:00 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/19 19:36:33 by ahammam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void ft_fill_info(t_data *data, char *line)
+static void ft_fill_info(t_map *data, char *line)
 {
     char **split;
 
     split = ft_split(line, ' ');
-    if (!ft_strcmp(split[0],"NO"))
+    if (!ft_strcmp(split[0], "NO"))
         data->no_texture = ft_strdup(split[1]);
-    if (!ft_strcmp(split[0],"SO"))
+    if (!ft_strcmp(split[0], "SO"))
         data->so_texture = ft_strdup(split[1]);
-    if (!ft_strcmp(split[0],"WE"))
+    if (!ft_strcmp(split[0], "WE"))
         data->we_texture = ft_strdup(split[1]);
-    if (!ft_strcmp(split[0],"EA"))
+    if (!ft_strcmp(split[0], "EA"))
         data->ea_texture = ft_strdup(split[1]);
-    if (!ft_strcmp(split[0],"F"))
+    if (!ft_strcmp(split[0], "F"))
         data->floor_texture = ft_strdup(split[1]);
-    if (!ft_strcmp(split[0],"C"))
+    if (!ft_strcmp(split[0], "C"))
         data->ceill_texture = ft_strdup(split[1]);
     ft_free_split(split);
 }
 
-void ft_fill_data(t_data *data, char *file)
+void ft_fill_data(t_map *data, char *file)
 {
     int fd;
     char *line;
     int len;
-    
+
     fd = open(file, O_RDONLY);
     len = 0;
-    while  (( line = get_next_line(fd)))
+    while ((line = get_next_line(fd)))
     {
         if (line[0] != '\n' && len < 6)
-        {   
+        {
             len++;
-            ft_fill_info(data,line);
+            ft_fill_info(data, line);
         }
         free(line);
         if (len == 6)

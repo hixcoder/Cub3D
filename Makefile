@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
+#    By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/19 14:23:23 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/19 19:37:21 by ahammam          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,12 @@ CC = cc
 $(NAME) : ${SRCOBJ} $(OTHER_SRCS)
 	@$(MAKE) -C $(GET_NEXT_LINE_FOLDER)
 	@$(MAKE) -C $(LIBFT_FOLDER)
-	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
+	#  -lmlx -framework OpenGL -framework AppKit
 	@echo "|+| make the get_next_line.a [${GREEN}DONE${RESET}]"
 	@echo "|+| make the libft.a         [${GREEN}DONE${RESET}]"
 	@echo "|+| make the $(NAME) program   [${GREEN}DONE${RESET}]"
+	clear
 
 # @$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
 
