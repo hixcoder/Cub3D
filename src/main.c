@@ -17,8 +17,5 @@ int main(int ac, char **av)
     if (ac != 2)
         return (0);
     if (!ft_verifie(av[1]))
-    {
-        printf("invalid Map");
         return (0);
-    }
 }

@@ -24,7 +24,6 @@ int ft_is_gbr_valid(char *str)
         else
             return (0);
     }
-
     return (1);
 }
 
@@ -64,9 +63,9 @@ static int identifier(char *str, char *info)
     if (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"))
     {
         if (!ft_is_gbr_valid(info))
-            return (0);
+            return (printf("Error.\nGBR not valid\n"),0);
         split = ft_split(info, ',');
-        while (ft_len_split(split) == 3 && i != 1 && split[i])
+        while (ft_len_split(split) == 3 && i != -1 && split[i])
         {
             nbr = ft_atoi(split[i]);
             if (nbr > 255 || nbr < 0)
@@ -75,7 +74,7 @@ static int identifier(char *str, char *info)
         }
         ft_free_split(split);
         if (i == 0 || i == -1)
-            return (0);
+            return (printf("Error.\nGBR not valid\n"),0);
     }
     return (1);
 }
@@ -113,7 +112,7 @@ static int ft_information(char *file)
 int ft_verifie(char *file)
 {
     if (!ft_extension(file))
-        return (0);
+        return (printf("Error.\nExtension must be .cub\n"),0);
     if (!ft_information(file))
         return (0);
     return (1);
