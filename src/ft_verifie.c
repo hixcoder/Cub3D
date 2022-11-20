@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/19 23:02:55 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:28:08 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int identifier(char *str, char *info)
         split = ft_split(info, ',');
         while (ft_len_split(split) == 3 && i != -1 && split[i])
         {
-            nbr = ft_atoi(split[i]);
+            nbr  = ft_atoi(split[i]);
             if (nbr > 255 || nbr < 0)
                 i = -2;
             i++;
@@ -96,9 +96,11 @@ static int ft_information(char *file)
     {
         if (line[0] != '\n' && len < 6)
         {
+            re = 0;
             split = ft_split(line, ' ');
-            if (ft_len_split(split) != 2 && split[ft_len_split(split) - 1][0] != '\n')
-                re = 0;
+            if (ft_len_split(split) == 2 || (ft_len_split(split) == 3 && split[ft_len_split(split) - 1][0] == '\n'))
+                re = 1;
+            printf("---> %d\n",re);
             re = re * identifier(split[0], split[1]);
             ft_free_split(split);
             len++;
@@ -108,6 +110,8 @@ static int ft_information(char *file)
             return (printf("Error.\nError info\n"), 0);
     }
     close(fd);
+    if (len > 6)
+        return (0);
     return (1);
 }
 
