@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/20 09:28:08 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/20 09:45:47 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int ft_is_gbr_valid(char *str)
     while (str && str[i] && str[i] != '\n')
     {
         if ((str[i] >= '0' && str[i] <= '9') || str[i] == ',')
+        {
+            if (str[i] == ',' && str[i + 1] == ',')
+                return (0);
             i++;
+        }
         else
             return (0);
     }
