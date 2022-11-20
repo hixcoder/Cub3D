@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/20 09:45:47 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:08:56 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static int ft_information(char *file)
             return (printf("Error.\nError info\n"), 0);
     }
     close(fd);
-    if (len > 6)
+    if (len < 6)
         return (0);
     return (1);
 }
