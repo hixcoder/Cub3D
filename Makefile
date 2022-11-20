@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+         #
+#    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/19 19:37:21 by ahammam          ###   ########.fr        #
+#    Updated: 2022/11/20 09:13:26 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBS = ./src/get_next_line.a ./src/libft.a
 INCLUDES = ./src/cub3D.h ./src/ft_printf/ft_printf.h ./src/get_next_line/get_next_line.h ./src/libft/libft.h ./src/bonus/cub3D_bonus.h
 
 # -g for the debugger
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror -g
 CC = cc 
 
 %.o : %.c ${INCLUDES}

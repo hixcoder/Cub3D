@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/20 10:08:56 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:10:18 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int ft_information(char *file)
 
     fd = open(file, O_RDONLY);
     if (fd < 0)
-        return (printf("Error.\nError fd\n"), 0);
+        return (printf("Error\nError fd\n"), 0);
     re = 1;
     len = 0;
     while ((line = get_next_line(fd)))
@@ -104,25 +104,24 @@ static int ft_information(char *file)
             split = ft_split(line, ' ');
             if (ft_len_split(split) == 2 || (ft_len_split(split) == 3 && split[ft_len_split(split) - 1][0] == '\n'))
                 re = 1;
-            printf("---> %d\n",re);
             re = re * identifier(split[0], split[1]);
             ft_free_split(split);
             len++;
         }
         free(line);
         if (!re)
-            return (printf("Error.\nError info\n"), 0);
+            return (printf("Error\nError info\n"), 0);
     }
     close(fd);
     if (len < 6)
-        return (0);
+        return (printf("Error\nError info\n"), 0);
     return (1);
 }
 
 int ft_verifie(char *file)
 {
     if (!ft_extension(file))
-        return (printf("Error.\nExtension must be .cub\n"), 0);
+        return (printf("Error\nExtension must be .cub\n"), 0);
     if (!ft_information(file))
         return (0);
     return (1);
