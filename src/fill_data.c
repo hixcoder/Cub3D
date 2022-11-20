@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/19 19:36:33 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 12:17:12 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static void ft_fill_info(t_map *data, char *line)
 
     split = ft_split(line, ' ');
     if (!ft_strcmp(split[0], "NO"))
-        data->no_texture = ft_strdup(split[1]);
+        data->no_texture_path = ft_strdup(split[1]);
     if (!ft_strcmp(split[0], "SO"))
-        data->so_texture = ft_strdup(split[1]);
+        data->so_texture_path = ft_strdup(split[1]);
     if (!ft_strcmp(split[0], "WE"))
-        data->we_texture = ft_strdup(split[1]);
+        data->we_texture_path = ft_strdup(split[1]);
     if (!ft_strcmp(split[0], "EA"))
-        data->ea_texture = ft_strdup(split[1]);
+        data->ea_texture_path = ft_strdup(split[1]);
     if (!ft_strcmp(split[0], "F"))
-        data->floor_texture = ft_strdup(split[1]);
+        data->floor_color = ft_strdup(split[1]);
     if (!ft_strcmp(split[0], "C"))
-        data->ceill_texture = ft_strdup(split[1]);
+        data->ceill_color = ft_strdup(split[1]);
     ft_free_split(split);
 }
 

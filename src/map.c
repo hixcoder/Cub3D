@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/20 10:06:03 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:56:18 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char    *ft_go_to_map_line(int fd)
 }
 
 // this function for get the width and the hight of the map
-void ft_map_dimensions(char *map_path, t_map *obj_map)
+void ft_map_dimensions(char *map_path, t_data *data)
 {
     int fd;
     int i;
@@ -41,7 +41,7 @@ void ft_map_dimensions(char *map_path, t_map *obj_map)
     int map_end;
 
     i = 0;
-    obj_map->map_width = 0;
+    data->obj_map->map_width = 0;
     line_lenght = 0;
     fd = open(map_path, O_RDONLY);
     map_end = 0;
@@ -49,19 +49,18 @@ void ft_map_dimensions(char *map_path, t_map *obj_map)
     while (line)
     {
         line_lenght = ft_strlen(line) - 1;
-        if (obj_map->map_width < line_lenght)
-            obj_map->map_width = line_lenght;
+        if (data->obj_map->map_width < line_lenght)
+            data->obj_map->map_width = line_lenght;
         if (line[0] != '\n' && map_end == 0)
             i++;
         else if (line[0] == '\n' && map_end == 0)
             map_end = 1;
         else if (line[0] != '\n' && map_end == 1)
-            free(line),ft_map_errors(obj_map, 4);
+            free(line),ft_map_errors(data->obj_map, 4);
         free(line);
-        
         line = get_next_line(fd);
     }
-    obj_map->map_height = i;
+    data->obj_map->map_height = i;
     close(fd);
 }
 
@@ -105,14 +104,16 @@ void ft_print_map(char **map)
     }
 }
 
-void ft_map_init(char *map_path, t_map *obj_map)
-{
+void ft_map_init(char *map_path, t_data *data)
+{    
     if (!ft_verifie(map_path))
         exit(0);
-    ft_map_dimensions(map_path, obj_map);
-    ft_fill_map(map_path, obj_map);
-    ft_check_characters(obj_map);
-    ft_check_walls(obj_map);
-    ft_print_map(obj_map->map);
-    ft_fill_data(obj_map, map_path);
+    ft_map_dimensions(map_path, data);
+    ft_fill_map(map_path, data->obj_map);
+    ft_check_characters(data->obj_map);
+    ft_check_walls(data->obj_map);
+    ft_print_map(data->obj_map->map);
+    ft_fill_data(data->obj_map, map_path);
+    data->obj_plyr->x = data->obj_map->plyr_x;
+    data->obj_plyr->y = data->obj_map->plyr_y;
 }

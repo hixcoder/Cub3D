@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "/Users/hboumahd/Desktop/Cub3D/cub3D",
-            "args": ["assets/maps/map.cub"],
+            "args": ["./map.cub"],
             "cwd": "/Users/hboumahd/Desktop/Cub3D"
         }
     ]

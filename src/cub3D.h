@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/19 19:35:45 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 12:39:01 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 
 #define CUB3D_H
-// # include "mlx.h"
+# include "mlx.h"
 #include "./get_next_line/get_next_line.h"
 #include "./libft/libft.h"
 
@@ -25,24 +25,50 @@ typedef struct s_map
 	int plyr_x;
 	int plyr_y;
 
-	char *no_texture;
-	char *so_texture;
-	char *we_texture;
-	char *ea_texture;
-	char *floor_texture;
-	char *ceill_texture;
+	char *no_texture_path;
+	char *so_texture_path;
+	char *we_texture_path;
+	char *ea_texture_path;
+	char *floor_color;
+	char *ceill_color;
 } t_map;
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	radius;
+	int	turn_direction;
+	int	walk_direction;
+	int rotation_angle;
+	int move_speed;
+	int rotation_speed;
+} t_player;
+
+typedef struct s_img
+{
+	void	*no_texture;
+	void	*so_texture;
+	void	*we_texture;
+	void	*ea_texture;
+}	t_img;
 
 typedef struct s_data
 {
-	t_map *obj_map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_map		*obj_map;
+	t_player	*obj_plyr;
+	t_img		*obj_img;
 } t_data;
 
 void ft_maloc_error(void *var);
-void ft_map_init(char *map_path, t_map *obj_map);
+void ft_map_init(char *map_path, t_data *data);
 void ft_map_errors(t_map *obj_map, int error_num);
 void ft_check_characters(t_map *obj_map);
 void ft_check_walls(t_map *obj_map);
+void	ft_drawer_init(t_data *data);
+void	ft_draw(t_data *data);
 
 int ft_verifie(char *file);
 int ft_strcmp(char *s1, char *s2);
@@ -50,5 +76,6 @@ int ft_is_exist(char *str, char c);
 int ft_len_split(char **tab);
 void ft_free_split(char **tab);
 void ft_fill_data(t_map *data, char *file);
+
 
 #endif

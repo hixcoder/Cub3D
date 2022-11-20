@@ -6,7 +6,7 @@
 #    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/20 09:13:26 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/20 12:40:20 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ BONUS = cub3D_bonus
 
 # madatory
 SRC_FOLDER = ./src/
-SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c
+SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
 
@@ -49,8 +49,7 @@ CC = cc
 $(NAME) : ${SRCOBJ} $(OTHER_SRCS)
 	@$(MAKE) -C $(GET_NEXT_LINE_FOLDER)
 	@$(MAKE) -C $(LIBFT_FOLDER)
-	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
-	#  -lmlx -framework OpenGL -framework AppKit
+	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "|+| make the get_next_line.a [${GREEN}DONE${RESET}]"
 	@echo "|+| make the libft.a         [${GREEN}DONE${RESET}]"
 	@echo "|+| make the $(NAME) program   [${GREEN}DONE${RESET}]"
