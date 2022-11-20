@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/19 22:08:17 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:44:16 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_map_errors(t_map *obj_map, int error_num)
 	if (error_num == 1)
 		printf("a map must contain only the 6 chars: [0, 1, W, N, E, S]\n");
 	else if (error_num == 2)
-		printf("a map must contain only one Player.\n");
+		printf("a map must contain one Player.\n");
 	else if (error_num == 3)
 		printf("a map must be surrounded by walls [1].\n");
 	else if (error_num == 4)

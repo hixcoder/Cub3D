@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:54:43 by ubunto            #+#    #+#             */
-/*   Updated: 2022/11/19 22:10:43 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:52:41 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ void ft_check_characters(t_map *obj_map)
             }
         }
     }
+    if (nbr_plyrs == 0)
+        ft_map_errors(obj_map, 2);
 }
 
+// this function check if the element surrounded by walls
 void ft_is_wall_exist(t_map *obj_map, int y, int x)
 {
     char **map;
 
     map = obj_map->map;
-    if (y == 0 || y == obj_map->map_height - 1 || x == 0 || x == obj_map->map_width || map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+    if (y == 0 || y == obj_map->map_height - 1 || x == 0 || x == obj_map->map_width - 1 || map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
         ft_map_errors(obj_map, 3);
 }
 

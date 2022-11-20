@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/19 22:38:08 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 09:32:29 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+char    *ft_go_to_map_line(int fd)
+{
+    char    *line;
+    int     len;
+    
+    len = 0;
+    line = get_next_line(fd);
+    while (line)
+    {
+        if (line[0] != '\n')
+            len++;
+        if (line[0] != '\n' && len > 6)
+            break;
+        free(line);
+        line = get_next_line(fd);
+    }
+    return (line);
+}
 
 // this function for get the width and the hight of the map
 void ft_map_dimensions(char *map_path, t_map *obj_map)
@@ -21,22 +39,13 @@ void ft_map_dimensions(char *map_path, t_map *obj_map)
     char *line;
     int line_lenght;
     int map_end;
-    int len;
 
     i = 0;
     obj_map->map_width = 0;
     line_lenght = 0;
     fd = open(map_path, O_RDONLY);
-    len = 0;
-    while ((line = get_next_line(fd)))
-    {
-        if (line[0] != '\n')
-            len++;
-        if (line[0] != '\n' && len > 6)
-            break;
-        free(line);
-    }
     map_end = 0;
+    line = ft_go_to_map_line(fd);
     while (line)
     {
         line_lenght = ft_strlen(line) - 1;
@@ -64,7 +73,6 @@ void ft_fill_map(char *map_path, t_map *obj_map)
     int map_len;
     char **map;
     char *line;
-    int len;
 
     map_len = obj_map->map_height + 1;
     map = (char **)malloc(sizeof(char *) * map_len);
@@ -72,15 +80,7 @@ void ft_fill_map(char *map_path, t_map *obj_map)
         ft_maloc_error(map);
     fd = open(map_path, O_RDONLY);
     i = -1;
-    len = 0;
-    while ((line = get_next_line(fd)))
-    {
-        if (line[0] != '\n')
-            len++;
-        if (line[0] != '\n' && len > 6)
-            break;
-        free(line);
-    }
+    line = ft_go_to_map_line(fd);
     while (line && ++i < (map_len - 1))
     {
         map[i] = ft_strdup_cub3D(line, obj_map->map_width);
@@ -110,6 +110,8 @@ void ft_map_init(char *map_path, t_map *obj_map)
     if (!ft_verifie(map_path))
         exit(0);
     ft_map_dimensions(map_path, obj_map);
+        printf("the h = %d\n", obj_map->map_height);
+    printf("the w = %d\n\n", obj_map->map_width);
     ft_fill_map(map_path, obj_map);
     ft_check_characters(obj_map);
     ft_check_walls(obj_map);
