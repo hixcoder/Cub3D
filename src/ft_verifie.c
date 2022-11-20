@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/19 23:02:55 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/20 10:07:37 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int ft_is_gbr_valid(char *str)
     while (str && str[i] && str[i] != '\n')
     {
         if ((str[i] >= '0' && str[i] <= '9') || str[i] == ',')
+        {
+            if (str[i] == ',' && str[i + 1] == ',')
+                return (0);
             i++;
+        }
         else
             return (0);
     }
@@ -67,7 +71,7 @@ static int identifier(char *str, char *info)
         split = ft_split(info, ',');
         while (ft_len_split(split) == 3 && i != -1 && split[i])
         {
-            nbr = ft_atoi(split[i]);
+            nbr  = ft_atoi(split[i]);
             if (nbr > 255 || nbr < 0)
                 i = -2;
             i++;
@@ -89,32 +93,35 @@ static int ft_information(char *file)
 
     fd = open(file, O_RDONLY);
     if (fd < 0)
-        return (printf("Error.\nError fd\n"), 0);
+        return (printf("Error\nError fd\n"), 0);
     re = 1;
     len = 0;
     while ((line = get_next_line(fd)))
     {
         if (line[0] != '\n' && len < 6)
         {
+            re = 0;
             split = ft_split(line, ' ');
-            if (ft_len_split(split) != 2 && split[ft_len_split(split) - 1][0] != '\n')
-                re = 0;
+            if (ft_len_split(split) == 2 || (ft_len_split(split) == 3 && split[ft_len_split(split) - 1][0] == '\n'))
+                re = 1;
             re = re * identifier(split[0], split[1]);
             ft_free_split(split);
             len++;
         }
         free(line);
         if (!re)
-            return (printf("Error.\nError info\n"), 0);
+            return (printf("Error\nError info\n"), 0);
     }
     close(fd);
+    if (len < 6)
+        return (printf("Error\nError info\n"), 0);
     return (1);
 }
 
 int ft_verifie(char *file)
 {
     if (!ft_extension(file))
-        return (printf("Error.\nExtension must be .cub\n"), 0);
+        return (printf("Error\nExtension must be .cub\n"), 0);
     if (!ft_information(file))
         return (0);
     return (1);

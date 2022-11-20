@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/20 09:32:29 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:06:03 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void ft_map_init(char *map_path, t_map *obj_map)
     if (!ft_verifie(map_path))
         exit(0);
     ft_map_dimensions(map_path, obj_map);
-        printf("the h = %d\n", obj_map->map_height);
-    printf("the w = %d\n\n", obj_map->map_width);
     ft_fill_map(map_path, obj_map);
     ft_check_characters(obj_map);
     ft_check_walls(obj_map);
