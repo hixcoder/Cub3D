@@ -6,16 +6,11 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/21 12:11:02 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:02:12 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void update()
-{
-	
-}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -91,6 +86,9 @@ void	ft_draw_map(t_data *data)
 				draw_rectangle(data, x*50 ,  y*50 , 0x00FFFFFF);
 			else if (obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x]== 'N' || obj_map->map[y][x] == 'S')
 				draw_rectangle(data, x*50 ,  y*50 , 0x00FFFFFF);
+			else
+				draw_rectangle(data, x*50 , y*50, 0x00000000);
+
 			x++;		
 		}
 		y++;

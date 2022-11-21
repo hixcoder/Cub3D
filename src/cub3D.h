@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 11:56:17 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:36:44 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 	int	radius;
 	int	turn_direction;
 	int	walk_direction;
-	int rotation_angle;
-	int move_speed;
-	int rotation_speed;
+	double rotation_angle;
+	double move_speed;
+	double rotation_speed;
 } t_player;
 
 typedef struct s_img

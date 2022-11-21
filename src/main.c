@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:32 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:53:25 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_exit_handler(void *n_data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	exit(0);
 }
+
+
 
 int main(int ac, char **av)
 {
@@ -53,11 +55,11 @@ int main(int ac, char **av)
 		data.img = mlx_new_image(data.mlx_ptr, w, h);
 		data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
 								&data.endian);
-		// ft_drawer_init(&data);
+		ft_drawer_init(&data);
 		ft_draw_map(&data);
 		init_data_player(&data);
-		mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 		update_game(&data);
+		mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 		mlx_loop(data.mlx_ptr);
     }
     else

@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/21 12:46:24 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:50:20 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 void ft_draw_player(t_data *data)
 {
     int i;
+	double x;
+	double y;
     
     i = 0;
-	draw_circle_r(data,  data->obj_plyr->x *50 + 50/2 ,  data->obj_plyr->y *50+ 50/2 , 10, 0x00FF0000);
-    while(i < 400)
+	draw_circle_r(data,  data->obj_plyr->x *50 + 50/2 ,  data->obj_plyr->y * 50 + 50/2 , 5, 0x00FF0000);
+    while(i < 300)
     {
-        my_mlx_pixel_put(data,data->obj_plyr->x *50 + 50/2 + 0.1 * cos(data->obj_plyr->rotation_angle) * i ,
-                            data->obj_plyr->y*50 + 50/2 + 0.1 * sin(data->obj_plyr->rotation_angle) * i,
-                             0x00FF0000);
+		x = data->obj_plyr->x *50 + 50/2 + 0.1 * cos(data->obj_plyr->rotation_angle) * i;
+		y =  data->obj_plyr->y*50 + 50/2 + 0.1 * sin(data->obj_plyr->rotation_angle) * i;
+        my_mlx_pixel_put(data,x, y, 0x00FF0000);
         i++;
     }
 }
@@ -83,9 +85,9 @@ void init_data_player(t_data *data)
 	data->obj_plyr->radius = 3;
 	data->obj_plyr->turn_direction = 0;
 	data->obj_plyr->walk_direction = 0;
-	data->obj_plyr->rotation_angle = M_PI / 2;
-	data->obj_plyr->move_speed = 2.0;
-	data->obj_plyr->rotation_speed = 2 * (M_PI/180);
+	data->obj_plyr->rotation_angle = 0;
+	data->obj_plyr->move_speed = 0.1;
+	data->obj_plyr->rotation_speed = 10 * (M_PI/180);
     // printf("x = %d ---- y = %d\n", )
     ft_draw_player(data);
 }
