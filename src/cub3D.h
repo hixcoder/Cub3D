@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 11:59:40 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:29:13 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@
 # include <math.h>
 
 # define COLUMN_SIZE	50
+
 # define KEY_ESC	53
 # define KEY_W	13
 # define KEY_S	1
 # define KEY_A	0
 # define KEY_D	2
+# define KEY_AROW_R	124
+# define KEY_AROW_L	123
+# define KEY_	2
 
 typedef struct s_map
 {
@@ -43,8 +47,8 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 	float	radius;
 	float	turn_direction;
 	float	walk_direction;

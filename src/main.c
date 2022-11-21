@@ -6,59 +6,93 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 12:53:28 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:14:55 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+void ft_draw_square(int y, int x, int size, t_data *data)
+{
+	int h;
+	int w;
+
+	y = y - size / 2;
+	x = x - size / 2;
+	h = y + size;
+	w = x + size;
+	while (y < h)
+	{
+		x = w - size;
+		while (x < w)
+		{
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x00e9eae0);
+			x++;
+		}
+		y++;
+	}
+}
+
 void ft_render_player(t_data *data)
 {
 	int		y;
 	int		x;
-	// int		plyr_h;
-	// int		plyr_w;
-	char	**map;
-
-	y = data->obj_plyr->y * COLUMN_SIZE;
-	x = data->obj_plyr->x * COLUMN_SIZE;
-	// plyr_h = 5 + y;
-	// plyr_w = 40 + x;
-	
-	map = data->obj_map->map;
-	// while (y < plyr_h)
-	// {
-	// 	x = data->obj_plyr->x * COLUMN_SIZE;
-	// 	while (x < plyr_w)
-	// 	{
-	// // printf("this y = %d and x = %d\n",y, x);
-	// // printf("rotation angle = %d\n", data->obj_plyr->rotation_angle);
-	// // printf("rotation in x = %d  y = %d\n",cos(data->obj_plyr->rotation_angle) * 50, sin(data->obj_plyr->rotation_angle) * 50);
-	// 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + cos(data->obj_plyr->rotation_angle) * 30, y + sin(data->obj_plyr->rotation_angle) * 30, 0x00FF0000);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	
 	int player_size;
 	int i;
 
+	y = data->obj_plyr->y * COLUMN_SIZE;
+	x = data->obj_plyr->x * COLUMN_SIZE;
+
 	i = -1;
-	player_size = 50;
+	player_size = 30;
 	while (++i < player_size)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + cos(data->obj_plyr->rotation_angle) * (0.5 * i),  y + sin(data->obj_plyr->rotation_angle) * (0.5 * i), 0x00FF0000);
-
+		ft_draw_square(y, x, 10, data);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + cos(data->obj_plyr->rotation_angle) * i,  y + sin(data->obj_plyr->rotation_angle) * i, 0x00FF0000);
 	}
-	
 }
 
-void	ft_update(t_data *data)
+int	ft_is_in_wall(int new_x, int new_y, t_data *data)
 {
-	printf("ft_update ===== turn_direction = %f\n", data->obj_plyr->turn_direction);
-	data->obj_plyr->rotation_angle += data->obj_plyr->turn_direction * data->obj_plyr->rotation_speed;
-	printf("ft_update ===== rotation angle = %f\n", data->obj_plyr->rotation_angle);
-	data->obj_plyr->turn_direction = 0;
+	if (new_x < 0 || new_x > data->obj_map->map_height + 1 || new_y < 0 || new_x > data->obj_map->map_width + 1)
+		return (1);
+	if (data->obj_map->map[new_y][new_x] == '1')
+		return (1);
+	else
+		return (0);
+}
+
+void	ft_update(t_data *data, int key)
+{
+	float move_step;
+	float	new_x;
+	float	new_y;
+	
+	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D || key == KEY_A)
+	{
+		data->obj_plyr->rotation_angle += data->obj_plyr->turn_direction * data->obj_plyr->rotation_speed;
+		printf("1- data->obj_plyr->rotation_angle = %f\n", data->obj_plyr->rotation_angle);
+		data->obj_plyr->turn_direction = 0;
+	}
+	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D || key == KEY_D || key == KEY_A)
+	{
+		// printf("->walk_direction = %f\n", data->obj_plyr->walk_direction);
+		move_step = data->obj_plyr->move_speed * data->obj_plyr->walk_direction;
+		// printf("2- data->obj_plyr->rotation_angle = %f\n", data->obj_plyr->rotation_angle);
+		// printf("1->data->obj_plyr->x = %f\n", data->obj_plyr->x);
+		new_x = data->obj_plyr->x + move_step * cos(data->obj_plyr->rotation_angle);
+		// data->obj_plyr->x += move_step * cos(data->obj_plyr->rotation_angle);
+		// printf("2->data->obj_plyr->x = %f\n", move_step * cos(data->obj_plyr->rotation_angle));
+		new_y = data->obj_plyr->y + move_step * sin(data->obj_plyr->rotation_angle);
+		// data->obj_plyr->y += move_step * sin(data->obj_plyr->rotation_angle);
+		if (ft_is_in_wall(new_x, new_y, data) == 0)
+		{
+			data->obj_plyr->x = new_x;
+			data->obj_plyr->y = new_y;
+		}
+		
+	}
+	
 }
 
 int	ft_exit_handler(void *n_data)
@@ -93,17 +127,15 @@ int	ft_key_handler(int key, void *n_data)
 		data->obj_plyr->walk_direction = 1;
 	else if (key == KEY_S)
 		data->obj_plyr->walk_direction = -1;
-	else if (key == KEY_A)
+	else if (key == KEY_AROW_R || key == KEY_D)
 		data->obj_plyr->turn_direction = 1;
-	else if (key == KEY_D)
+	else if (key == KEY_AROW_L || key == KEY_A)
 		data->obj_plyr->turn_direction = -1;
-	ft_update(data);
+	ft_update(data, key);
 	ft_render_map(data);
 	ft_render_player(data);
 	return (0);
 }
-
-
 
 int main(int ac, char **av)
 {
@@ -120,8 +152,8 @@ int main(int ac, char **av)
 		obj_plyr.radius = 3;
 		obj_plyr.turn_direction = 0; // -1 if left , +1 if right
 		obj_plyr.walk_direction = 0; // -1 if back , +1 if front
-		obj_plyr.rotation_angle = M_PI / 3;
-		obj_plyr.move_speed = 10;
+		obj_plyr.rotation_angle = 0;
+		obj_plyr.move_speed = 0.15;
 		obj_plyr.rotation_speed = 10 * (M_PI / 180);
 		
 		// init data

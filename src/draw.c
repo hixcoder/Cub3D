@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 10:53:39 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:02:49 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,9 @@ void	ft_render_map(t_data *data)
 		x = -1;
 		while (++x < obj_map->map_width)
 		{
-			ft_put_image(data, data->obj_img->so_texture, y, x);
 			if (obj_map->map[y][x] == '1')
 				ft_put_image(data, data->obj_img->ea_texture, y, x);
-			else if (obj_map->map[y][x] == '0')
-				ft_put_image(data, data->obj_img->we_texture, y, x);
-			else if (obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x] == 'N' || obj_map->map[y][x] == 'S')
+			else if (obj_map->map[y][x] == '0' || obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x] == 'N' || obj_map->map[y][x] == 'S')
 				ft_put_image(data, data->obj_img->no_texture, y, x);
 		}
 	}
