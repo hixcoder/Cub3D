@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/20 15:20:45 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:53:32 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,17 @@ int main(int ac, char **av)
         w = data.obj_map->map_width * 50;
 		printf("this h = %d and w = %d\n", h / 50, w / 50);
         data.win_ptr = mlx_new_window(data.mlx_ptr, w, h, "Free Fire");
-		ft_drawer_init(&data);
-		ft_draw(&data);
-		// mlx_hook(data.win_ptr, 02, 0, ft_key_handler, &data.obj_game);
-		mlx_hook(data.win_ptr, 17, 0, ft_exit_handler, &data);
+		data.img = mlx_new_image(data.mlx_ptr, w, h);
+		data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+								&data.endian);
+		// ft_drawer_init(&data);
+		ft_draw_map(&data);
+		init_data_player(&data);
+		mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
+		update_game(&data);
 		mlx_loop(data.mlx_ptr);
     }
     else
         printf("==> Please enter : ./cub3D [assets/maps/map_name.cub]\n");
 }
+

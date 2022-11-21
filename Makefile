@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
+#    By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/20 12:40:20 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/21 11:48:19 by lahammam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ BONUS = cub3D_bonus
 
 # madatory
 SRC_FOLDER = ./src/
-SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c
+SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c draw_utile.c player.c hook.c
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
 
@@ -53,7 +53,7 @@ $(NAME) : ${SRCOBJ} $(OTHER_SRCS)
 	@echo "|+| make the get_next_line.a [${GREEN}DONE${RESET}]"
 	@echo "|+| make the libft.a         [${GREEN}DONE${RESET}]"
 	@echo "|+| make the $(NAME) program   [${GREEN}DONE${RESET}]"
-	clear
+	# clear
 
 # @$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
 

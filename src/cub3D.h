@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/20 12:39:01 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:56:17 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,18 @@
 # include "mlx.h"
 #include "./get_next_line/get_next_line.h"
 #include "./libft/libft.h"
-
+#include <math.h>
+#define TILE_SIZE 50
+# define KEY_A 0
+# define KEY_W 13
+# define KEY_D 2
+# define KEY_S 1
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
+# define KEY_ESC 53
+# define KEY_Q 12
 typedef struct s_map
 {
 	char **map;
@@ -57,6 +68,12 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void	*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	
 	t_map		*obj_map;
 	t_player	*obj_plyr;
 	t_img		*obj_img;
@@ -77,5 +94,13 @@ int ft_len_split(char **tab);
 void ft_free_split(char **tab);
 void ft_fill_data(t_map *data, char *file);
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void draw_rectangle(t_data *data, int x, int y, int color);
+void	ft_draw_map(t_data *data);
 
+void init_data_player(t_data *data);
+void draw_circle_r(t_data *data,int x, int y, int r, int color);
+void ft_draw_player(t_data *data);
+static int	key_hook(int keycode, t_data *data);
+void	update_game(t_data *data);
 #endif

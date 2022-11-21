@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/20 15:38:55 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 10:10:00 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void	ft_draw(t_data *data)
 				ft_put_image(data, data->obj_img->we_texture, y, x);
 			else if (obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x] == 'N' || obj_map->map[y][x] == 'S')
 				ft_put_image(data, data->obj_img->no_texture, y, x);
+				
 		}
 	}
 }
+
+
