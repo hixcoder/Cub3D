@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/20 12:17:12 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:56:36 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void ft_fill_info(t_map *data, char *line)
     if (!ft_strcmp(split[0], "C"))
         data->ceill_color = ft_strdup(split[1]);
     ft_free_split(split);
+    printf("--->%s",line);
 }
 
 void ft_fill_data(t_map *data, char *file)
@@ -45,6 +46,7 @@ void ft_fill_data(t_map *data, char *file)
         if (line[0] != '\n' && len < 6)
         {
             len++;
+            line[ft_strlen(line) - 1] = 0;
             ft_fill_info(data, line);
         }
         free(line);

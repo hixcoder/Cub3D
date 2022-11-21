@@ -3,7 +3,8 @@ SO ./assets/textures/so1.xpm
 WE ./assets/textures/we1.xpm
 EA ./assets/textures/ea1.xpm
 
-
+F 220,100,0
+C 225,30,0
 
 11111111111
 10000000001
