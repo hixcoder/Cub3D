@@ -4,15 +4,12 @@
 
 int ft_has_wall_at(t_data *data, double x, double y)
 {
-	char	**map;
-	t_map	*obj_map;
 
-	obj_map = data->obj_map;
-	map = data->obj_map->map;
-
-	double get_index_x = (x*50 + 50/2) / TILE_SIZE;
-	double get_index_y = (y*50 + 50/2) / TILE_SIZE;
-	if (map[(int) get_index_y][(int) get_index_x] == '1')
+	double get_index_x = (x*TILE_SIZE + TILE_SIZE/2) / TILE_SIZE;
+	double get_index_y = (y*TILE_SIZE + TILE_SIZE/2) / TILE_SIZE;
+	// if ((int) get_index_x > data->obj_map->map_height || (int) get_index_y > data->obj_map->map_width)
+	// 	return (1);
+	if (data->obj_map->map[(int) get_index_y][(int) get_index_x] == '1')
 		return (1);
 	return(0);
 }
@@ -27,7 +24,7 @@ void update_map(t_data *data)
 
 void ft_rotate(t_data *data)
 {
-	data->obj_plyr->rotation_angle =data->obj_plyr->rotation_angle + data->obj_plyr->rotation_speed * data->obj_plyr->turn_direction ;
+	data->obj_plyr->rotation_angle =   data->obj_plyr->rotation_angle + data->obj_plyr->rotation_speed * data->obj_plyr->turn_direction;
 	update_map(data);
 }
 

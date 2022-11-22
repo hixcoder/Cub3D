@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 08:40:30 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:20:39 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 #include "./get_next_line/get_next_line.h"
 #include "./libft/libft.h"
 #include <math.h>
+
 #define TILE_SIZE 50
+#define FOV_ANGLE 60 * (M_PI/180)
+#define WALL_STRIP_WIDTH 0.1
+
 # define KEY_A 0
 # define KEY_W 13
 # define KEY_D 2
@@ -28,6 +32,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_Q 12
+
 typedef struct s_map
 {
 	char **map;
@@ -54,6 +59,7 @@ typedef struct s_player
 	double rotation_angle;
 	double move_speed;
 	double rotation_speed;
+	double num_rays;
 } t_player;
 
 typedef struct s_img
@@ -103,4 +109,9 @@ void draw_circle_r(t_data *data,int x, int y, int r, int color);
 void ft_draw_player(t_data *data);
 static int	key_hook(int keycode, t_data *data);
 void	update_game(t_data *data);
+int ft_has_wall_at(t_data *data, double x, double y);
+
+void ft_cast_all_rays(t_data *data);
+void ft_line(t_data *data, double angle, int l);
+int ft_has_wall_at(t_data *data, double x, double y);
 #endif

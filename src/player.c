@@ -6,27 +6,34 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/21 17:50:20 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:27:26 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void ft_draw_player(t_data *data)
+void ft_line(t_data *data, double angle, int l)
 {
-    int i;
+	int i;
 	double x;
 	double y;
-    
-    i = 0;
-	draw_circle_r(data,  data->obj_plyr->x *50 + 50/2 ,  data->obj_plyr->y * 50 + 50/2 , 5, 0x00FF0000);
-    while(i < 300)
+
+	i = 0;
+	while(i < l)
     {
-		x = data->obj_plyr->x *50 + 50/2 + 0.1 * cos(data->obj_plyr->rotation_angle) * i;
-		y =  data->obj_plyr->y*50 + 50/2 + 0.1 * sin(data->obj_plyr->rotation_angle) * i;
-        my_mlx_pixel_put(data,x, y, 0x00FF0000);
+		 x = data->obj_plyr->x *TILE_SIZE + TILE_SIZE/2 + 0.1 * cos(angle) * i;
+		 y = data->obj_plyr->y*TILE_SIZE + TILE_SIZE/2 + 0.1 * sin(angle) * i;
+		my_mlx_pixel_put(data,x, y, 0x00FF0000);
         i++;
     }
+	
+}
+void ft_draw_player(t_data *data)
+{   
+	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE + TILE_SIZE/2 ,  data->obj_plyr->y * TILE_SIZE + TILE_SIZE/2 , 5, 0x00FF0000);
+    ft_line(data,data->obj_plyr->rotation_angle, 300);
+	ft_cast_all_rays(data);
+	
 }
 
 int get_player_x(t_data *data)
@@ -88,6 +95,6 @@ void init_data_player(t_data *data)
 	data->obj_plyr->rotation_angle = 0;
 	data->obj_plyr->move_speed = 0.1;
 	data->obj_plyr->rotation_speed = 10 * (M_PI/180);
-    // printf("x = %d ---- y = %d\n", )
+	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH;
     ft_draw_player(data);
 }

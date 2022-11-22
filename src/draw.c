@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/22 08:39:06 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/22 09:00:24 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ void	ft_draw_map(t_data *data)
 		while (x < obj_map->map_width)
 		{
 			if (obj_map->map[y][x] == '1')
-				draw_rectangle(data, x*50 , y*50, 0x00000000);
+				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x00000000);
 			else if (obj_map->map[y][x] == '0')
-				draw_rectangle(data, x*50 ,  y*50 , 0x00FFFFFF);
+				draw_rectangle(data, x*TILE_SIZE ,  y*TILE_SIZE , 0x00FFFFFF);
 			else if (obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x]== 'N' || obj_map->map[y][x] == 'S')
-				draw_rectangle(data, x*50 ,  y*50 , 0x00FFFFFF);
+				draw_rectangle(data, x*TILE_SIZE ,  y*TILE_SIZE , 0x00FFFFFF);
 			else
-				draw_rectangle(data, x*50 , y*50, 0x00000000);
+				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x00000000);
 			x++;		
 		}
 		y++;
