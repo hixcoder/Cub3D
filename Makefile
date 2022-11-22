@@ -6,7 +6,7 @@
 #    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/22 10:25:52 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/22 11:02:53 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ BONUS = cub3D_bonus
 
 # madatory
 SRC_FOLDER = ./src/
-SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c player.c
+SRC = main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c player.c rays.c  
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
 

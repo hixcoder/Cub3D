@@ -6,42 +6,11 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 11:00:16 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:04:33 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// this function for draw a ray
-void    ft_draw_one_ray(int x, int y, float ray_angle, t_data *data)
-{
-    int line_lenght;
-    int j;
-    
-    j = -1;
-	line_lenght = 50;
-    while (++j < line_lenght)
-        mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + cos(ray_angle) * j,  y + sin(ray_angle) * j, 0x00FF0000);
-}
-
-// this function draw the player on the map
-void ft_render_rays(t_data *data)
-{
-	int		y;
-	int		x;
-    float ray_angle;
-	int i;
-
-	y = data->obj_plyr->y * COLUMN_SIZE;
-	x = data->obj_plyr->x * COLUMN_SIZE;
-	i = -1;
-    ray_angle = data->obj_plyr->rotation_angle - (data->obj_plyr->fov_angle / 2);
-    while (++i < data->obj_plyr->rays_num)
-    {
-        ft_draw_one_ray(x, y, ray_angle, data);
-        ray_angle += data->obj_plyr->fov_angle / data->obj_plyr->rays_num;
-    }
-}
 
 // this function draw the player on the map
 void ft_render_player(t_data *data)
