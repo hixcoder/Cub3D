@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 13:04:33 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:42:02 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void ft_render_player(t_data *data)
 	int player_size;
 	int i;
 
-	y = data->obj_plyr->y * COLUMN_SIZE;
-	x = data->obj_plyr->x * COLUMN_SIZE;
+	y = data->obj_plyr->y;
+	x = data->obj_plyr->x;
 
 	i = -1;
 	player_size = 30;
@@ -35,9 +35,14 @@ void ft_render_player(t_data *data)
 // this function checks if there is a wall in the position map[new_y][new_x]
 int	ft_is_in_wall(int new_x, int new_y, t_data *data)
 {
-	if (new_x < 0 || new_x > data->obj_map->map_width + 1 || new_y < 0 || new_y > data->obj_map->map_height + 1)
+	int w;
+	int h;
+
+	w = (data->obj_map->map_width + 1) * COLUMN_SIZE;
+	h = (data->obj_map->map_height + 1) * COLUMN_SIZE;
+	if (new_x < 0 || new_x > w || new_y < 0 || new_y > h)
 		return (1);
-	if (data->obj_map->map[new_y][new_x] == '1')
+	if (data->obj_map->map[new_y / COLUMN_SIZE][new_x / COLUMN_SIZE] == '1')
 		return (1);
 	else
 		return (0);

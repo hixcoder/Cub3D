@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 10:49:12 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:40:55 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int main(int ac, char **av)
 		obj_plyr.turn_direction = 0; // -1 if left , +1 if right
 		obj_plyr.walk_direction = 0; // -1 if back , +1 if front
 		obj_plyr.rotation_angle = 0;
-		obj_plyr.move_speed = 0.15;
+		obj_plyr.move_speed = 10;
 		obj_plyr.rotation_speed = 20 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
 		obj_plyr.rays_width = 0.1;
