@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 09:45:00 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:25:10 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_render_map(t_data *data);
 void	ft_draw_square(int y, int x, int size, t_data *data);
 void	ft_render_player(t_data *data);
 void	ft_update(t_data *data, int key);
+void ft_render_rays(t_data *data);
 
 int		ft_verifie(char *file);
 int		ft_strcmp(char *s1, char *s2);

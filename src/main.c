@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 09:45:41 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:49:12 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_key_handler(int key, void *n_data)
 		data->obj_plyr->turn_direction = -1;
 	ft_update(data, key);
 	ft_render_map(data);
+	ft_render_rays(data);
 	ft_render_player(data);
 	return (0);
 }
@@ -65,6 +66,11 @@ int main(int ac, char **av)
 
     if (ac == 2)
     {
+		// init data
+		data.obj_map = &obj_map;
+		data.obj_img = &obj_img;
+		data.obj_plyr = &obj_plyr;
+        data.mlx_ptr = mlx_init();
         ft_map_init(av[1], &data);
 		
 		// init player
@@ -73,16 +79,11 @@ int main(int ac, char **av)
 		obj_plyr.walk_direction = 0; // -1 if back , +1 if front
 		obj_plyr.rotation_angle = 0;
 		obj_plyr.move_speed = 0.15;
-		obj_plyr.rotation_speed = 10 * (M_PI / 180);
+		obj_plyr.rotation_speed = 20 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
-		obj_plyr.rays_width = 1;
+		obj_plyr.rays_width = 0.1;
 		obj_plyr.rays_num = data.obj_map->map_width / obj_plyr.rays_width;
 		
-		// init data
-		data.obj_map = &obj_map;
-		data.obj_img = &obj_img;
-		data.obj_plyr = &obj_plyr;
-        data.mlx_ptr = mlx_init();
         h = data.obj_map->map_height * COLUMN_SIZE;
         w = data.obj_map->map_width * COLUMN_SIZE;
 		printf("this h = %d and w = %d\n", h / COLUMN_SIZE, w / COLUMN_SIZE);
@@ -90,6 +91,7 @@ int main(int ac, char **av)
 		
 		ft_drawer_init(&data);
 		ft_render_map(&data);
+		ft_render_rays(&data);
 		ft_render_player(&data);
 		mlx_hook(data.win_ptr, 02, 0, ft_key_handler, &data);
 		mlx_hook(data.win_ptr, 17, 0, ft_exit_handler, &data);

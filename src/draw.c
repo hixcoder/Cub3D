@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 08:57:24 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 10:36:16 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	ft_render_map(t_data *data)
 				ft_put_image(data, data->obj_img->no_texture, y, x);
 		}
 	}
+	ft_draw_square(y, x, 10, data);
 }
