@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 16:36:44 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/22 08:40:30 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void ft_map_init(char *map_path, t_data *data);
 void ft_map_errors(t_map *obj_map, int error_num);
 void ft_check_characters(t_map *obj_map);
 void ft_check_walls(t_map *obj_map);
-void	ft_drawer_init(t_data *data);
+// void	ft_drawer_init(t_data *data);
 void	ft_draw(t_data *data);
 
 int ft_verifie(char *file);

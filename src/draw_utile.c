@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/21 18:08:06 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/22 08:39:06 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	ft_draw_map(t_data *data)
 				draw_rectangle(data, x*50 ,  y*50 , 0x00FFFFFF);
 			else
 				draw_rectangle(data, x*50 , y*50, 0x00000000);
-
 			x++;		
 		}
 		y++;
