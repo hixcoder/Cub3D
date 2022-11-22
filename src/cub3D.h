@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/21 16:29:13 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/22 09:45:00 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ typedef struct s_player
 	float	radius;
 	float	turn_direction;
 	float	walk_direction;
-	float rotation_angle;
-	float move_speed;
-	float rotation_speed;
+	float	rotation_angle;
+	float	move_speed;
+	float	rotation_speed;
+
+	float	fov_angle;
+	float	rays_width;
+	float	rays_num;
 } t_player;
 
 typedef struct s_img
@@ -81,6 +85,9 @@ void	ft_check_characters(t_map *obj_map);
 void	ft_check_walls(t_map *obj_map);
 void	ft_drawer_init(t_data *data);
 void	ft_render_map(t_data *data);
+void	ft_draw_square(int y, int x, int size, t_data *data);
+void	ft_render_player(t_data *data);
+void	ft_update(t_data *data, int key);
 
 int		ft_verifie(char *file);
 int		ft_strcmp(char *s1, char *s2);
