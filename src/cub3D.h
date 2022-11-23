@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 17:04:23 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:22:08 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "./libft/libft.h"
 # include <math.h>
 
-# define COLUMN_SIZE	50
+# define COLUMN_SIZE 50
 
 # define KEY_ESC	53
 # define KEY_W	13

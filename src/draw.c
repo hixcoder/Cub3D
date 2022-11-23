@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 10:36:16 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:08:09 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void ft_draw_square(int y, int x, int size, t_data *data)
 		x = w - size;
 		while (x < w)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x00e9eae0);
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x00ff000);
 			x++;
 		}
 		y++;
@@ -70,16 +70,17 @@ void	ft_render_map(t_data *data)
 	obj_map = data->obj_map;
 	map = data->obj_map->map;
 	y = -1;
-	while (++y < obj_map->map_height)
+	while (++y < data->obj_map->map_height * COLUMN_SIZE)
 	{
 		x = -1;
-		while (++x < obj_map->map_width)
+		while (++x < data->obj_map->map_width * COLUMN_SIZE)
 		{
-			if (obj_map->map[y][x] == '1')
-				ft_put_image(data, data->obj_img->ea_texture, y, x);
-			else if (obj_map->map[y][x] == '0' || obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x] == 'N' || obj_map->map[y][x] == 'S')
-				ft_put_image(data, data->obj_img->no_texture, y, x);
+			if (ft_is_in_wall(x, y, data) == 1)
+				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x000000);
+			else
+				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0xffffff);
+			if (x % COLUMN_SIZE == 0 || y % COLUMN_SIZE == 0)
+				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x000000);
 		}
 	}
-	ft_draw_square(y, x, 10, data);
 }
