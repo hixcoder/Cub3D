@@ -4,12 +4,7 @@
 
 int ft_has_wall_at(t_data *data, double x, double y)
 {
-
-	double get_index_x = (x*TILE_SIZE + TILE_SIZE/2) / TILE_SIZE;
-	double get_index_y = (y*TILE_SIZE + TILE_SIZE/2) / TILE_SIZE;
-	// if ((int) get_index_x > data->obj_map->map_height || (int) get_index_y > data->obj_map->map_width)
-	// 	return (1);
-	if (data->obj_map->map[(int) get_index_y][(int) get_index_x] == '1')
+	if (data->obj_map->map[(int)  y][(int)  x] == '1')
 		return (1);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/22 16:27:26 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:01:40 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void ft_line(t_data *data, double angle, int l)
 	i = 0;
 	while(i < l)
     {
-		 x = data->obj_plyr->x *TILE_SIZE + TILE_SIZE/2 + 0.1 * cos(angle) * i;
-		 y = data->obj_plyr->y*TILE_SIZE + TILE_SIZE/2 + 0.1 * sin(angle) * i;
+		 x = data->obj_plyr->x *TILE_SIZE +  cos(angle) * i;
+		 y = data->obj_plyr->y*TILE_SIZE +  sin(angle) * i;
 		my_mlx_pixel_put(data,x, y, 0x00FF0000);
         i++;
     }
@@ -30,8 +30,8 @@ void ft_line(t_data *data, double angle, int l)
 }
 void ft_draw_player(t_data *data)
 {   
-	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE + TILE_SIZE/2 ,  data->obj_plyr->y * TILE_SIZE + TILE_SIZE/2 , 5, 0x00FF0000);
-    ft_line(data,data->obj_plyr->rotation_angle, 300);
+	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE ,  data->obj_plyr->y * TILE_SIZE, 5, 0x00FF0000);
+    ft_line(data,data->obj_plyr->rotation_angle, 30);
 	ft_cast_all_rays(data);
 	
 }
@@ -94,7 +94,7 @@ void init_data_player(t_data *data)
 	data->obj_plyr->walk_direction = 0;
 	data->obj_plyr->rotation_angle = 0;
 	data->obj_plyr->move_speed = 0.1;
-	data->obj_plyr->rotation_speed = 10 * (M_PI/180);
+	data->obj_plyr->rotation_speed = 1 * (M_PI/180);
 	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH;
     ft_draw_player(data);
 }
