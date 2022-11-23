@@ -4,6 +4,9 @@
 
 int ft_has_wall_at(t_data *data, double x, double y)
 {
+	if ( (x < 0 && x > data->obj_map->map_height)
+        || ( y < 0 && y > data->obj_map->map_width))
+			return(1);
 	if (data->obj_map->map[(int)  y][(int)  x] == '1')
 		return (1);
 	return(0);

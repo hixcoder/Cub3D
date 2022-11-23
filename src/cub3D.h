@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 13:23:18 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:36:18 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define TILE_SIZE 50
 #define FOV_ANGLE 60 * (M_PI/180)
-#define WALL_STRIP_WIDTH 0.01
+#define WALL_STRIP_WIDTH 0.1
 
 # define KEY_A 0
 # define KEY_W 13

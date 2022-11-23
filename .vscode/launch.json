@@ -7,10 +7,12 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
-            "program": "/Users/hboumahd/Desktop/Cub3D/cub3D",
-            "args": ["./map.cub"],
-            "cwd": "/Users/hboumahd/Desktop/Cub3D"
+            "name": "ffff",
+            "program": "/Users/lahammam/Desktop/Cub3D/cub3D",
+            "args": [
+                "./map.cub"
+            ],
+            "cwd": "/Users/lahammam/Desktop/Cub3D"
         }
     ]
 }

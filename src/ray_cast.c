@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:08:36 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/23 13:32:20 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:37:31 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ double ft_hor_intersection(t_data *data, double ray_angle)
     int isRayFacingLeft = !isRayFacingRight;
     ya = (data->obj_plyr->y/ TILE_SIZE) * TILE_SIZE;
     ya += isRayFacingDown ? 1 : 0;
-    
     xa = data->obj_plyr->x + (ya - data->obj_plyr->y) / tan(ray_angle);
     ystep = TILE_SIZE;
     ystep *= isRayFacingUp ? -1 : 1;
@@ -48,8 +47,8 @@ double ft_hor_intersection(t_data *data, double ray_angle)
     double next_hor_touch_y = ya * TILE_SIZE;
     if(isRayFacingUp)
         next_hor_touch_y--;
-    while (next_hor_touch_x > 0 && next_hor_touch_x <= data->obj_map->map_width * TILE_SIZE
-        && next_hor_touch_y > 0 && next_hor_touch_y <= data->obj_map->map_height * TILE_SIZE)
+    while (next_hor_touch_x > 0 && next_hor_touch_x < data->obj_map->map_width  * TILE_SIZE
+        && next_hor_touch_y > 0 && next_hor_touch_y < data->obj_map->map_height  * TILE_SIZE)
     {
         if (ft_has_wall_at(data,next_hor_touch_x / TILE_SIZE, next_hor_touch_y / TILE_SIZE))
         {
@@ -59,7 +58,7 @@ double ft_hor_intersection(t_data *data, double ray_angle)
         next_hor_touch_x += xstep;
         next_hor_touch_y += ystep;
     }
-    return (data->obj_map->map_width *data->obj_map->map_height * TILE_SIZE);
+    return (data->obj_map->map_height  *data->obj_map->map_width * TILE_SIZE);
 }
 
 double ft_ver_intersection(t_data *data, double ray_angle)
@@ -91,8 +90,8 @@ double ft_ver_intersection(t_data *data, double ray_angle)
     double next_ver_touch_y = ya * TILE_SIZE;
     if(isRayFacingLeft)
         next_ver_touch_x--;
-    while (next_ver_touch_x > 0 && next_ver_touch_x <= data->obj_map->map_width * TILE_SIZE
-        && next_ver_touch_y > 0 && next_ver_touch_y <= data->obj_map->map_height * TILE_SIZE)
+    while (next_ver_touch_x >= 0 && next_ver_touch_x < data->obj_map->map_width   * TILE_SIZE
+        && next_ver_touch_y >= 0 && next_ver_touch_y < data->obj_map->map_height * TILE_SIZE)
     {
         if (ft_has_wall_at(data,next_ver_touch_x / TILE_SIZE, next_ver_touch_y / TILE_SIZE))
         {
@@ -102,7 +101,7 @@ double ft_ver_intersection(t_data *data, double ray_angle)
         next_ver_touch_x += xstep;
         next_ver_touch_y += ystep;
     }
-    return (data->obj_map->map_width *data->obj_map->map_height * TILE_SIZE);
+    return (data->obj_map->map_height *data->obj_map->map_width * TILE_SIZE);
 }
 
 void ft_cast_all_rays(t_data *data)
@@ -112,16 +111,16 @@ void ft_cast_all_rays(t_data *data)
     int l1;
     int l2 ;
     int l;
-    
 	while(i < data->obj_plyr->num_rays)
 	{
-          l1 = ft_hor_intersection(data, ray_angle);
-         l2 = ft_ver_intersection(data,ray_angle);
+        printf("ray_angle=%f\n", ray_angle);
+        l1 = ft_hor_intersection(data, ray_angle);
+        l2 = ft_ver_intersection(data,ray_angle);
         if (l2 > l1)
             l = l1;
         else
             l = l2;
-		ft_line(data,ray_angle, l);
+		ft_line(data, ray_angle, l);
 		ray_angle = ray_angle +  FOV_ANGLE/data->obj_plyr->num_rays;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/23 12:01:40 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:34:37 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void init_data_player(t_data *data)
 	data->obj_plyr->turn_direction = 0;
 	data->obj_plyr->walk_direction = 0;
 	data->obj_plyr->rotation_angle = 0;
-	data->obj_plyr->move_speed = 0.1;
-	data->obj_plyr->rotation_speed = 1 * (M_PI/180);
-	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH;
+	data->obj_plyr->move_speed = 0.5;
+	data->obj_plyr->rotation_speed = 5 * (M_PI/180);
+	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH; // ??
     ft_draw_player(data);
 }
