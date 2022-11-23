@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 11:22:08 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:30:54 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	ft_render_player(t_data *data);
 void	ft_update(t_data *data, int key);
 void ft_render_rays(t_data *data);
 int	ft_is_in_wall(int new_x, int new_y, t_data *data);
+int    ft_horizontal_intersection(t_data *data, float ray_angle);
+int    ft_vertical_intersection(t_data *data, float ray_angle);
 
 int		ft_verifie(char *file);
 int		ft_strcmp(char *s1, char *s2);

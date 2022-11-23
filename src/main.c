@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 14:34:58 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:11:31 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int main(int ac, char **av)
 		obj_plyr.walk_direction = 0; // -1 if back , +1 if front
 		obj_plyr.rotation_angle = M_PI / 2;
 		obj_plyr.move_speed = 10;
-		obj_plyr.rotation_speed = 2 * (M_PI / 180);
+		obj_plyr.rotation_speed = 1 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
 		obj_plyr.rays_width = 0.1;
-		// obj_plyr.rays_num = data.obj_map->map_width / obj_plyr.rays_width;
-		obj_plyr.rays_num = 1;
+		obj_plyr.rays_num = data.obj_map->map_width / obj_plyr.rays_width;
+		// obj_plyr.rays_num = 1;
 		
         h = data.obj_map->map_height * COLUMN_SIZE;
         w = data.obj_map->map_width * COLUMN_SIZE;
