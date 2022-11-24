@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utile.c                                       :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/22 09:00:24 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:39:37 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	int x1 = x * MINI_MAP;
+	int y1 = y * MINI_MAP;
+	dst = data->addr + (y1 * data->line_length + x1 * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -57,8 +59,8 @@ void draw_rectangle(t_data *data, int x, int y, int color)
 		j = 0;
 			while(j < TILE_SIZE)
 			{
-				if (j < 1 || j > TILE_SIZE - 1 || i < 1 || i > TILE_SIZE - 1)
-					my_mlx_pixel_put(data, x+i, y +j,0x00000000);
+				if (j < 9 || i < 9 )
+					my_mlx_pixel_put(data, x+i, y +j,0x00FF00);
 				else
 					my_mlx_pixel_put(data, x+i, y +j,color);
 				j++;
@@ -80,17 +82,16 @@ void	ft_draw_map(t_data *data)
 	while (y < obj_map->map_height)
 	{
 		x = 0;
-		
 		while (x < obj_map->map_width)
 		{
 			if (obj_map->map[y][x] == '1')
-				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x00000000);
+				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x0070776D);
 			else if (obj_map->map[y][x] == '0')
 				draw_rectangle(data, x*TILE_SIZE ,  y*TILE_SIZE , 0x00FFFFFF);
 			else if (obj_map->map[y][x] == 'W' || obj_map->map[y][x] == 'E' || obj_map->map[y][x]== 'N' || obj_map->map[y][x] == 'S')
 				draw_rectangle(data, x*TILE_SIZE ,  y*TILE_SIZE , 0x00FFFFFF);
 			else
-				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x00000000);
+				draw_rectangle(data, x*TILE_SIZE , y*TILE_SIZE, 0x0070776D);
 			x++;		
 		}
 		y++;

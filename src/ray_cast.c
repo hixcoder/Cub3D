@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:08:36 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/23 15:37:31 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:56:59 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,13 @@ void ft_cast_all_rays(t_data *data)
     int l;
 	while(i < data->obj_plyr->num_rays)
 	{
-        printf("ray_angle=%f\n", ray_angle);
         l1 = ft_hor_intersection(data, ray_angle);
         l2 = ft_ver_intersection(data,ray_angle);
         if (l2 > l1)
             l = l1;
         else
             l = l2;
-		ft_line(data, ray_angle, l);
+		ft_line(data, ray_angle, l, 0x00FF0000);
 		ray_angle = ray_angle +  FOV_ANGLE/data->obj_plyr->num_rays;
 		i++;
 	}

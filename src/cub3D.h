@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 15:36:18 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:41:25 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 #include <math.h>
 
 #define TILE_SIZE 50
+#define MINI_MAP 0.5
 #define FOV_ANGLE 60 * (M_PI/180)
-#define WALL_STRIP_WIDTH 0.1
+#define WALL_STRIP_WIDTH 0.2
 
 # define KEY_A 0
 # define KEY_W 13
@@ -107,11 +108,11 @@ void	ft_draw_map(t_data *data);
 void init_data_player(t_data *data);
 void draw_circle_r(t_data *data,int x, int y, int r, int color);
 void ft_draw_player(t_data *data);
-static int	key_hook(int keycode, t_data *data);
+// static int	key_hook(int keycode, t_data *data);
 void	update_game(t_data *data);
 int ft_has_wall_at(t_data *data, double x, double y);
 
 void ft_cast_all_rays(t_data *data);
-void ft_line(t_data *data, double angle, int l);
+void ft_line(t_data *data, double angle, int l, int color);
 int ft_has_wall_at(t_data *data, double x, double y);
 #endif

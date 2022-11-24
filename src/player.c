@@ -6,13 +6,13 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/23 15:34:37 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:52:54 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void ft_line(t_data *data, double angle, int l)
+void ft_line(t_data *data, double angle, int l, int color)
 {
 	int i;
 	double x;
@@ -23,16 +23,16 @@ void ft_line(t_data *data, double angle, int l)
     {
 		 x = data->obj_plyr->x *TILE_SIZE +  cos(angle) * i;
 		 y = data->obj_plyr->y*TILE_SIZE +  sin(angle) * i;
-		my_mlx_pixel_put(data,x, y, 0x00FF0000);
+		my_mlx_pixel_put(data,x, y, color);
         i++;
     }
 	
 }
 void ft_draw_player(t_data *data)
 {   
-	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE ,  data->obj_plyr->y * TILE_SIZE, 5, 0x00FF0000);
-    ft_line(data,data->obj_plyr->rotation_angle, 30);
+	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE ,  data->obj_plyr->y * TILE_SIZE, 5, 0x0000FF00);
 	ft_cast_all_rays(data);
+    ft_line(data,data->obj_plyr->rotation_angle, 30, 0x0000FF00);
 	
 }
 
