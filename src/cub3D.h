@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/24 15:41:25 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:12:59 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <math.h>
 
 #define TILE_SIZE 50
-#define MINI_MAP 0.5
+#define MINI_MAP 0.2
 #define FOV_ANGLE 60 * (M_PI/180)
 #define WALL_STRIP_WIDTH 0.2
 
@@ -33,6 +33,13 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_Q 12
+
+typedef struct s_inter_p
+{
+	double x;
+	double y;
+	double l;
+} t_inter_p;
 
 typedef struct s_map
 {
@@ -115,4 +122,5 @@ int ft_has_wall_at(t_data *data, double x, double y);
 void ft_cast_all_rays(t_data *data);
 void ft_line(t_data *data, double angle, int l, int color);
 int ft_has_wall_at(t_data *data, double x, double y);
+void render3d_projection(t_data *data, t_inter_p l, int i, double ray_angle);
 #endif

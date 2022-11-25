@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/24 15:39:37 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 08:14:13 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void draw_rectangle(t_data *data, int x, int y, int color)
 		j = 0;
 			while(j < TILE_SIZE)
 			{
-				if (j < 9 || i < 9 )
+				if (j < 1 || i < 1 )
 					my_mlx_pixel_put(data, x+i, y +j,0x00FF00);
 				else
 					my_mlx_pixel_put(data, x+i, y +j,color);
