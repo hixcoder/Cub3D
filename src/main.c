@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 12:35:37 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:10:39 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_key_handler(int key, void *n_data)
 
 	data = (t_data *) n_data;
 	map = data->obj_map->map;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	ft_clear_window(data);
 	if (key == KEY_ESC)
 		ft_exit_handler(data);
 	else if (key == KEY_W)
@@ -79,7 +79,7 @@ int main(int ac, char **av)
 		obj_plyr.move_speed = 5;
 		obj_plyr.rotation_speed = 4 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
-		obj_plyr.wall_strip_width = 2;
+		obj_plyr.wall_strip_width = 1;
 		obj_plyr.rays_num = (data.obj_map->map_width) / obj_plyr.wall_strip_width;
 		obj_plyr.minimap_scale_factor = 0.2;
 		

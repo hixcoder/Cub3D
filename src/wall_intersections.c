@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:23:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 10:03:42 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:56:21 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void    ft_init_horz_vars(t_data *data, float ray_angle, t_var *v)
 }
 
 // this function return the distance between the player and the horizontal intersection with the wall
-int    ft_horizontal_intersection(t_data *data, float ray_angle)
+float    ft_horizontal_intersection(t_data *data, float ray_angle)
 {
     t_var    v;
 
@@ -142,7 +142,7 @@ void    ft_init_vertcl_vars(t_data *data, float ray_angle, t_var *v)
 }
 
 // this function return the distance between the player and the vertical intersection with the wall
-int    ft_vertical_intersection(t_data *data, float ray_angle)
+float    ft_vertical_intersection(t_data *data, float ray_angle)
 {
     t_var    v;
 

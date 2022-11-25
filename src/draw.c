@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 11:59:49 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:37:51 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	int		y_scaled;
 	float		scale_factor;	
 
+	if (y > (data->obj_map->map_height * COLUMN_SIZE) || x > (data->obj_map->map_width  * COLUMN_SIZE))
+		return;
 	scale_factor = data->obj_plyr->minimap_scale_factor;
 	x_scaled = scale_factor * x;
 	y_scaled = scale_factor * y;
@@ -31,7 +33,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void	my_mlx_pixel_put2(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-
+	
+	if (y > (data->obj_map->map_height * COLUMN_SIZE) || x > (data->obj_map->map_width  * COLUMN_SIZE))
+		return;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -58,8 +62,6 @@ void ft_draw_square(int y, int x, int size, t_data *data)
 	}
 }
 
-
-
 // this function for draw a ray
 void    ft_draw_one_ray(t_data *data, float ray_angle, int size)
 {
@@ -68,4 +70,19 @@ void    ft_draw_one_ray(t_data *data, float ray_angle, int size)
     j = -1;
     while (++j < size)
         my_mlx_pixel_put(data, (data->obj_plyr->x + cos(ray_angle) * j),  (data->obj_plyr->y + sin(ray_angle) * j) , 0x00FF0000);
+}
+
+// this function is used for clear the window (by drawing black pixels)
+void	ft_clear_window(t_data *data)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < data->obj_map->map_height * COLUMN_SIZE)
+	{
+		x = -1;
+		while (++x < data->obj_map->map_width * COLUMN_SIZE)
+			my_mlx_pixel_put2(data, x, y, 0x0000000);
+	}
 }
