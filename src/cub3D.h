@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 11:31:04 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:15:25 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 #define TILE_SIZE 50
 #define MINI_MAP 0.2
 #define FOV_ANGLE 60 * (M_PI/180)
-#define WALL_STRIP_WIDTH 0.2
-
+#define WALL_STRIP_WIDTH 0.1
 # define KEY_A 0
 # define KEY_W 13
 # define KEY_D 2
@@ -33,13 +32,6 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_Q 12
-
-typedef struct s_inter_p
-{
-	double x;
-	double y;
-	double l;
-} t_inter_p;
 
 typedef struct s_map
 {
@@ -122,5 +114,10 @@ int ft_has_wall_at(t_data *data, double x, double y);
 void ft_cast_all_rays(t_data *data);
 void ft_line(t_data *data, double angle, int l, int color);
 int ft_has_wall_at(t_data *data, double x, double y);
-void render3d_projection(t_data *data, t_inter_p l, int i);
+void render3d_projection(t_data *data, double l, int i);
+void	my_mlx_pixel_put_v2(t_data *data, int x, int y, int color);
+void ft_wall_render(t_data *data);
+
+double ft_ver_intersection(t_data *data, double ray_angle);
+double ft_hor_intersection(t_data *data, double ray_angle);
 #endif

@@ -11,11 +11,29 @@ int ft_has_wall_at(t_data *data, double x, double y)
 		return (1);
 	return(0);
 }
+void draw_black_window(t_data *data,int x,int y, int with, int height)
+{
+	int i;
+	int j;
 
+	i = 0;
+	while (i < with)
+	{
+		j = 0;
+		while(j < height)
+		{
+			my_mlx_pixel_put_v2(data,(x+i) ,(y+j) , 0x00000000);
+        	j++;
+		}
+		i++;
+	}
+}
 void update_map(t_data *data)
 {
-	int a = mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	printf("---->%d\n", a);
+	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	draw_black_window(data, 0, 0, data->obj_map->map_width * TILE_SIZE,data->obj_map->map_height*TILE_SIZE),
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+	ft_wall_render(data);
 	ft_draw_map(data);
 	ft_draw_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahammam <ahammam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:55:10 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/19 19:35:13 by ahammam          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:22:12 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 int ft_strcmp(char *s1, char *s2)
 {

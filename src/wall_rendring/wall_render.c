@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:09:33 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 11:54:41 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:15:46 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,44 @@ void draw_rect_wall(t_data *data,int x,int y, int with, int height)
 		j = 0;
 		while(j < height)
 		{
-			my_mlx_pixel_put(data, (x+i) /MINI_MAP , (y + j)/MINI_MAP, 0x00FF0000);
+			if (x+i > 0 && x+i < data->obj_map->map_width * TILE_SIZE &&
+				y+j > 0 && y+j < data->obj_map->map_height * TILE_SIZE)
+				my_mlx_pixel_put_v2(data, x+i, y+j, 0x0000FF00);
         	j++;
 		}
 		i++;
 	}
 }
 
-void render3d_projection(t_data *data, t_inter_p p_inter, int i)
+void render3d_projection(t_data *data, double l, int i)
 {
     double distance_projection_plane = (data->obj_map->map_width / 2)/ tan(FOV_ANGLE / 2);
-    double pro_wall_height = (TILE_SIZE / p_inter.l) * distance_projection_plane;
+    double pro_wall_height = (TILE_SIZE / l) * distance_projection_plane;
 	draw_rect_wall(data,
 					i * WALL_STRIP_WIDTH * TILE_SIZE,
 					(data->obj_map->map_height/2 - pro_wall_height/2)*TILE_SIZE,
 					WALL_STRIP_WIDTH * TILE_SIZE,
 					pro_wall_height* TILE_SIZE);
+}
+
+void ft_wall_render(t_data *data)
+{
+    int i = 0;
+	double ray_angle = data->obj_plyr->rotation_angle - (FOV_ANGLE / 2);
+   double l1;
+   double l2;
+   double l;
+	while(i < data->obj_plyr->num_rays)
+	{
+        l1 = ft_hor_intersection(data, ray_angle);
+        l2 = ft_ver_intersection(data,ray_angle);
+        if (l2 > l1)
+            l = l1;
+        else
+           l = l2;
+		ft_line(data, ray_angle,l , 0x00FF0000);
+        render3d_projection(data, l, i);
+		ray_angle = ray_angle +  FOV_ANGLE/data->obj_plyr->num_rays;
+		i++;
+	}
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:38:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 11:53:53 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:03:54 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -20,31 +20,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	int y1 = y * MINI_MAP;
 	dst = data->addr + (y1 * data->line_length + x1 * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-void draw_circle(t_data *data,int x, int y, int r, int color)
-{
-      double i, angle, x1, y1;
-
-      for(i = 0; i < 360; i += 0.1)
-      {
-            angle = i;
-            x1 = r * cos(angle * M_PI / 180);
-            y1 = r * sin(angle * M_PI / 180);
-            my_mlx_pixel_put(data,x + x1,y+ y1,color);
-      }
-}
-
-void draw_circle_r(t_data *data,int x, int y, int r, int color)
-{
-	int i;
-
-	i = 0;
-	while(i < r)
-	{
-		draw_circle(data,x,y,i,color);
-		i++;
-	}
 }
 
 void draw_rectangle(t_data *data, int x, int y, int color)
@@ -60,7 +35,7 @@ void draw_rectangle(t_data *data, int x, int y, int color)
 			while(j < TILE_SIZE)
 			{
 				if (j < 1 || i < 1 )
-					my_mlx_pixel_put(data, x+i, y +j,0x00FF00);
+					my_mlx_pixel_put(data, x+i, y +j,0x000000);
 				else
 					my_mlx_pixel_put(data, x+i, y +j,color);
 				j++;

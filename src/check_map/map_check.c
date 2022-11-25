@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:54:43 by ubunto            #+#    #+#             */
-/*   Updated: 2022/11/20 09:52:41 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:22:14 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 // this function for get the player position and check if there is more than one player.
 static void ft_update_plyr(t_map *obj_map, int nbr_plyrs, int x, int y)

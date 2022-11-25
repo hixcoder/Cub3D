@@ -6,11 +6,11 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:08:36 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 12:31:23 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:15:21 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 double normalise_angle(double angle)
 {
@@ -21,12 +21,11 @@ double normalise_angle(double angle)
 
 }
 
-t_inter_p ft_hor_intersection(t_data *data, double ray_angle)
+double ft_hor_intersection(t_data *data, double ray_angle)
 {
     double xstep, ystep;
     double xa;
     int ya;
-    t_inter_p p_inter;
     
     ray_angle = normalise_angle(ray_angle);
     int isRayFacingDown = ray_angle > 0 && ray_angle < M_PI;
@@ -44,31 +43,30 @@ t_inter_p ft_hor_intersection(t_data *data, double ray_angle)
     xstep *= (isRayFacingLeft && xstep > 0 ) ? -1 : 1;
     xstep *= (isRayFacingRight && xstep < 0 ) ? -1 : 1;
     
-    p_inter.x = xa * TILE_SIZE;
-    p_inter.y = ya * TILE_SIZE;
+    double inter_x = xa * TILE_SIZE;
+    double inter_y = ya * TILE_SIZE;
     if(isRayFacingUp)
-        p_inter.y--;
-    while (p_inter.x > 0 && p_inter.x < data->obj_map->map_width  * TILE_SIZE
-        && p_inter.y > 0 && p_inter.y < data->obj_map->map_height  * TILE_SIZE)
+        inter_y--;
+    while (inter_x > 0 && inter_x < data->obj_map->map_width  * TILE_SIZE
+        && inter_y > 0 && inter_y < data->obj_map->map_height  * TILE_SIZE)
     {
-        if (ft_has_wall_at(data,p_inter.x / TILE_SIZE, p_inter.y / TILE_SIZE))
+        if (ft_has_wall_at(data,inter_x / TILE_SIZE, inter_y / TILE_SIZE))
         {
-            p_inter.l = sqrt(pow((p_inter.x - data->obj_plyr->x * TILE_SIZE), 2) + pow((p_inter.y - data->obj_plyr->y* TILE_SIZE), 2));
-            return (p_inter);
+            double l = sqrt(pow((inter_x - data->obj_plyr->x * TILE_SIZE), 2) + pow((inter_y - data->obj_plyr->y* TILE_SIZE), 2));
+            return (l);
         }
-        p_inter.x += xstep;
-        p_inter.y += ystep;
+        inter_x += xstep;
+        inter_y += ystep;
     }
-    p_inter.l = data->obj_map->map_height  *data->obj_map->map_width * TILE_SIZE;
-    return (p_inter);
+    return (data->obj_map->map_height  *data->obj_map->map_width * TILE_SIZE);
 }
 
-t_inter_p ft_ver_intersection(t_data *data, double ray_angle)
+double ft_ver_intersection(t_data *data, double ray_angle)
 {
     double xstep, ystep;
     int xa;
     double ya;
-    t_inter_p p_inter;
+    
     
     ray_angle = normalise_angle(ray_angle);
 
@@ -89,42 +87,40 @@ t_inter_p ft_ver_intersection(t_data *data, double ray_angle)
     ystep *= (isRayFacingUp && ystep > 0 ) ? -1 : 1;
     ystep *= (isRayFacingDown && ystep < 0 ) ? -1 : 1;
     
-    p_inter.x = xa * TILE_SIZE;
-    p_inter.y = ya * TILE_SIZE;
+    double inter_x = xa * TILE_SIZE;
+    double inter_y = ya * TILE_SIZE;
     if(isRayFacingLeft)
-        p_inter.x--;
-    while ( p_inter.x >= 0 &&  p_inter.x < data->obj_map->map_width   * TILE_SIZE
-        &&  p_inter.y >= 0 &&  p_inter.y < data->obj_map->map_height * TILE_SIZE)
+        inter_x--;
+    while ( inter_x >= 0 &&  inter_x < data->obj_map->map_width   * TILE_SIZE
+        &&  inter_y >= 0 &&  inter_y < data->obj_map->map_height * TILE_SIZE)
     {
-        if (ft_has_wall_at(data, p_inter.x / TILE_SIZE,  p_inter.y / TILE_SIZE))
+        if (ft_has_wall_at(data, inter_x / TILE_SIZE,  inter_y / TILE_SIZE))
         {
-            p_inter.l = sqrt(pow(( p_inter.x - data->obj_plyr->x * TILE_SIZE), 2) +pow(( p_inter.y - data->obj_plyr->y* TILE_SIZE), 2));
-            return (p_inter);
+            double l = sqrt(pow(( inter_x - data->obj_plyr->x * TILE_SIZE), 2) +pow(( inter_y - data->obj_plyr->y* TILE_SIZE), 2));
+            return (l);
         }
-         p_inter.x += xstep;
-         p_inter.y += ystep;
+         inter_x += xstep;
+         inter_y += ystep;
     }
-    p_inter.l = data->obj_map->map_height *data->obj_map->map_width * TILE_SIZE;
-    return (p_inter);
+    return (data->obj_map->map_height *data->obj_map->map_width * TILE_SIZE);
 }
 
 void ft_cast_all_rays(t_data *data)
 {
     int i = 0;
 	double ray_angle = data->obj_plyr->rotation_angle - (FOV_ANGLE / 2);
-    t_inter_p p_inter_h;
-    t_inter_p p_inter_v;
-    t_inter_p p_inter;
+   double l1;
+   double l2;
+   double l;
 	while(i < data->obj_plyr->num_rays)
 	{
-        p_inter_h = ft_hor_intersection(data, ray_angle);
-        p_inter_v = ft_ver_intersection(data,ray_angle);
-        if (p_inter_v.l > p_inter_h.l)
-            p_inter = p_inter_h;
+        l1 = ft_hor_intersection(data, ray_angle);
+        l2 = ft_ver_intersection(data,ray_angle);
+        if (l2 > l1)
+            l = l1;
         else
-           p_inter = p_inter_v;
-		ft_line(data, ray_angle, p_inter.l, 0x00FF0000);
-        render3d_projection(data, p_inter, i);
+           l = l2;
+		ft_line(data, ray_angle,l , 0x00FF0000);
 		ray_angle = ray_angle +  FOV_ANGLE/data->obj_plyr->num_rays;
 		i++;
 	}
