@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 12:08:09 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:32:08 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,35 @@ void ft_draw_square(int y, int x, int size, t_data *data)
 		x = w - size;
 		while (x < w)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x00ff000);
+			my_mlx_pixel_put(data, x, y, 0x00ff000);
 			x++;
 		}
 		y++;
 	}
 }
 
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+	int		x_scaled;
+	int		y_scaled;
+	float		scale_factor;	
+
+	scale_factor = data->obj_plyr->minimap_scale_factor;
+	x_scaled = scale_factor * x;
+	y_scaled = scale_factor * y;
+	dst = data->addr + (y_scaled * data->line_length + x_scaled * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	my_mlx_pixel_put2(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 // this function initialize the images
 void	ft_drawer_init(t_data *data)
 {
@@ -66,9 +88,11 @@ void	ft_render_map(t_data *data)
 	int		x;
 	char	**map;
 	t_map	*obj_map;
+	
 
 	obj_map = data->obj_map;
 	map = data->obj_map->map;
+	
 	y = -1;
 	while (++y < data->obj_map->map_height * COLUMN_SIZE)
 	{
@@ -76,11 +100,11 @@ void	ft_render_map(t_data *data)
 		while (++x < data->obj_map->map_width * COLUMN_SIZE)
 		{
 			if (ft_is_in_wall(x, y, data) == 1)
-				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x000000);
+				my_mlx_pixel_put(data, x, y, 0x808050);
 			else
-				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0xffffff);
+				my_mlx_pixel_put(data, x, y, 0xffffff);
 			if (x % COLUMN_SIZE == 0 || y % COLUMN_SIZE == 0)
-				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x,  y , 0x000000);
+				my_mlx_pixel_put(data, x, y, 0x808050);
 		}
 	}
 }

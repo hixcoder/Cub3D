@@ -6,7 +6,7 @@
 #    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/23 15:23:16 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/24 08:52:46 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OTHER_OBJ = ${OTHER_SRCS:.c=.o}
 
 LIBS = ./src/get_next_line.a ./src/libft.a
 
-INCLUDES = ./src/cub3D.h ./src/ft_printf/ft_printf.h ./src/get_next_line/get_next_line.h ./src/libft/libft.h ./src/bonus/cub3D_bonus.h
+INCLUDES = ./src/cub3D.h ./src/get_next_line/get_next_line.h ./src/libft/libft.h 
 
 # -g for the debugger
 FLAGS = -Wall -Wextra -Werror -g
@@ -46,7 +46,7 @@ CC = cc
 %.o : %.c ${INCLUDES}
 	$(CC) ${FLAGS} -Imlx -c $< -o $@
 	
-$(NAME) : ${SRCOBJ} $(OTHER_SRCS)
+$(NAME) : ${SRCOBJ} $(OTHER_SRCS) ${INCLUDES}
 	@$(MAKE) -C $(GET_NEXT_LINE_FOLDER)
 	@$(MAKE) -C $(LIBFT_FOLDER)
 	@$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)

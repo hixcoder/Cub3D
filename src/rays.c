@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 15:28:24 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:09:17 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void    ft_draw_one_ray(t_data *data, float ray_angle, int size)
     
     j = -1;
     while (++j < size)
-        mlx_pixel_put(data->mlx_ptr, data->win_ptr, data->obj_plyr->x + cos(ray_angle) * j,  data->obj_plyr->y + sin(ray_angle) * j, 0x00FF0000);
+        my_mlx_pixel_put(data, (data->obj_plyr->x + cos(ray_angle) * j),  (data->obj_plyr->y + sin(ray_angle) * j) , 0x00FF0000);
 }
 
-// this function function draw the player rays that intersect with the walls
+// this function for draw the player rays that intersect with the walls
 void    ft_cast_rays(t_data *data, float ray_angle)
 {
     int      distance;

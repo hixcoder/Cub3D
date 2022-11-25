@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 15:30:54 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:17:45 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_player
 	float	fov_angle;
 	float	rays_width;
 	float	rays_num;
+	float	minimap_scale_factor;
 } t_player;
 
 typedef struct s_img
@@ -71,11 +72,17 @@ typedef struct s_img
 
 typedef struct s_data
 {
+	void	*img;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		*obj_map;
 	t_player	*obj_plyr;
 	t_img		*obj_img;
+
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 } t_data;
 
 void	ft_maloc_error(void *var);
@@ -92,6 +99,7 @@ void ft_render_rays(t_data *data);
 int	ft_is_in_wall(int new_x, int new_y, t_data *data);
 int    ft_horizontal_intersection(t_data *data, float ray_angle);
 int    ft_vertical_intersection(t_data *data, float ray_angle);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int		ft_verifie(char *file);
 int		ft_strcmp(char *s1, char *s2);
