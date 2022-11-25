@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 10:12:59 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:31:04 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ int ft_has_wall_at(t_data *data, double x, double y);
 void ft_cast_all_rays(t_data *data);
 void ft_line(t_data *data, double angle, int l, int color);
 int ft_has_wall_at(t_data *data, double x, double y);
-void render3d_projection(t_data *data, t_inter_p l, int i, double ray_angle);
+void render3d_projection(t_data *data, t_inter_p l, int i);
 #endif

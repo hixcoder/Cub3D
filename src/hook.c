@@ -14,7 +14,8 @@ int ft_has_wall_at(t_data *data, double x, double y)
 
 void update_map(t_data *data)
 {
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	int a = mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	printf("---->%d\n", a);
 	ft_draw_map(data);
 	ft_draw_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 08:30:18 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:01:40 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void ft_line(t_data *data, double angle, int l, int color)
 void ft_draw_player(t_data *data)
 {   
 	draw_circle_r(data,  data->obj_plyr->x *TILE_SIZE ,  data->obj_plyr->y * TILE_SIZE, 5, 0x0000FF00);
-	ft_cast_all_rays(data);
     ft_line(data,data->obj_plyr->rotation_angle, 30, 0x0000FF00);
+	ft_cast_all_rays(data);
 	
 }
 
@@ -92,7 +92,7 @@ void init_data_player(t_data *data)
 	data->obj_plyr->radius = 3;
 	data->obj_plyr->turn_direction = 0;
 	data->obj_plyr->walk_direction = 0;
-	data->obj_plyr->rotation_angle = 0;
+	data->obj_plyr->rotation_angle = 3*M_PI/2;
 	data->obj_plyr->move_speed = 0.5;
 	data->obj_plyr->rotation_speed = 5 * (M_PI/180);
 	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH; // ??

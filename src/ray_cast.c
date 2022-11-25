@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:08:36 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 10:12:43 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:31:23 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void ft_cast_all_rays(t_data *data)
         else
            p_inter = p_inter_v;
 		ft_line(data, ray_angle, p_inter.l, 0x00FF0000);
-        render3d_projection(data, p_inter, i, ray_angle);
+        render3d_projection(data, p_inter, i);
 		ray_angle = ray_angle +  FOV_ANGLE/data->obj_plyr->num_rays;
 		i++;
 	}
