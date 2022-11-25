@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/24 13:17:45 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:28:58 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_player
 	float	rotation_speed;
 
 	float	fov_angle;
-	float	rays_width;
+	float	wall_strip_width;
 	float	rays_num;
 	float	minimap_scale_factor;
 } t_player;
@@ -90,16 +90,20 @@ void	ft_map_init(char *map_path, t_data *data);
 void	ft_map_errors(t_map *obj_map, int error_num);
 void	ft_check_characters(t_map *obj_map);
 void	ft_check_walls(t_map *obj_map);
-void	ft_drawer_init(t_data *data);
+void	ft_imgs_init(t_data *data);
 void	ft_render_map(t_data *data);
 void	ft_draw_square(int y, int x, int size, t_data *data);
 void	ft_render_player(t_data *data);
 void	ft_update(t_data *data, int key);
-void ft_render_rays(t_data *data);
-int	ft_is_in_wall(int new_x, int new_y, t_data *data);
-int    ft_horizontal_intersection(t_data *data, float ray_angle);
-int    ft_vertical_intersection(t_data *data, float ray_angle);
+void	ft_render_rays(t_data *data);
+int		ft_is_in_wall(int new_x, int new_y, t_data *data);
+int		ft_horizontal_intersection(t_data *data, float ray_angle);
+int		ft_vertical_intersection(t_data *data, float ray_angle);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    ft_render(t_data *data, int key);
+void    ft_draw_one_ray(t_data *data, float ray_angle, int size);
+void	my_mlx_pixel_put2(t_data *data, int x, int y, int color);
+void ft_draw_rectangle(int y, int x, int h, int w,t_data *data);
 
 int		ft_verifie(char *file);
 int		ft_strcmp(char *s1, char *s2);

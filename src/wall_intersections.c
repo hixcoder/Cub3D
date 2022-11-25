@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:23:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/23 16:11:04 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/25 10:03:42 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int    ft_horizontal_intersection(t_data *data, float ray_angle)
     }
     return(v.window_w * v.window_h);
 }
-
 
 // this function initialize the ft_vertical_intersection() function vars
 void    ft_init_vertcl_vars(t_data *data, float ray_angle, t_var *v)
