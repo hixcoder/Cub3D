@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 10:48:53 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:28:57 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int main(int ac, char **av)
 		obj_plyr.move_speed = 5;
 		obj_plyr.rotation_speed = 4 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
-		obj_plyr.wall_strip_width = 0.11;
+		obj_plyr.wall_strip_width = 0.2;
 		obj_plyr.rays_num = (data.obj_map->map_width) / obj_plyr.wall_strip_width;
 		obj_plyr.minimap_scale_factor = 0.2;
 		

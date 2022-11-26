@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:15:48 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/02/21 15:52:46 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:06:54 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*get_next_line(int fd)
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	line = ft_read(fd, buffer, saved_str);
