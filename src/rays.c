@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 18:54:35 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 10:58:57 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,22 @@ float   ft_normalize_angle(float angle)
 // this function draws a rectange on the position map[y][x] with a size of your choice
 void ft_draw_rectangle(int y, int x, int h, int w,t_data *data)
 {
-	int tmp;
-
+    int x1;
+    int y1;
     
     w = w + x;
     h = h + y;
-    tmp = x;
-	while (y < h)
+    y1 = y - 1;
+	while (++y1 < h)
 	{
-		x = tmp;
-		while (x < w)
+        x1 = x - 1;
+		while (++x1 < w)
 		{
-            if (y > (data->obj_map->map_height * COLUMN_SIZE) || y < 0 
-                || x > (data->obj_map->map_width  * COLUMN_SIZE) || x < 0)
+            if (y1 > (data->obj_map->map_height * COLUMN_SIZE) || y1 < 0 
+                || x1 > (data->obj_map->map_width  * COLUMN_SIZE) || x1 < 0)
                 return ;
-			my_mlx_pixel_put2(data, x, y, 0xFFFFFFF);
-			x++;
+			my_mlx_pixel_put2(data, x1, y1, 0xFFFFFFF);
 		}
-		y++;
 	}
 }
 
@@ -55,7 +53,7 @@ void    ft_render_3D_projected_wall(t_data *data, float distance, int i)
     int x;
     int y;
 
-    h = data->obj_map->map_height ;
+    h = data->obj_map->map_height;
     w = data->obj_map->map_width;
     
     // calculate the distance to the projection plane
@@ -63,7 +61,7 @@ void    ft_render_3D_projected_wall(t_data *data, float distance, int i)
     // projected wall height
     wall_strip_height = (COLUMN_SIZE / distance) * distance_projection_plane;
 
-    y = ((h / 2) - (wall_strip_height / 2)) * COLUMN_SIZE;
+    y = (((h / 2) ) - (wall_strip_height / 2)) ;
     x = i * data->obj_plyr->wall_strip_width * COLUMN_SIZE;
     printf("i = %d\n", i);
     printf("distance = %f\n", distance);
@@ -83,7 +81,6 @@ void    ft_cast_rays(t_data *data, float ray_angle, int i)
     if (distance > ft_vertical_intersection(data, ray_angle))
         distance = ft_vertical_intersection(data, ray_angle);
     ft_draw_one_ray(data, ray_angle, distance);
-    // (void) i;
     ft_render_3D_projected_wall(data, distance, i);
 }
 
@@ -101,5 +98,4 @@ void ft_render_rays(t_data *data)
         ft_cast_rays(data, ray_angle, i);
         ray_angle += data->obj_plyr->fov_angle / data->obj_plyr->rays_num;
     }
-    // ft_draw_rectangle(0, 50, 100, 50, data);
 }
