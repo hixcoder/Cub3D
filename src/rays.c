@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 10:58:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 11:17:52 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ void ft_draw_rectangle(int y, int x, int h, int w,t_data *data)
         x1 = x - 1;
 		while (++x1 < w)
 		{
-            if (y1 > (data->obj_map->map_height * COLUMN_SIZE) || y1 < 0 
-                || x1 > (data->obj_map->map_width  * COLUMN_SIZE) || x1 < 0)
-                return ;
-			my_mlx_pixel_put2(data, x1, y1, 0xFFFFFFF);
+            if (!(y1 > (data->obj_map->map_height * COLUMN_SIZE) || y1 < 0 
+                || x1 > (data->obj_map->map_width  * COLUMN_SIZE) || x1 < 0))
+			    my_mlx_pixel_put2(data, x1, y1, 0xFFFFFFF);
 		}
 	}
 }
@@ -57,11 +56,11 @@ void    ft_render_3D_projected_wall(t_data *data, float distance, int i)
     w = data->obj_map->map_width;
     
     // calculate the distance to the projection plane
-    distance_projection_plane = (w / 2) / tan(data->obj_plyr->fov_angle / 2);
+    distance_projection_plane = ((w / 2) / tan(data->obj_plyr->fov_angle / 2));
     // projected wall height
     wall_strip_height = (COLUMN_SIZE / distance) * distance_projection_plane;
 
-    y = (((h / 2) ) - (wall_strip_height / 2)) ;
+    y = (((h / 2) ) - (wall_strip_height / 2))  * COLUMN_SIZE;
     x = i * data->obj_plyr->wall_strip_width * COLUMN_SIZE;
     printf("i = %d\n", i);
     printf("distance = %f\n", distance);
@@ -69,7 +68,7 @@ void    ft_render_3D_projected_wall(t_data *data, float distance, int i)
     printf("wall_strip_height = %f\n", wall_strip_height);
     printf("x = %d  &&  y = %d\n", x, y);
     printf("w = %d  &&  h = %d\n---------\n", w * COLUMN_SIZE, h * COLUMN_SIZE);
-    ft_draw_rectangle(y, x, wall_strip_height * COLUMN_SIZE, data->obj_plyr->wall_strip_width * COLUMN_SIZE, data);
+    ft_draw_rectangle(y, x, floor(wall_strip_height * COLUMN_SIZE), floor(data->obj_plyr->wall_strip_width * COLUMN_SIZE), data);
 }
 
 // this function for draw the player rays that intersect with the walls
