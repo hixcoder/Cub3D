@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 16:51:14 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:27:12 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,29 @@ float   ft_normalize_angle(float angle)
 }
 
 // this function draws a rectange on the position map[y][x] with a size of your choice
-void ft_draw_rectangle(int y, int x, int h, int w,t_data *data)
+void ft_draw_rectangle(int y, int x, int h, int w, unsigned int color, unsigned int c_color, unsigned int f_color, t_data *data)
 {
     int x1;
     int y1;
     
     w = w + x;
     h = h + y;
-    y1 = y - 1;
-	while (++y1 < h)
+    y1 = - 1;
+	while (++y1 < data->obj_map->map_height * COLUMN_SIZE)
 	{
         x1 = x - 1;
 		while (++x1 < w)
 		{
             if (!(y1 > (data->obj_map->map_height * COLUMN_SIZE) || y1 < 0 
                 || x1 > (data->obj_map->map_width  * COLUMN_SIZE) || x1 < 0))
-			    my_mlx_pixel_put2(data, x1, y1, 0xFFFFFFF);
+                {
+                    if (y1 < y)
+			            my_mlx_pixel_put2(data, x1, y1, c_color);
+                    else if (y1 >= y && y1 < h)
+			            my_mlx_pixel_put2(data, x1, y1, color);
+                    else if (y1 >= h)
+			            my_mlx_pixel_put2(data, x1, y1, f_color);
+                }
 		}
 	}
 }
@@ -52,14 +59,22 @@ void    ft_render_3D_projected_wall(t_data *data, float distorted_distance, int 
     float x;
     float y;
     float correct_distance;
+    unsigned int color;
+    int ray_max_distance;
+    int rachio;
+    int f_color;
+    int c_color;
+
 
     h = data->obj_map->map_height;
     w = data->obj_map->map_width;
     correct_distance = cos(ray_angle - data->obj_plyr->rotation_angle) * distorted_distance;
+    ray_max_distance = sqrt(pow(h * COLUMN_SIZE, 2)) + sqrt(pow(w * COLUMN_SIZE, 2));
+    printf("ray_max_distance = %d\n", ray_max_distance);
     // calculate the distance to the projection plane
     distance_projection_plane = ((w / 2) / tan(data->obj_plyr->fov_angle / 2));
     // projected wall height
-    wall_strip_height = (COLUMN_SIZE / correct_distance) * distance_projection_plane  * 0.3;
+    wall_strip_height = (COLUMN_SIZE / correct_distance) * distance_projection_plane  * 0.5;
 
     y = (((h / 2) ) - (wall_strip_height / 2))  * COLUMN_SIZE;
     x = i * data->obj_plyr->wall_strip_width * COLUMN_SIZE;
@@ -69,33 +84,49 @@ void    ft_render_3D_projected_wall(t_data *data, float distorted_distance, int 
     printf("wall_strip_height = %f\n", wall_strip_height);
     printf("x = %f  &&  y = %f\n", x, y);
     printf("w = %d  &&  h = %d\n---------\n", w * COLUMN_SIZE, h * COLUMN_SIZE);
-    ft_draw_rectangle(y, x, floor(wall_strip_height * COLUMN_SIZE), floor(data->obj_plyr->wall_strip_width * COLUMN_SIZE), data);
+    rachio = 255 - (255 * correct_distance) / ray_max_distance;
+    color = ft_trgb_to_decimal(0, rachio, rachio, rachio);
+    f_color = ft_trgb_to_decimal(0, 65, 142, 79);
+    c_color = ft_trgb_to_decimal(0, 65, 109, 182);
+    ft_draw_rectangle(y, x, floor(wall_strip_height * COLUMN_SIZE), floor(data->obj_plyr->wall_strip_width * COLUMN_SIZE), color, c_color, f_color, data);
 }
 
-// this function for draw the player rays that intersect with the walls
-void    ft_cast_rays(t_data *data, float ray_angle, int i)
-{
-    float      distance;
-    
-    distance = ft_horizontal_intersection(data, ray_angle);
-    if (distance > ft_vertical_intersection(data, ray_angle))
-        distance = ft_vertical_intersection(data, ray_angle);
-    ft_draw_one_ray(data, ray_angle, distance);
-    ft_render_3D_projected_wall(data, distance, i, ray_angle);
-}
-
-// this function draw the rays on the map
+// this function draw the rays on the minimap
 void ft_render_rays(t_data *data)
 {
     float ray_angle;
 	int i;
+    float      distance;
+    
+	i = -1;
+    ray_angle = data->obj_plyr->rotation_angle - (data->obj_plyr->fov_angle / 2);
+    ray_angle = ft_normalize_angle(ray_angle);
+    while (++i < data->obj_plyr->rays_num)
+    {
+        distance = ft_horizontal_intersection(data, ray_angle);
+        if (distance > ft_vertical_intersection(data, ray_angle))
+            distance = ft_vertical_intersection(data, ray_angle);
+        ft_draw_one_ray(data, ray_angle, distance);
+        ray_angle += data->obj_plyr->fov_angle / data->obj_plyr->rays_num;
+    }
+}
+
+// this function project the walls 
+void ft_project_walls(t_data *data)
+{
+    float ray_angle;
+	int i;
+    float      distance;
 
 	i = -1;
     ray_angle = data->obj_plyr->rotation_angle - (data->obj_plyr->fov_angle / 2);
     ray_angle = ft_normalize_angle(ray_angle);
     while (++i < data->obj_plyr->rays_num)
     {
-        ft_cast_rays(data, ray_angle, i);
+        distance = ft_horizontal_intersection(data, ray_angle);
+        if (distance > ft_vertical_intersection(data, ray_angle))
+            distance = ft_vertical_intersection(data, ray_angle);
+        ft_render_3D_projected_wall(data, distance, i, ray_angle);
         ray_angle += data->obj_plyr->fov_angle / data->obj_plyr->rays_num;
     }
 }

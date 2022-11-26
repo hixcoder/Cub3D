@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 12:28:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:28:51 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int main(int ac, char **av)
 		obj_plyr.move_speed = 5;
 		obj_plyr.rotation_speed = 4 * (M_PI / 180);
 		obj_plyr.fov_angle = 60 * (M_PI / 180);
-		obj_plyr.wall_strip_width = 0.2;
+		obj_plyr.wall_strip_width = 0.1;
 		obj_plyr.rays_num = (data.obj_map->map_width) / obj_plyr.wall_strip_width;
 		obj_plyr.minimap_scale_factor = 0.2;
 		
@@ -91,9 +91,7 @@ int main(int ac, char **av)
 		data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
 		
 		ft_imgs_init(&data);
-		ft_render_map(&data);
-		ft_render_rays(&data);
-		ft_render_player(&data);
+		ft_render(&data, 999999);
 		mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 		mlx_hook(data.win_ptr, 02, 0, ft_key_handler, &data);
 		mlx_hook(data.win_ptr, 17, 0, ft_exit_handler, &data);

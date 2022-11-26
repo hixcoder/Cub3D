@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 12:27:28 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:28:20 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ void	ft_render_map(t_data *data)
 }
 
 // this function render the game elements
+// Note: 
+// you will find the function ft_render_map() that render the map 
+// in the ft_render_rays() ==> ft_cast_rays()
 void    ft_render(t_data *data, int key)
 {
     ft_update(data, key);
-	ft_render_map(data);
+	ft_project_walls(data);
+    ft_render_map(data);
 	ft_render_rays(data);
 	ft_render_player(data);
 }

@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:41:28 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 17:05:19 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:15:42 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ unsigned int ft_hexcolor_to_decimal(char *hex)
         else
             dec = hex[i] - 48;
         decimal = decimal * 16 + dec;
-        printf("hex[%d] = %c ==> %d\n", i, hex[i],dec);
     }
     return(decimal);
 }
@@ -79,53 +78,13 @@ unsigned int ft_trgb_to_decimal(int t, int r, int g, int b)
     return (hex_to_int);
 }
 
-int main() {
-    
-    int r = 255;
-    int g = 255;
-    int b = 255;
-    int t = 255;
-    char *hex = "428f7f5";
-    printf("we have the hex: %s\n", hex);
-    printf("we have the dec: %d \n", ft_hexcolor_to_decimal(hex));
-    return 0;
+// this function add shades depends on the distance you pass
+int ft_add_shades(int distance, int max_distance)
+{
+    unsigned int transparency_value;
+    int rachio;
+
+    rachio = 255 - (255 * distance) / max_distance;
+    transparency_value = (255 * distance) / max_distance;
+    return (transparency_value);
 }
-
-
-
-
-
-
-// int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
-// {
-// 	return (*(int *)(unsigned char [4]){b, g, r, t});
-// }
-
-// unsigned char	get_t(int trgb)
-// {
-// 	return (((unsigned char *)&trgb)[3]);
-// }
-
-// unsigned char	get_r(int trgb)
-// {
-// 	return (((unsigned char *)&trgb)[2]);
-// }
-
-// unsigned char	get_g(int trgb)
-// {
-// 	return (((unsigned char *)&trgb)[1]);
-// }
-
-// unsigned char	get_b(int trgb)
-// {
-// 	return (((unsigned char *)&trgb)[0]);
-// }
-
-
-// // char    *ft_rgb_to_hex(int red, int green, int blue)
-// // {
-// //     char *hex;
-
-    
-// //     return (hex);
-// // }
