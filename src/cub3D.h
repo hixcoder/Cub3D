@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 16:15:25 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:07:09 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,11 @@ int ft_has_wall_at(t_data *data, double x, double y);
 void ft_cast_all_rays(t_data *data);
 void ft_line(t_data *data, double angle, int l, int color);
 int ft_has_wall_at(t_data *data, double x, double y);
-void render3d_projection(t_data *data, double l, int i);
+void render3d_projection(t_data *data, double l, int i, double ray_angle);
 void	my_mlx_pixel_put_v2(t_data *data, int x, int y, int color);
 void ft_wall_render(t_data *data);
 
 double ft_ver_intersection(t_data *data, double ray_angle);
 double ft_hor_intersection(t_data *data, double ray_angle);
+double normalise_angle(double angle);
 #endif

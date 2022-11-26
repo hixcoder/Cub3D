@@ -30,7 +30,6 @@ void draw_black_window(t_data *data,int x,int y, int with, int height)
 }
 void update_map(t_data *data)
 {
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	draw_black_window(data, 0, 0, data->obj_map->map_width * TILE_SIZE,data->obj_map->map_height*TILE_SIZE),
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	ft_wall_render(data);
@@ -41,7 +40,8 @@ void update_map(t_data *data)
 
 void ft_rotate(t_data *data)
 {
-	data->obj_plyr->rotation_angle =   data->obj_plyr->rotation_angle + data->obj_plyr->rotation_speed * data->obj_plyr->turn_direction;
+	data->obj_plyr->rotation_angle =  data->obj_plyr->rotation_angle + data->obj_plyr->rotation_speed * data->obj_plyr->turn_direction;
+	data->obj_plyr->rotation_angle = normalise_angle(data->obj_plyr->rotation_angle );
 	update_map(data);
 }
 
