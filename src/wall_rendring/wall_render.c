@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:09:33 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/26 20:32:06 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:37:46 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,27 @@ void draw_rect_wall(t_data *data,int x,int y, int with, int height,int color)
 		{
 			if (x+i > 0 && x+i < data->obj_map->map_width * TILE_SIZE &&
 				y+j > 0 && y+j < data->obj_map->map_height * TILE_SIZE)
-				my_mlx_pixel_put_v2(data, x+i, y+j, color); 
+				{
+					my_mlx_pixel_put_v2(data, x+i, y+j, color); 
+				}
         	j++;
 		}
 		i++;
 	}
 	
+}
+unsigned get_color(char *str)
+{
+	char **split;
+	unsigned result = 0;
+
+	split = ft_split(str,',');
+
+	result = result + ft_atoi( split[0]) * pow(16,4);
+	result = result + ft_atoi( split[1]) * pow(16,2);
+	result = result + ft_atoi( split[2]) * pow(16,0);
+	ft_free_split(split);
+	return(result);
 }
 
 void render3d_projection(t_data *data, double l, int i,double ray_angle)
@@ -60,16 +75,15 @@ void render3d_projection(t_data *data, double l, int i,double ray_angle)
 					0,
 					WALL_STRIP_WIDTH * TILE_SIZE,
 					(data->obj_map->map_height/2 - pro_wall_height/2)*TILE_SIZE,
-					0x00ff0000
+					get_color(data->obj_map->ceill_color)
 					);
 	draw_rect_wall(data,
 					i * WALL_STRIP_WIDTH * TILE_SIZE,
 					(data->obj_map->map_height/2 - pro_wall_height/2)*TILE_SIZE + pro_wall_height* TILE_SIZE - 1,
 					WALL_STRIP_WIDTH * TILE_SIZE,
 					data->obj_map->map_height*TILE_SIZE,
-					0x0000ff00
-					);
-	
+					get_color(data->obj_map->floor_color));
+				
 }
 
 void ft_wall_render(t_data *data)
