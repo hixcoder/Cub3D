@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:09:33 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/27 11:37:46 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/27 13:03:27 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ void draw_rect_wall(t_data *data,int x,int y, int with, int height,int color)
 			if (x+i > 0 && x+i < data->obj_map->map_width * TILE_SIZE &&
 				y+j > 0 && y+j < data->obj_map->map_height * TILE_SIZE)
 				{
+					// int		img_width;
+					// int		img_height;
+					// mlx_xpm_file_to_image(data->mlx_ptr, "assets/textures/ea1.xpm", &img_width, &img_height);
 					my_mlx_pixel_put_v2(data, x+i, y+j, color); 
 				}
         	j++;
 		}
 		i++;
 	}
-	
+	color++;
 }
 unsigned get_color(char *str)
 {

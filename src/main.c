@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 14:43:22 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/27 12:41:44 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int main(int ac, char **av)
         ft_map_init(av[1], &data);
         h = data.obj_map->map_height * TILE_SIZE;
         w = data.obj_map->map_width * TILE_SIZE;
+		printf("\n\n\n\nw=%d  h=%d\n",w,h);
         data.win_ptr = mlx_new_window(data.mlx_ptr, w, h, "Free Fire");
 		data.img = mlx_new_image(data.mlx_ptr, w, h);
 		data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,

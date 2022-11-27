@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:38:45 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/25 16:04:27 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/27 12:56:02 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,16 @@ void init_data_player(t_data *data)
 	data->obj_plyr->radius = 3;
 	data->obj_plyr->turn_direction = 0;
 	data->obj_plyr->walk_direction = 0;
-	data->obj_plyr->rotation_angle = 3*M_PI/2;//0;
+	if ( data->obj_map->map[(int)data->obj_plyr->y][(int)data->obj_plyr->x] == 'W')
+		data->obj_plyr->rotation_angle = M_PI;
+	if ( data->obj_map->map[(int)data->obj_plyr->y][(int)data->obj_plyr->x] == 'E') 
+		data->obj_plyr->rotation_angle = 0;
+	if ( data->obj_map->map[(int)data->obj_plyr->y][(int)data->obj_plyr->x] == 'N') 
+		data->obj_plyr->rotation_angle = 3*M_PI/2;
+	if ( data->obj_map->map[(int)data->obj_plyr->y][(int)data->obj_plyr->x] == 'S') 
+		data->obj_plyr->rotation_angle = M_PI/2;
 	data->obj_plyr->move_speed = 0.1;
 	data->obj_plyr->rotation_speed = 5 * (M_PI/180);
-	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH; // ??
+	data->obj_plyr->num_rays = data->obj_map->map_width / WALL_STRIP_WIDTH;
     ft_draw_player(data);
 }
