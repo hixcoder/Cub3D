@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:41:28 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 20:15:42 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:03:35 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,20 @@ unsigned int ft_trgb_to_decimal(int t, int r, int g, int b)
     return (hex_to_int);
 }
 
-// this function add shades depends on the distance you pass
-int ft_add_shades(int distance, int max_distance)
+// this function will return the int value of:
+//  'r' if rgb = 1 or 'g' if rgb = 2 or 'b' if rgb = 3
+int    ft_get_color(char *color, int rgb)
 {
-    unsigned int transparency_value;
-    int rachio;
-
-    rachio = 255 - (255 * distance) / max_distance;
-    transparency_value = (255 * distance) / max_distance;
-    return (transparency_value);
+    char **s_rgb;
+    
+    s_rgb = ft_split(color, ',');
+    if (!s_rgb)
+        return (0);
+    if (rgb == 1 )
+        return (ft_atoi(s_rgb[0]));
+    else if (rgb == 2)
+        return (ft_atoi(s_rgb[1]));
+    else if (rgb == 3)
+        return (ft_atoi(s_rgb[2]));
+    return (0); 
 }

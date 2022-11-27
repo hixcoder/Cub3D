@@ -6,11 +6,26 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 10:46:35 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:34:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+// this function get the obj_plyr.rotation_angle 
+// based on the player orientation p_orientation
+float ft_get_rotation_angle(char c)
+{
+	if (c == 'W')
+		return (M_PI);
+	else if (c == 'E')
+		return (0);
+	else if (c == 'N')
+		return ((3 * M_PI) / 2);
+	else if (c == 'S')
+		return (M_PI / 2);
+	return (0);
+}
 
 // this function draw the player on the map
 void ft_render_player(t_data *data)

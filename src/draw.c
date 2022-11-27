@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 16:37:51 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 15:14:27 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,4 @@ void	ft_clear_window(t_data *data)
 			my_mlx_pixel_put2(data, x, y, 0x0000000);
 	}
 }
+

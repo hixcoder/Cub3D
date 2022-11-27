@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 19:28:20 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:14:21 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ void	ft_imgs_init(t_data *data)
 	data->obj_img->so_texture = mlx_xpm_file_to_image(p, data->obj_map->so_texture_path, &s, &s);
 }
 
+// t_image	ft_new_sprite(void *mlx, char *path, t_image)
+// {
+// 	t_image	img;
+	
+// 	img.pointer = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
+// 	img.pixels  = mlx_get_data_addr(img.reference, &img.bits_per_pixel, &img.line_size, &img.endian);
+// 	return (img);
+// }
+
 // this function draws the map
 void	ft_render_map(t_data *data)
 {
@@ -44,12 +53,14 @@ void	ft_render_map(t_data *data)
 		x = -1;
 		while (++x < data->obj_map->map_width * COLUMN_SIZE)
 		{
-			if (ft_is_in_wall(x, y, data) == 1)
-				my_mlx_pixel_put(data, x, y, 0x808050);
-			else
+			if (x == (data->obj_map->map_width * COLUMN_SIZE) - 1 || y == (data->obj_map->map_height * COLUMN_SIZE) - 1)
 				my_mlx_pixel_put(data, x, y, 0xffffff);
-			if (x % COLUMN_SIZE == 0 || y % COLUMN_SIZE == 0)
-				my_mlx_pixel_put(data, x, y, 0x808050);
+			else if (ft_is_in_wall(x, y, data) == 1 || data->obj_map->map[y / 50][x / 50] == ' ')
+				my_mlx_pixel_put(data, x, y, 0x808080);
+			else 
+				my_mlx_pixel_put(data, x, y, 0xffffff);
+			// else
+			// 	my_mlx_pixel_put(data, x, y, 0xffffff);
 		}
 	}
 }

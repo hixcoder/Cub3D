@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 19:27:52 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:13:06 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define KEY_D	2
 # define KEY_AROW_R	124
 # define KEY_AROW_L	123
-# define KEY_	2
+# define KEY_RANDOM	9999999
 
 typedef struct s_map
 {
@@ -49,6 +49,7 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
+	char	p_orientation;
 	float	radius;
 	float	turn_direction;
 	float	walk_direction;
@@ -62,12 +63,21 @@ typedef struct s_player
 	float	minimap_scale_factor;
 } t_player;
 
-typedef struct s_img
+typedef struct	s_image
 {
-	void	*no_texture;
-	void	*so_texture;
-	void	*we_texture;
-	void	*ea_texture;
+	void      *texture;
+	char      *pixels;
+	int       bits_per_pixel;
+	int       line_size;
+	int       endian;
+}   t_image;
+
+typedef struct s_imgs
+{
+	t_image		*no_texture;
+	t_image		*so_texture;
+	t_image		*we_texture;
+	t_image		*ea_texture;
 }	t_img;
 
 typedef struct s_data
@@ -105,8 +115,9 @@ void    		ft_draw_one_ray(t_data *data, float ray_angle, int size);
 void			my_mlx_pixel_put2(t_data *data, int x, int y, int color);
 void			ft_clear_window(t_data *data);
 unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b);
-int ft_add_shades(int distance, int max_distance);
 void ft_project_walls(t_data *data);
+int    ft_get_color(char *color, int rgb);
+float ft_get_rotation_angle(char c);
 
 // lhou functions
 int		ft_verifie(char *file);

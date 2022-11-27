@@ -6,12 +6,16 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/22 17:17:14 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:26:03 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+/**
+ *  this function goes to the 7 full line, in the normal it's
+ *  the line that contain the map.
+**/ 
 char    *ft_go_to_map_line(int fd)
 {
     char    *line;
@@ -93,17 +97,7 @@ void ft_fill_map(char *map_path, t_map *obj_map)
     close(fd);
 }
 
-void ft_print_map(char **map)
-{
-    int i;
-
-    i = -1;
-    while (map[++i])
-    {
-        printf("|%s|\n", map[i]);
-    }
-}
-
+// this function init the map
 void ft_map_init(char *map_path, t_data *data)
 {    
     if (!ft_verifie(map_path))
@@ -112,8 +106,8 @@ void ft_map_init(char *map_path, t_data *data)
     ft_fill_map(map_path, data->obj_map);
     ft_check_characters(data->obj_map);
     ft_check_walls(data->obj_map);
-    ft_print_map(data->obj_map->map);
     ft_fill_data(data->obj_map, map_path);
+    data->obj_plyr->p_orientation = data->obj_map->map[data->obj_map->plyr_y][data->obj_map->plyr_x];
     data->obj_plyr->x = data->obj_map->plyr_x * COLUMN_SIZE;
     data->obj_plyr->y = data->obj_map->plyr_y * COLUMN_SIZE;
 }

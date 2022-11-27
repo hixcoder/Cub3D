@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/26 20:27:12 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:16:10 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void ft_draw_rectangle(int y, int x, int h, int w, unsigned int color, unsigned 
         x1 = x - 1;
 		while (++x1 < w)
 		{
-            if (!(y1 > (data->obj_map->map_height * COLUMN_SIZE) || y1 < 0 
-                || x1 > (data->obj_map->map_width  * COLUMN_SIZE) || x1 < 0))
+            if ((y1 < (data->obj_map->map_height * COLUMN_SIZE) && y1 >= 0) 
+                && (x1 < (data->obj_map->map_width  * COLUMN_SIZE) && x1 >= 0))
                 {
                     if (y1 < y)
 			            my_mlx_pixel_put2(data, x1, y1, c_color);
@@ -49,7 +49,7 @@ void ft_draw_rectangle(int y, int x, int h, int w, unsigned int color, unsigned 
 	}
 }
 
-// this function will 
+// this function will render a wall 
 void    ft_render_3D_projected_wall(t_data *data, float distorted_distance, int i, float ray_angle)
 {
     float distance_projection_plane;
@@ -59,25 +59,25 @@ void    ft_render_3D_projected_wall(t_data *data, float distorted_distance, int 
     float x;
     float y;
     float correct_distance;
-    unsigned int color;
-    int ray_max_distance;
+    float ray_max_distance;
     int rachio;
-    int f_color;
-    int c_color;
-
+    unsigned int color;
+    unsigned int f_color;
+    unsigned int c_color;
 
     h = data->obj_map->map_height;
     w = data->obj_map->map_width;
     correct_distance = cos(ray_angle - data->obj_plyr->rotation_angle) * distorted_distance;
     ray_max_distance = sqrt(pow(h * COLUMN_SIZE, 2)) + sqrt(pow(w * COLUMN_SIZE, 2));
-    printf("ray_max_distance = %d\n", ray_max_distance);
-    // calculate the distance to the projection plane
+    
+    
     distance_projection_plane = ((w / 2) / tan(data->obj_plyr->fov_angle / 2));
-    // projected wall height
-    wall_strip_height = (COLUMN_SIZE / correct_distance) * distance_projection_plane  * 0.5;
-
+    wall_strip_height = (COLUMN_SIZE / correct_distance) * distance_projection_plane  * 0.2;
+    
     y = (((h / 2) ) - (wall_strip_height / 2))  * COLUMN_SIZE;
     x = i * data->obj_plyr->wall_strip_width * COLUMN_SIZE;
+    
+    
     printf("i = %d\n", i);
     printf("distance = %f\n", correct_distance);
     printf("distance_projection_plane = %f\n", distance_projection_plane);
@@ -86,8 +86,9 @@ void    ft_render_3D_projected_wall(t_data *data, float distorted_distance, int 
     printf("w = %d  &&  h = %d\n---------\n", w * COLUMN_SIZE, h * COLUMN_SIZE);
     rachio = 255 - (255 * correct_distance) / ray_max_distance;
     color = ft_trgb_to_decimal(0, rachio, rachio, rachio);
-    f_color = ft_trgb_to_decimal(0, 65, 142, 79);
-    c_color = ft_trgb_to_decimal(0, 65, 109, 182);
+    f_color = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->floor_color, 1), ft_get_color(data->obj_map->floor_color, 2), ft_get_color(data->obj_map->floor_color, 3));
+    c_color = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->ceill_color, 1), ft_get_color(data->obj_map->ceill_color, 2), ft_get_color(data->obj_map->ceill_color, 3));
+
     ft_draw_rectangle(y, x, floor(wall_strip_height * COLUMN_SIZE), floor(data->obj_plyr->wall_strip_width * COLUMN_SIZE), color, c_color, f_color, data);
 }
 
