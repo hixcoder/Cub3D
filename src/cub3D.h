@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/27 18:13:06 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:51:57 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # define KEY_ESC	53
 # define KEY_W	13
+# define MOUSE_R	6
+# define MOUSE_L	7
+# define MOUSE_R2	10
+# define MOUSE_L2	9
 # define KEY_S	1
 # define KEY_A	0
 # define KEY_D	2
@@ -50,6 +54,8 @@ typedef struct s_player
 	float	x;
 	float	y;
 	char	p_orientation;
+	int		is_facing_right;
+	int		is_facing_up;
 	float	radius;
 	float	turn_direction;
 	float	walk_direction;
@@ -65,8 +71,8 @@ typedef struct s_player
 
 typedef struct	s_image
 {
-	void      *texture;
-	char      *pixels;
+	void      *pointer;
+	char      *img_data;
 	int       bits_per_pixel;
 	int       line_size;
 	int       endian;
@@ -82,14 +88,14 @@ typedef struct s_imgs
 
 typedef struct s_data
 {
-	void	*img;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		*obj_map;
 	t_player	*obj_plyr;
 	t_img		*obj_img;
 
-	char	*addr;
+	void	*img;
+	char	*img_data;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -100,7 +106,7 @@ void			ft_map_init(char *map_path, t_data *data);
 void			ft_map_errors(t_map *obj_map, int error_num);
 void			ft_check_characters(t_map *obj_map);
 void			ft_check_walls(t_map *obj_map);
-void			ft_imgs_init(t_data *data);
+void			ft_textures_init(t_data *data);
 void			ft_render_map(t_data *data);
 void			ft_draw_square(int y, int x, int size, t_data *data);
 void			ft_render_player(t_data *data);
@@ -112,12 +118,13 @@ float			ft_vertical_intersection(t_data *data, float ray_angle);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    		ft_render(t_data *data, int key);
 void    		ft_draw_one_ray(t_data *data, float ray_angle, int size);
-void			my_mlx_pixel_put2(t_data *data, int x, int y, int color);
 void			ft_clear_window(t_data *data);
 unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b);
-void ft_project_walls(t_data *data);
-int    ft_get_color(char *color, int rgb);
-float ft_get_rotation_angle(char c);
+void 			ft_project_walls(t_data *data);
+int  			ft_get_color(char *color, int rgb);
+float			ft_get_rotation_angle(char c);
+void	my_mlx_pixel_put2(t_data *data, int x, int y, int color, int is_white, int is_horz_inter);
+
 
 // lhou functions
 int		ft_verifie(char *file);

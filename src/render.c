@@ -6,24 +6,37 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/27 18:14:21 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:14:03 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 // this function initialize the images
-void	ft_imgs_init(t_data *data)
+void	ft_textures_init(t_data *data)
 {
 	int		s;
 	void	*p;
+	t_image *tmp;
 
-	s = COLUMN_SIZE;
+	s = 50;
 	p = data->mlx_ptr;
-	data->obj_img->ea_texture = mlx_xpm_file_to_image(p, data->obj_map->ea_texture_path, &s, &s);
-	data->obj_img->we_texture = mlx_xpm_file_to_image(p, data->obj_map->we_texture_path, &s, &s);
-	data->obj_img->no_texture = mlx_xpm_file_to_image(p, data->obj_map->no_texture_path, &s, &s);
-	data->obj_img->so_texture = mlx_xpm_file_to_image(p, data->obj_map->so_texture_path, &s, &s);
+	
+	tmp = data->obj_img->ea_texture;
+	tmp->pointer = mlx_xpm_file_to_image(p, data->obj_map->ea_texture_path, &s, &s);
+	tmp->img_data = mlx_get_data_addr(tmp->pointer, &tmp->bits_per_pixel, &tmp->line_size, &tmp->endian);
+
+	tmp = data->obj_img->we_texture;
+	tmp->pointer = mlx_xpm_file_to_image(p, data->obj_map->we_texture_path, &s, &s);
+	tmp->img_data = mlx_get_data_addr(tmp->pointer, &tmp->bits_per_pixel, &tmp->line_size, &tmp->endian);
+	
+	tmp = data->obj_img->no_texture;
+	tmp->pointer = mlx_xpm_file_to_image(p, data->obj_map->no_texture_path, &s, &s);
+	tmp->img_data = mlx_get_data_addr(tmp->pointer, &tmp->bits_per_pixel, &tmp->line_size, &tmp->endian);
+	
+	tmp = data->obj_img->so_texture;
+	tmp->pointer = mlx_xpm_file_to_image(p, data->obj_map->so_texture_path, &s, &s);
+	tmp->img_data = mlx_get_data_addr(tmp->pointer, &tmp->bits_per_pixel, &tmp->line_size, &tmp->endian);
 }
 
 // t_image	ft_new_sprite(void *mlx, char *path, t_image)

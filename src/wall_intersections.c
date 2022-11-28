@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:23:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/25 17:56:21 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:44:31 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_var
 } t_var;
 
 // this function for know where the ray is facing 
-void    ft_ray_facing(t_var *v, float ray_angle)
+void    ft_ray_facing(t_var *v, float ray_angle, t_data *data)
 {
     v->is_ray_facing_up = 0;
     v->is_ray_facing_down = 0;
@@ -54,6 +54,15 @@ void    ft_ray_facing(t_var *v, float ray_angle)
         v->is_ray_facing_left = 1;
     if (v->is_ray_facing_left == 0)
         v->is_ray_facing_right = 1;
+    
+    if (v->is_ray_facing_right == 1)
+        data->obj_plyr->is_facing_right = 1;
+    else
+        data->obj_plyr->is_facing_right = 0;
+    if (v->is_ray_facing_up == 1)
+        data->obj_plyr->is_facing_up = 1;
+    else
+        data->obj_plyr->is_facing_up = 0;
 }
 
 // this function initialize the ft_horizontal_intersection() function vars
@@ -90,7 +99,7 @@ float    ft_horizontal_intersection(t_data *data, float ray_angle)
 {
     t_var    v;
 
-    ft_ray_facing(&v, ray_angle);
+    ft_ray_facing(&v, ray_angle, data);
     ft_init_horz_vars(data, ray_angle, &v);    
     while (v.next_horz_touch_x >= 0 && v.next_horz_touch_x < v.window_w 
         && v.next_horz_touch_y >= 0 && v.next_horz_touch_y < v.window_h)
@@ -146,7 +155,7 @@ float    ft_vertical_intersection(t_data *data, float ray_angle)
 {
     t_var    v;
 
-    ft_ray_facing(&v, ray_angle);
+    ft_ray_facing(&v, ray_angle, data);
     ft_init_vertcl_vars(data, ray_angle, &v);    
     while (v.next_vertcl_touch_x >= 0 && v.next_vertcl_touch_x < v.window_w 
         && v.next_vertcl_touch_y >= 0 && v.next_vertcl_touch_y < v.window_h)

@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/27 11:26:03 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:33:56 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ void ft_map_init(char *map_path, t_data *data)
     ft_check_walls(data->obj_map);
     ft_fill_data(data->obj_map, map_path);
     data->obj_plyr->p_orientation = data->obj_map->map[data->obj_map->plyr_y][data->obj_map->plyr_x];
-    data->obj_plyr->x = data->obj_map->plyr_x * COLUMN_SIZE;
-    data->obj_plyr->y = data->obj_map->plyr_y * COLUMN_SIZE;
+    data->obj_plyr->x = data->obj_map->plyr_x * COLUMN_SIZE + 2;
+    data->obj_plyr->y = data->obj_map->plyr_y * COLUMN_SIZE + 2;
 }

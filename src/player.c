@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/27 11:34:53 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:52:35 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_update(t_data *data, int key)
 	float	new_x;
 	float	new_y;
 	
-	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D || key == KEY_A)
+	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D || key == KEY_A || key == MOUSE_L || key == MOUSE_R || key == MOUSE_L2 || key == MOUSE_R2)
 	{
 		data->obj_plyr->rotation_angle += data->obj_plyr->turn_direction * data->obj_plyr->rotation_speed;
 		data->obj_plyr->turn_direction = 0;
