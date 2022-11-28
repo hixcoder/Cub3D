@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/27 10:35:44 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:00:58 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void ft_fill_info(t_map *data, char *line)
     if (!ft_strcmp(split[0], "C"))
         data->ceill_color = ft_strdup(split[1]);
     ft_free_split(split);
-    printf("--->%s",line);
+    // printf("--->%s",line);
 }
 
 void ft_fill_data(t_map *data, char *file)
