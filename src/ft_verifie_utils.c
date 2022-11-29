@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:55:10 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/29 16:03:17 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:47:54 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 void	ft_free_split(char **tab)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (tab && tab[i])

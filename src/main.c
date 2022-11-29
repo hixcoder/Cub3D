@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:41:27 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:47:36 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 // clicking the red cross or the ESK
 int	ft_exit_handler(void *n_data)
 {
-	t_data	*data;
-	int		i;
+	t_data *data;
+	int i;
 
-	data = (t_data *) n_data;
+	data = (t_data *)n_data;
 	i = -1;
 	while (data->obj_map->map[++i] != NULL)
 		free(data->obj_map->map[i]);

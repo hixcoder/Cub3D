@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:41:13 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:50:16 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,14 @@ void	ft_plyr_init(t_player *obj_plyr, t_data *data);
 void	ft_free_textures(t_data *data);
 
 // lhou functions
-int				ft_verifie(char *file);
-int				ft_strcmp(char *s1, char *s2);
-int				ft_is_exist(char *str, char c);
-int				ft_len_split(char **tab);
-void			ft_free_split(char **tab);
-void			ft_fill_data(t_map *data, char *file);
+int		ft_verifie(char *file);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_is_exist(char *str, char c);
+int		ft_len_split(char **tab);
+void	ft_free_split(char **tab);
+void	ft_fill_data(t_map *data, char *file);
+int		ft_is_flag(char *str);
+int		ft_nbr_flag(char *str);
+int	ft_is_gbr_valid(char *str);
 
 #endif
