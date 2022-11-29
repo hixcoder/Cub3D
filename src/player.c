@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:48:33 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:39:10 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // this function get the obj_plyr.rotation_angle
 // based on the player orientation p_orientation
-float ft_get_rot_angle(char c)
+float	ft_get_rot_angle(char c)
 {
 	if (c == 'W')
 		return (M_PI);
@@ -28,28 +28,28 @@ float ft_get_rot_angle(char c)
 }
 
 // this function draw the player on the map
-void ft_render_player(t_data *data)
+void	ft_render_player(t_data *data)
 {
-	int y;
-	int x;
-	int player_size;
-	int i;
+	int	y;
+	int	x;
+	int	player_size;
+	int	i;
 
 	y = data->obj_plyr->y;
 	x = data->obj_plyr->x;
-
 	i = -1;
 	player_size = 30;
 	ft_draw_square(y, x, COLUMN_SIZE / 5, data);
 	while (++i < player_size)
-		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotation_angle) * i,  y + sin(data->obj_plyr->rotation_angle) * i, 0x00FF0000);
+		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotate_angle) * i, \
+		y + sin(data->obj_plyr->rotate_angle) * i, 0x00FF0000);
 }
 
 // this function checks if there is a wall in the position map[new_y][new_x]
-int ft_is_in_wall(int new_x, int new_y, t_data *data)
+int	ft_is_in_wall(int new_x, int new_y, t_data *data)
 {
-	int w;
-	int h;
+	int	w;
+	int	h;
 
 	w = (data->obj_map->map_width) * COLUMN_SIZE;
 	h = (data->obj_map->map_height) * COLUMN_SIZE;
@@ -62,26 +62,31 @@ int ft_is_in_wall(int new_x, int new_y, t_data *data)
 }
 
 // this function updates the players info based on the key you pressed
-void ft_update(t_data *data, int key)
+void	ft_update(t_data *data, int key)
 {
-	float move_step;
-	float new_x;
-	float new_y;
+	float		move_step;
+	float		new_x;
+	float		new_y;
+	t_player	*obj_plyr;
 
-	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D || key == KEY_A || key == MOUSE_L || key == MOUSE_R || key == MOUSE_L2 || key == MOUSE_R2)
+	obj_plyr = data->obj_plyr;
+	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D
+		|| key == KEY_A || key == MOUSE_L || key == MOUSE_R
+		|| key == MOUSE_L2 || key == MOUSE_R2)
 	{
-		data->obj_plyr->rotation_angle += data->obj_plyr->turn_direction * data->obj_plyr->rotation_speed;
-		data->obj_plyr->turn_direction = 0;
+		obj_plyr->rotate_angle += obj_plyr->turn_direction \
+		* obj_plyr->rotation_speed;
+		obj_plyr->turn_direction = 0;
 	}
 	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
 	{
-		move_step = data->obj_plyr->move_speed * data->obj_plyr->walk_direction;
-		new_x = data->obj_plyr->x + move_step * cos(data->obj_plyr->rotation_angle);
-		new_y = data->obj_plyr->y + move_step * sin(data->obj_plyr->rotation_angle);
+		move_step = obj_plyr->move_speed * obj_plyr->walk_direction;
+		new_x = obj_plyr->x + move_step * cos(obj_plyr->rotate_angle);
+		new_y = obj_plyr->y + move_step * sin(obj_plyr->rotate_angle);
 		if (ft_is_in_wall(new_x, new_y, data) == 0)
 		{
-			data->obj_plyr->x = new_x;
-			data->obj_plyr->y = new_y;
+			obj_plyr->x = new_x;
+			obj_plyr->y = new_y;
 		}
 	}
 }

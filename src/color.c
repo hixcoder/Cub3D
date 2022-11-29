@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:41:28 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 15:43:58 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:20:30 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ unsigned int	ft_hexcolor_to_decimal(char *hex)
 }
 
 // this function convert trgb to decimal
-unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b)
+unsigned int	ft_trgb_to_dec(int t, int r, int g, int b)
 {
 	char	*trgb_to_hex;
 	int		hex_to_int;

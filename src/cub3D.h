@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:50:16 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:36:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,33 @@
 
 typedef struct s_map
 {
-	char	**map;
-	int map_width;
-	int map_height;
-	int plyr_x;
-	int plyr_y;
+	char			**map;
+	int				map_width;
+	int				map_height;
+	int				plyr_x;
+	int				plyr_y;
 
-	char *no_texture_path;
-	char *so_texture_path;
-	char *we_texture_path;
-	char *ea_texture_path;
-	char *floor_color;
-	char *ceill_color;
-	unsigned int floor_color_d;
-	unsigned int ceill_color_d;
-} t_map;
+	char			*no_texture_path;
+	char			*so_texture_path;
+	char			*we_texture_path;
+	char			*ea_texture_path;
+	char			*f_color;
+	char			*c_color;
+	unsigned int	f_color_d;
+	unsigned int	c_color_d;
+}	t_map;
 
 typedef struct s_player
 {
 	float	x;
 	float	y;
 	char	p_orientation;
-	int		is_facing_right;
-	int		is_facing_up;
+	int		is_ray_right;
+	int		is_ray_up;
+	int		is_horz_intr;
 	float	turn_direction;
 	float	walk_direction;
-	float	rotation_angle;
+	float	rotate_angle;
 	float	move_speed;
 	float	rotation_speed;
 
@@ -104,10 +105,10 @@ typedef struct s_data
 }	t_data;
 
 void			ft_maloc_error(void *var);
-void	ft_check_characters(t_data *data, t_map *obj_map);
+void			ft_check_characters(t_data *data, t_map *obj_map);
 void			ft_map_init(char *map_path, t_data *data);
 void			ft_map_errors(t_data *data, int error_num);
-void	ft_check_walls(t_data *data, t_map *obj_map);
+void			ft_check_walls(t_data *data, t_map *obj_map);
 void			ft_textures_init(t_data *data);
 void			ft_render_minimap(t_data *data);
 void			ft_draw_square(int y, int x, int size, t_data *data);
@@ -120,23 +121,26 @@ float			ft_vertical_intersection(t_data *data, float ray_angle);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render(t_data *data, int key);
 void			ft_draw_one_ray(t_data *data, float ray_angle, int size);
-unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b);
+unsigned int	ft_trgb_to_dec(int t, int r, int g, int b);
 void			ft_project_walls(t_data *data);
 int				ft_get_color(char *color, int rgb);
 float			ft_get_rot_angle(char c);
-void			my_mlx_pixel_put2(t_data *data, int x, int y, int color, int is_white, int is_horz_inter);
-void	ft_plyr_init(t_player *obj_plyr, t_data *data);
-void	ft_free_textures(t_data *data);
+void			my_mlx_pixel_put2(t_data *data, int x, int y, int color_num);
+void			ft_plyr_init(t_player *obj_plyr, t_data *data);
+void			ft_free_textures(t_data *data);
+int				ft_exit_handler(void *n_data);
+int				ft_key_handler(int key, void *n_data);
+int				ft_mouse_handler(int key, int x, int y, void *n_data);
 
 // lhou functions
-int		ft_verifie(char *file);
-int		ft_strcmp(char *s1, char *s2);
-int		ft_is_exist(char *str, char c);
-int		ft_len_split(char **tab);
-void	ft_free_split(char **tab);
-void	ft_fill_data(t_map *data, char *file);
-int		ft_is_flag(char *str);
-int		ft_nbr_flag(char *str);
-int	ft_is_gbr_valid(char *str);
+int				ft_verifie(char *file);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_is_exist(char *str, char c);
+int				ft_len_split(char **tab);
+void			ft_free_split(char **tab);
+void			ft_fill_data(t_map *data, char *file);
+int				ft_is_flag(char *str);
+int				ft_nbr_flag(char *str);
+int				ft_is_gbr_valid(char *str);
 
 #endif

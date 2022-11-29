@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:40:51 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:48:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 /**
  *  this function goes to the 7 full line, in the normal it's
  *  the line that contain the map.
-**/ 
-char    *ft_go_to_map_line(int fd)
+**/
+char	*ft_go_to_map_line(int fd)
 {
-	char    *line;
-	int     len;
-	
+	char	*line;
+	int		len;
+
 	len = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -28,39 +28,47 @@ char    *ft_go_to_map_line(int fd)
 		if (line[0] != '\n')
 			len++;
 		if (line[0] != '\n' && len > 6)
-			break;
+			break ;
 		free(line);
 		line = get_next_line(fd);
 	}
 	return (line);
 }
 
-// this function for get the width and the hight of the map
-void ft_map_dimensions(char *map_path, t_data *data)
+static void	ft_check_line(t_data *data, char *line, int *i)
 {
-	int fd;
-	int i;
-	char *line;
-	int line_lenght;
-	int map_end;
+	int	map_end;
+	int	line_lenght;
+
+	map_end = 0;
+	line_lenght = ft_strlen(line) - 1;
+	if (data->obj_map->map_width < line_lenght)
+		data->obj_map->map_width = line_lenght;
+	if (line[0] != '\n' && map_end == 0)
+		(*i)++;
+	else if (line[0] == '\n' && map_end == 0)
+		map_end = 1;
+	else if (line[0] != '\n' && map_end == 1)
+	{
+		free(line);
+		ft_map_errors(data, 4);
+	}
+}
+
+// this function for get the width and the hight of the map
+void	ft_map_dimensions(char *map_path, t_data *data)
+{
+	int		fd;
+	int		i;
+	char	*line;
 
 	i = 0;
 	data->obj_map->map_width = 0;
-	line_lenght = 0;
 	fd = open(map_path, O_RDONLY);
-	map_end = 0;
 	line = ft_go_to_map_line(fd);
 	while (line)
 	{
-		line_lenght = ft_strlen(line) - 1;
-		if (data->obj_map->map_width < line_lenght)
-			data->obj_map->map_width = line_lenght;
-		if (line[0] != '\n' && map_end == 0)
-			i++;
-		else if (line[0] == '\n' && map_end == 0)
-			map_end = 1;
-		else if (line[0] != '\n' && map_end == 1)
-			free(line),ft_map_errors(data, 4);
+		ft_check_line(data, line, &i);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -69,13 +77,13 @@ void ft_map_dimensions(char *map_path, t_data *data)
 }
 
 // this function for convert the map file to 2D char array
-void ft_fill_map(char *map_path, t_map *obj_map)
+void	ft_fill_map(char *map_path, t_map *obj_map)
 {
-	int i;
-	int fd;
-	int map_len;
-	char **map;
-	char *line;
+	int		i;
+	int		fd;
+	int		map_len;
+	char	**map;
+	char	*line;
 
 	map_len = obj_map->map_height + 1;
 	map = (char **)malloc(sizeof(char *) * map_len);
@@ -86,7 +94,7 @@ void ft_fill_map(char *map_path, t_map *obj_map)
 	line = ft_go_to_map_line(fd);
 	while (line && ++i < (map_len - 1))
 	{
-		map[i] = ft_strdup_cub3D(line, obj_map->map_width);
+		map[i] = ft_strdup_cub3d(line, obj_map->map_width);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -96,35 +104,24 @@ void ft_fill_map(char *map_path, t_map *obj_map)
 }
 
 // this function init the map
-void ft_map_init(char *map_path, t_data *data)
-{    
+void	ft_map_init(char *map_path, t_data *data)
+{
+	t_map	*obj_map;
+
 	if (!ft_verifie(map_path))
 		exit(0);
+	obj_map = data->obj_map;
 	ft_map_dimensions(map_path, data);
-	ft_fill_map(map_path, data->obj_map);
-	ft_check_characters(data, data->obj_map);
-	ft_check_walls(data, data->obj_map);
-	ft_fill_data(data->obj_map, map_path);
-	data->obj_plyr->p_orientation = data->obj_map->map[data->obj_map->plyr_y][data->obj_map->plyr_x];
-	data->obj_plyr->x = data->obj_map->plyr_x * COLUMN_SIZE + 2;
-	data->obj_plyr->y = data->obj_map->plyr_y * COLUMN_SIZE + 2;
-	data->obj_map->floor_color_d = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->floor_color, 1), ft_get_color(data->obj_map->floor_color, 2), ft_get_color(data->obj_map->floor_color, 3));
-	data->obj_map->ceill_color_d = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->ceill_color, 1), ft_get_color(data->obj_map->ceill_color, 2), ft_get_color(data->obj_map->ceill_color, 3));
-}
-
-// this function init the obj_plyr attributes
-void	ft_plyr_init(t_player *obj_plyr, t_data *data)
-{
-	int	w;
-
-	w = data->obj_map->map_width;
-	obj_plyr->turn_direction = 0;
-	obj_plyr->walk_direction = 0;
-	obj_plyr->rotation_angle = ft_get_rot_angle(data->obj_plyr->p_orientation);
-	obj_plyr->move_speed = 5;
-	obj_plyr->rotation_speed = 4 * (M_PI / 180);
-	obj_plyr->fov_angle = 60 * (M_PI / 180);
-	obj_plyr->wall_strip_width = 0.1;
-	obj_plyr->rays_num = w / obj_plyr->wall_strip_width;
-	obj_plyr->minimap_scale_factor = 0.3;
+	ft_fill_map(map_path, obj_map);
+	ft_check_characters(data, obj_map);
+	ft_check_walls(data, obj_map);
+	ft_fill_data(obj_map, map_path);
+	data->obj_plyr->p_orientation = \
+	obj_map->map[obj_map->plyr_y][obj_map->plyr_x];
+	data->obj_plyr->x = obj_map->plyr_x * COLUMN_SIZE + 2;
+	data->obj_plyr->y = obj_map->plyr_y * COLUMN_SIZE + 2;
+	obj_map->f_color_d = ft_trgb_to_dec(0, ft_get_color(obj_map->f_color, 1), \
+	ft_get_color(obj_map->f_color, 2), ft_get_color(obj_map->f_color, 3));
+	obj_map->c_color_d = ft_trgb_to_dec(0, ft_get_color(obj_map->c_color, 1), \
+	ft_get_color(obj_map->c_color, 2), ft_get_color(obj_map->c_color, 3));
 }

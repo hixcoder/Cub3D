@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 09:19:50 by hboumahd          #+#    #+#             */
-/*   Updated: 2021/11/11 20:26:51 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:48:17 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	**ft_fillrows(char **dst, const char *s, char c)
 		if (s[i] != c)
 		{
 			len = ft_prdctlen(s + i, c) + i;
-			dst[row] = malloc(sizeof(char) * (len + 1 - i));
+			dst[row] = (char *)malloc(sizeof(char) * (len + 1 - i));
 			if (dst[row] == NULL)
 				return (ft_free(dst));
 			j = 0;

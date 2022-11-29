@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:07:43 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 16:54:32 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:48:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-char	*ft_strdup_cub3D(const char *s1, int row_len);
+char	*ft_strdup_cub3d(const char *s1, int row_len);
 
 #endif

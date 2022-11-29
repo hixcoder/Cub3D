@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:54:43 by ubunto            #+#    #+#             */
-/*   Updated: 2022/11/29 18:37:15 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:11:44 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ static void	ft_update_plyr(t_data *data, int nbr_plyrs, int x, int y)
 		ft_map_errors(data, 2);
 	obj_map->plyr_x = x;
 	obj_map->plyr_y = y;
+}
+
+static int	ft_check_char(char c)
+{
+	if (c != '1' && c != '0' && c != 'N' && c != 'W'
+		&& c != 'S' && c != 'E' && c != ' ')
+		return (1);
+	else if (c == 'W' || c == 'S'
+		|| c == 'E' || c == 'N')
+		return (2);
+	return (0);
 }
 
 // this function check if there is more than one player 
@@ -42,9 +53,9 @@ void	ft_check_characters(t_data *data, t_map *obj_map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'N' && map[y][x] != 'W' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != ' ')
+			if (ft_check_char(map[y][x]) == 1)
 				ft_map_errors(data, 1);
-			else if (map[y][x] == 'W' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'N')
+			else if (ft_check_char(map[y][x]) == 2)
 			{
 				nbr_plyrs++;
 				ft_update_plyr(data, nbr_plyrs, x, y);
@@ -59,7 +70,7 @@ void	ft_check_characters(t_data *data, t_map *obj_map)
 void	ft_is_wall_exist(t_data *data, int y, int x)
 {
 	char	**map;
-	t_map *obj_map;
+	t_map	*obj_map;
 
 	obj_map = data->obj_map;
 	map = obj_map->map;

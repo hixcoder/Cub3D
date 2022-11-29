@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/29 16:00:47 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:19:31 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ft_fill_info(t_map *data, char *line)
 	if (!ft_strcmp(split[0], "EA"))
 		data->ea_texture_path = ft_strdup(split[1]);
 	if (!ft_strcmp(split[0], "F"))
-		data->floor_color = ft_strdup(split[1]);
+		data->f_color = ft_strdup(split[1]);
 	if (!ft_strcmp(split[0], "C"))
-		data->ceill_color = ft_strdup(split[1]);
+		data->c_color = ft_strdup(split[1]);
 	ft_free_split(split);
 }
 
@@ -40,7 +40,8 @@ void	ft_fill_data(t_map *data, char *file)
 
 	fd = open(file, O_RDONLY);
 	len = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (line[0] != '\n' && len < 6)
 		{
@@ -51,6 +52,7 @@ void	ft_fill_data(t_map *data, char *file)
 		free(line);
 		if (len == 6)
 			break ;
+		line = get_next_line(fd);
 	}
 	close(fd);
 }

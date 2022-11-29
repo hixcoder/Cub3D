@@ -6,15 +6,15 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:38:47 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/19 14:24:18 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:49:04 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (s == NULL)

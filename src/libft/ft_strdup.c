@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:41:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 11:55:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:48:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s1)
 	return (pdst);
 }
 
-char	*ft_strdup_cub3D(const char *s1, int row_len)
+char	*ft_strdup_cub3d(const char *s1, int row_len)
 {
 	int		i;
 	char	*pdst;
