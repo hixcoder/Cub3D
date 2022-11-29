@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 19:51:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:53:21 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 typedef struct s_map
 {
-	char **map;
+	char	**map;
 	int map_width;
 	int map_height;
 	int plyr_x;
@@ -47,6 +47,8 @@ typedef struct s_map
 	char *ea_texture_path;
 	char *floor_color;
 	char *ceill_color;
+	unsigned int floor_color_d;
+	unsigned int ceill_color_d;
 } t_map;
 
 typedef struct s_player
@@ -56,7 +58,6 @@ typedef struct s_player
 	char	p_orientation;
 	int		is_facing_right;
 	int		is_facing_up;
-	float	radius;
 	float	turn_direction;
 	float	walk_direction;
 	float	rotation_angle;
@@ -65,18 +66,19 @@ typedef struct s_player
 
 	float	fov_angle;
 	float	wall_strip_width;
+	float	wall_strip_height;
 	float	rays_num;
 	float	minimap_scale_factor;
-} t_player;
+}	t_player;
 
-typedef struct	s_image
+typedef struct s_image
 {
-	void      *pointer;
-	char      *img_data;
-	int       bits_per_pixel;
-	int       line_size;
-	int       endian;
-}   t_image;
+	void	*pointer;
+	char	*img_data;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}	t_image;
 
 typedef struct s_imgs
 {
@@ -94,12 +96,12 @@ typedef struct s_data
 	t_player	*obj_plyr;
 	t_img		*obj_img;
 
-	void	*img;
-	char	*img_data;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-} t_data;
+	void		*img;
+	char		*img_data;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_data;
 
 void			ft_maloc_error(void *var);
 void			ft_map_init(char *map_path, t_data *data);
@@ -107,7 +109,7 @@ void			ft_map_errors(t_map *obj_map, int error_num);
 void			ft_check_characters(t_map *obj_map);
 void			ft_check_walls(t_map *obj_map);
 void			ft_textures_init(t_data *data);
-void			ft_render_map(t_data *data);
+void			ft_render_minimap(t_data *data);
 void			ft_draw_square(int y, int x, int size, t_data *data);
 void			ft_render_player(t_data *data);
 void			ft_update(t_data *data, int key);
@@ -116,23 +118,20 @@ int				ft_is_in_wall(int new_x, int new_y, t_data *data);
 float			ft_horizontal_intersection(t_data *data, float ray_angle);
 float			ft_vertical_intersection(t_data *data, float ray_angle);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    		ft_render(t_data *data, int key);
-void    		ft_draw_one_ray(t_data *data, float ray_angle, int size);
-void			ft_clear_window(t_data *data);
+void			ft_render(t_data *data, int key);
+void			ft_draw_one_ray(t_data *data, float ray_angle, int size);
 unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b);
-void 			ft_project_walls(t_data *data);
-int  			ft_get_color(char *color, int rgb);
+void			ft_project_walls(t_data *data);
+int				ft_get_color(char *color, int rgb);
 float			ft_get_rotation_angle(char c);
-void	my_mlx_pixel_put2(t_data *data, int x, int y, int color, int is_white, int is_horz_inter);
-
+void			my_mlx_pixel_put2(t_data *data, int x, int y, int color, int is_white, int is_horz_inter);
 
 // lhou functions
-int		ft_verifie(char *file);
-int		ft_strcmp(char *s1, char *s2);
-int		ft_is_exist(char *str, char c);
-int		ft_len_split(char **tab);
-void	ft_free_split(char **tab);
-void	ft_fill_data(t_map *data, char *file);
-
+int				ft_verifie(char *file);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_is_exist(char *str, char c);
+int				ft_len_split(char **tab);
+void			ft_free_split(char **tab);
+void			ft_fill_data(t_map *data, char *file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 19:52:35 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:38:04 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ void ft_render_player(t_data *data)
 
 	i = -1;
 	player_size = 30;
+	ft_draw_square(y, x, COLUMN_SIZE / 5, data);
 	while (++i < player_size)
-	{
-		ft_draw_square(y, x, COLUMN_SIZE / 5, data);
 		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotation_angle) * i,  y + sin(data->obj_plyr->rotation_angle) * i, 0x00FF0000);
-	}
 }
 
 // this function checks if there is a wall in the position map[new_y][new_x]

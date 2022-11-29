@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:23:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 17:44:31 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:41:09 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,10 @@ typedef struct s_var
 
     float     next_horz_touch_x;
     float     next_horz_touch_y;
-    int       found_horz_wall_hit;
     
     float     next_vertcl_touch_x;
     float     next_vertcl_touch_y;
-    int     found_vertcl_wall_hit;
     
-    int     x_wall_hit;
-    int     y_wall_hit;
     int     window_w;
     int     window_h;
     float     distance;
@@ -54,7 +50,6 @@ void    ft_ray_facing(t_var *v, float ray_angle, t_data *data)
         v->is_ray_facing_left = 1;
     if (v->is_ray_facing_left == 0)
         v->is_ray_facing_right = 1;
-    
     if (v->is_ray_facing_right == 1)
         data->obj_plyr->is_facing_right = 1;
     else
@@ -86,9 +81,6 @@ void    ft_init_horz_vars(t_data *data, float ray_angle, t_var *v)
     v->next_horz_touch_y = v->y_intercept;
     if (v->is_ray_facing_up == 1)
         v->next_horz_touch_y--;
-    v->found_horz_wall_hit = 0;
-    v->x_wall_hit = 0;
-    v->y_wall_hit = 0;
     v->distance = sqrt(pow((v->y_intercept - data->obj_plyr->y), 2) + pow((v->y_intercept - data->obj_plyr->y) / tan(ray_angle), 2));
     v->window_w = data->obj_map->map_width * COLUMN_SIZE;
     v->window_h = data->obj_map->map_height * COLUMN_SIZE;
@@ -105,18 +97,10 @@ float    ft_horizontal_intersection(t_data *data, float ray_angle)
         && v.next_horz_touch_y >= 0 && v.next_horz_touch_y < v.window_h)
     {
         if (ft_is_in_wall(v.next_horz_touch_x, v.next_horz_touch_y, data) == 1)
-        {
-            v.found_horz_wall_hit = 1;
-            v.x_wall_hit = v.next_horz_touch_x;
-            v.y_wall_hit = v.next_horz_touch_y;
             return(v.distance);
-        }
-        else
-        {
-            v.next_horz_touch_x += v.x_steps;
-            v.next_horz_touch_y += v.y_steps;
-            v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
-        }
+        v.next_horz_touch_x += v.x_steps;
+        v.next_horz_touch_y += v.y_steps;
+        v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
     }
     return(v.window_w * v.window_h);
 }
@@ -142,9 +126,6 @@ void    ft_init_vertcl_vars(t_data *data, float ray_angle, t_var *v)
     v->next_vertcl_touch_y = v->y_intercept;
     if (v->is_ray_facing_left == 1)
         v->next_vertcl_touch_x--;
-    v->found_vertcl_wall_hit = 0;
-    v->x_wall_hit = 0;
-    v->y_wall_hit = 0;
     v->distance = sqrt(pow((v->x_intercept - data->obj_plyr->x), 2) + pow((v->x_intercept - data->obj_plyr->x) * tan(ray_angle), 2));
     v->window_w = data->obj_map->map_width * COLUMN_SIZE;
     v->window_h = data->obj_map->map_height * COLUMN_SIZE;
@@ -161,18 +142,10 @@ float    ft_vertical_intersection(t_data *data, float ray_angle)
         && v.next_vertcl_touch_y >= 0 && v.next_vertcl_touch_y < v.window_h)
     {
         if (ft_is_in_wall(v.next_vertcl_touch_x, v.next_vertcl_touch_y, data) == 1)
-        {
-            v.found_vertcl_wall_hit = 1;
-            v.x_wall_hit = v.next_vertcl_touch_x;
-            v.y_wall_hit = v.next_vertcl_touch_y;
             return(v.distance);
-        }
-        else
-        {
-            v.next_vertcl_touch_x += v.x_steps;
-            v.next_vertcl_touch_y += v.y_steps;
-            v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
-        }
+        v.next_vertcl_touch_x += v.x_steps;
+        v.next_vertcl_touch_y += v.y_steps;
+        v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
     }
     return(v.window_w * v.window_h);
 }

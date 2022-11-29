@@ -6,7 +6,7 @@
 #    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/26 17:09:32 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/29 16:53:02 by hboumahd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,6 @@ $(NAME) : ${SRCOBJ} $(OTHER_SRCS) ${INCLUDES}
 	@echo "|+| make the get_next_line.a [${GREEN}DONE${RESET}]"
 	@echo "|+| make the libft.a         [${GREEN}DONE${RESET}]"
 	@echo "|+| make the $(NAME) program   [${GREEN}DONE${RESET}]"
-	clear
 
 # @$(CC) ${FLAGS} $(SRCOBJ) $(LIBS) -o $(NAME)
 

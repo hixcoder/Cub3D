@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 18:33:56 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:24:46 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void ft_fill_map(char *map_path, t_map *obj_map)
     while (line && ++i < (map_len - 1))
     {
         map[i] = ft_strdup_cub3D(line, obj_map->map_width);
-        if (!map[i])
-            ft_maloc_error(map[i]);
         free(line);
         line = get_next_line(fd);
     }
@@ -110,4 +108,7 @@ void ft_map_init(char *map_path, t_data *data)
     data->obj_plyr->p_orientation = data->obj_map->map[data->obj_map->plyr_y][data->obj_map->plyr_x];
     data->obj_plyr->x = data->obj_map->plyr_x * COLUMN_SIZE + 2;
     data->obj_plyr->y = data->obj_map->plyr_y * COLUMN_SIZE + 2;
+    data->obj_map->floor_color_d = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->floor_color, 1), ft_get_color(data->obj_map->floor_color, 2), ft_get_color(data->obj_map->floor_color, 3));
+    data->obj_map->ceill_color_d = ft_trgb_to_decimal(0, ft_get_color(data->obj_map->ceill_color, 1), ft_get_color(data->obj_map->ceill_color, 2), ft_get_color(data->obj_map->ceill_color, 3));
+
 }

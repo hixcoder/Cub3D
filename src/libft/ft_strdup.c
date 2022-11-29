@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:41:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/19 14:24:24 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 11:55:57 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	s1len = ft_strlen1(s1);
-	pdst = malloc(sizeof(char) * (s1len + 1));
+	pdst = (char *)malloc(sizeof(char) * (s1len + 1));
 	if (pdst == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -50,7 +50,7 @@ char	*ft_strdup_cub3D(const char *s1, int row_len)
 
 	i = 0;
 	end = 0;
-	pdst = malloc(sizeof(char) * (row_len + 1));
+	pdst = (char *)malloc(sizeof(char) * (row_len + 1));
 	if (pdst == NULL)
 		return (NULL);
 	while (i < row_len)

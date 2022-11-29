@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 19:52:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:50:28 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@ int	ft_exit_handler(void *n_data)
 	data = (t_data *) n_data;
 	i = -1;
 	while (data->obj_map->map[++i] != NULL)
-	{
 		free(data->obj_map->map[i]);
-		data->obj_map->map[i] = NULL;
-	}
 	free(data->obj_map->map);
-	data->obj_map->map = NULL;
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	exit(0);
 }
@@ -33,11 +29,8 @@ int	ft_exit_handler(void *n_data)
 int	ft_key_handler(int key, void *n_data)
 {
 	t_data	*data;
-	char	**map;
 
 	data = (t_data *) n_data;
-	map = data->obj_map->map;
-	ft_clear_window(data);
 	if (key == KEY_ESC)
 		ft_exit_handler(data);
 	else if (key == KEY_W)
@@ -56,14 +49,11 @@ int	ft_key_handler(int key, void *n_data)
 int	ft_mouse_hook(int key,int x,int y, void *n_data)
 {
 	t_data	*data;
-	int		i;
 
 	data = (t_data *) n_data;
-	i = -1;
 	key += 5;
 	(void) x;
 	(void) y;
-	printf("key is : %d\n", key);
 	if (key == MOUSE_L || key == MOUSE_L2 )
 		data->obj_plyr->turn_direction = -1;
 	else if (key == MOUSE_R || key == MOUSE_R2)
@@ -96,7 +86,6 @@ int main(int ac, char **av)
         ft_map_init(av[1], &data);
 		
 		// init player
-		obj_plyr.radius = 3;
 		obj_plyr.turn_direction = 0; // -1 if left , +1 if right
 		obj_plyr.walk_direction = 0; // -1 if back , +1 if front
 		obj_plyr.rotation_angle = ft_get_rotation_angle(data.obj_plyr->p_orientation);
