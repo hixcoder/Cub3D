@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 15:38:04 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:53:31 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // this function get the obj_plyr.rotation_angle 
 // based on the player orientation p_orientation
-float ft_get_rotation_angle(char c)
+float ft_get_rot_angle(char c)
 {
 	if (c == 'W')
 		return (M_PI);

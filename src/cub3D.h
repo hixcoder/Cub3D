@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 16:53:21 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:41:13 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ typedef struct s_data
 }	t_data;
 
 void			ft_maloc_error(void *var);
+void	ft_check_characters(t_data *data, t_map *obj_map);
 void			ft_map_init(char *map_path, t_data *data);
-void			ft_map_errors(t_map *obj_map, int error_num);
-void			ft_check_characters(t_map *obj_map);
-void			ft_check_walls(t_map *obj_map);
+void			ft_map_errors(t_data *data, int error_num);
+void	ft_check_walls(t_data *data, t_map *obj_map);
 void			ft_textures_init(t_data *data);
 void			ft_render_minimap(t_data *data);
 void			ft_draw_square(int y, int x, int size, t_data *data);
@@ -123,8 +123,10 @@ void			ft_draw_one_ray(t_data *data, float ray_angle, int size);
 unsigned int	ft_trgb_to_decimal(int t, int r, int g, int b);
 void			ft_project_walls(t_data *data);
 int				ft_get_color(char *color, int rgb);
-float			ft_get_rotation_angle(char c);
+float			ft_get_rot_angle(char c);
 void			my_mlx_pixel_put2(t_data *data, int x, int y, int color, int is_white, int is_horz_inter);
+void	ft_plyr_init(t_player *obj_plyr, t_data *data);
+void	ft_free_textures(t_data *data);
 
 // lhou functions
 int				ft_verifie(char *file);
