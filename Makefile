@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+         #
+#    By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/26 17:09:32 by hboumahd         ###   ########.fr        #
+#    Updated: 2022/11/29 18:27:42 by lahammam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS = cub3D_bonus
 # madatory
 SRC_FOLDER = ./src/
 SRC =	main.c error.c map.c map_check.c ft_verifie_utils.c ft_verifie.c fill_data.c draw.c player.c\
-		rays.c wall_intersections.c render.c color.c 
+		rays.c wall_intersections.c render.c color.c ft_verifie_utils2.c
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
 

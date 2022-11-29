@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 19:52:35 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:28:53 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// this function get the obj_plyr.rotation_angle 
+// this function get the obj_plyr.rotation_angle
 // based on the player orientation p_orientation
 float ft_get_rotation_angle(char c)
 {
@@ -30,8 +30,8 @@ float ft_get_rotation_angle(char c)
 // this function draw the player on the map
 void ft_render_player(t_data *data)
 {
-	int		y;
-	int		x;
+	int y;
+	int x;
 	int player_size;
 	int i;
 
@@ -40,21 +40,19 @@ void ft_render_player(t_data *data)
 
 	i = -1;
 	player_size = 30;
+	ft_draw_square(y, x, COLUMN_SIZE / 5, data);
 	while (++i < player_size)
-	{
-		ft_draw_square(y, x, COLUMN_SIZE / 5, data);
-		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotation_angle) * i,  y + sin(data->obj_plyr->rotation_angle) * i, 0x00FF0000);
-	}
+		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotation_angle) * i, y + sin(data->obj_plyr->rotation_angle) * i, 0x00FF0000);
 }
 
 // this function checks if there is a wall in the position map[new_y][new_x]
-int	ft_is_in_wall(int new_x, int new_y, t_data *data)
+int ft_is_in_wall(int new_x, int new_y, t_data *data)
 {
 	int w;
 	int h;
 
-	w = (data->obj_map->map_width ) * COLUMN_SIZE;
-	h = (data->obj_map->map_height ) * COLUMN_SIZE;
+	w = (data->obj_map->map_width) * COLUMN_SIZE;
+	h = (data->obj_map->map_height) * COLUMN_SIZE;
 	if (new_x < 0 || new_x > w || new_y < 0 || new_y > h)
 		return (1);
 	if (data->obj_map->map[new_y / COLUMN_SIZE][new_x / COLUMN_SIZE] == '1')
@@ -64,12 +62,12 @@ int	ft_is_in_wall(int new_x, int new_y, t_data *data)
 }
 
 // this function updates the players info based on the key you pressed
-void	ft_update(t_data *data, int key)
+void ft_update(t_data *data, int key)
 {
 	float move_step;
-	float	new_x;
-	float	new_y;
-	
+	float new_x;
+	float new_y;
+
 	if (key == KEY_AROW_R || key == KEY_AROW_L || key == KEY_D || key == KEY_A || key == MOUSE_L || key == MOUSE_R || key == MOUSE_L2 || key == MOUSE_R2)
 	{
 		data->obj_plyr->rotation_angle += data->obj_plyr->turn_direction * data->obj_plyr->rotation_speed;

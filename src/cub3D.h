@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 19:51:57 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:28:30 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ int		ft_is_exist(char *str, char c);
 int		ft_len_split(char **tab);
 void	ft_free_split(char **tab);
 void	ft_fill_data(t_map *data, char *file);
-
+int		ft_is_flag(char *str);
+int		ft_nbr_flag(char *str);
+int	ft_is_gbr_valid(char *str);
 
 #endif
