@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 17:04:42 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:06:24 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_H
 
 # include "mlx.h"
-# include "./get_next_line/get_next_line.h"
-# include "./libft/libft.h"
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
 # include <math.h>
 
 # define COLUMN_SIZE 50
@@ -162,7 +162,6 @@ void			ft_plyr_init(t_player *obj_plyr, t_data *data);
 void			ft_free_textures(t_data *data);
 int				ft_exit_handler(void *n_data);
 int				ft_key_handler(int key, void *n_data);
-int				ft_mouse_handler(int key, int x, int y, void *n_data);
 void			my_mlx_pixel_put_wall(t_data *data, int x, int y, int wall_top);
 int				ft_verifie(char *file);
 int				ft_strcmp(char *s1, char *s2);
