@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 14:56:58 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:23:54 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_textures_init(t_data *data)
 	ft_textures_init_utile(data, 4, obj_map->so_texture_path);
 }
 
-
+// this function helps you redraw the map element on the minimap
 int	ft_get_position_color(t_data *data, int x, int y, int map_size)
 {
 	int	s_y;
@@ -67,6 +67,7 @@ int	ft_get_position_color(t_data *data, int x, int y, int map_size)
 	return (0xffffff);
 }
 
+// this function render the minimap
 void	ft_render_minimap(t_data *data)
 {
 	int		y;
@@ -79,7 +80,7 @@ void	ft_render_minimap(t_data *data)
 	{
 		x = -1;
 		while (++x < map_size)
-			my_mlx_pixel_put3(data, x, y, ft_get_position_color(data, x, y, map_size));
+			my_mlx_pixel_put(data, x, y, ft_get_position_color(data, x, y, map_size));
 	}
 }
 

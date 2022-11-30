@@ -6,13 +6,13 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:14:33 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:21:50 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	my_mlx_pixel_put3(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 	float		x_scaled;
@@ -77,7 +77,7 @@ void	ft_draw_square(int y, int x, int size, t_data *data)
 		x = w - size;
 		while (x < w)
 		{
-			my_mlx_pixel_put3(data, x , y , 0x00ff000);
+			my_mlx_pixel_put(data, x , y , 0x00ff000);
 			x++;
 		}
 		y++;
@@ -92,7 +92,7 @@ void	ft_draw_one_ray(t_data *data, float ray_angle, int size)
 	j = -1;
 	while (++j < size)
 	{
-		my_mlx_pixel_put3(data, (data->obj_plyr->x + cos(ray_angle) * j), \
+		my_mlx_pixel_put(data, (data->obj_plyr->x + cos(ray_angle) * j), \
 		(data->obj_plyr->y + sin(ray_angle) * j), 0x00FF0000);
 	}
 }
