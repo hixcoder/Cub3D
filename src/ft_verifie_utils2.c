@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:22:41 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/29 18:28:20 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:04:29 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,13 @@ int	ft_is_gbr_valid(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+// this function limits the angle between (0~360) degree or (0~2PI) radian
+float	ft_normalize_angle(float angle)
+{
+	angle = fmod(angle, 2 * M_PI);
+	if (angle < 0)
+		angle = angle + (2 * M_PI);
+	return (angle);
 }

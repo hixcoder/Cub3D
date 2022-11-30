@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:38 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 09:31:44 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:36:21 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,18 @@ char	*ft_go_to_map_line(int fd)
 	return (line);
 }
 
-static void	ft_check_line(t_data *data, char *line, int *i)
+static void	ft_check_line(t_data *data, char *line, int *i, int *map_end)
 {
-	int	map_end;
 	int	line_lenght;
 
-	map_end = 0;
 	line_lenght = ft_strlen(line) - 1;
 	if (data->obj_map->map_width < line_lenght)
 		data->obj_map->map_width = line_lenght;
-	if (line[0] != '\n' && map_end == 0)
+	if (line[0] != '\n' && *map_end == 0)
 		(*i)++;
-	else if (line[0] == '\n' && map_end == 0)
-		map_end = 1;
-	else if (line[0] != '\n' && map_end == 1)
+	else if (line[0] == '\n' && *map_end == 0)
+		*map_end = 1;
+	else if (line[0] != '\n' && *map_end == 1)
 	{
 		free(line);
 		ft_map_errors(data, 4);
@@ -61,14 +59,16 @@ void	ft_map_dimensions(char *map_path, t_data *data)
 	int		fd;
 	int		i;
 	char	*line;
+	int		map_end;
 
 	i = 0;
+	map_end = 0;
 	data->obj_map->map_width = 0;
 	fd = open(map_path, O_RDONLY);
 	line = ft_go_to_map_line(fd);
 	while (line)
 	{
-		ft_check_line(data, line, &i);
+		ft_check_line(data, line, &i, &map_end);
 		free(line);
 		line = get_next_line(fd);
 	}

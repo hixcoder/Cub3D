@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:45:46 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:10:59 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int	ft_get_position_color(t_data *data, int x, int y, int map_size)
 {
 	int	s_y;
 	int	s_x;
-	
+
 	s_y = data->obj_plyr->y - map_size / 2;
 	s_x = data->obj_plyr->x - map_size / 2;
-
-	if (ft_is_in_wall(s_x + x, s_y + y, data) == 1 || data->obj_map->map[(s_y + y) / 50][(s_x + x) / 50] == ' ')
+	if (ft_is_in_wall(s_x + x, s_y + y, data) == 1
+		|| data->obj_map->map[(s_y + y) / 50][(s_x + x) / 50] == ' ')
 		return (0x808080);
 	return (0xffffff);
 }
@@ -73,7 +73,7 @@ void	ft_render_minimap(t_data *data)
 	int		y;
 	int		x;
 	int		map_size;
-	
+
 	map_size = data->obj_plyr->minimap_size;
 	y = -1;
 	while (++y < map_size)
@@ -81,11 +81,11 @@ void	ft_render_minimap(t_data *data)
 		x = -1;
 		while (++x < map_size)
 		{
-			my_mlx_pixel_put(data, x, y, ft_get_position_color(data, x, y, map_size));
+			my_mlx_pixel_put(data, x, y, \
+				ft_get_position_color(data, x, y, map_size));
 		}
 	}
 }
-
 
 // this function render the game elements
 // Note: 

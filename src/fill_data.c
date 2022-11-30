@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:41:35 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/29 20:19:31 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:42:46 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_fill_info(t_map *data, char *line)
 	char	**split;
 
 	split = ft_split(line, ' ');
+	if (!split)
+		ft_maloc_error(split);
 	if (!ft_strcmp(split[0], "NO"))
 		data->no_texture_path = ft_strdup(split[1]);
 	if (!ft_strcmp(split[0], "SO"))

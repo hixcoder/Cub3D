@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 16:22:47 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:04:42 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,6 @@ void			ft_fill_data(t_map *data, char *file);
 int				ft_is_flag(char *str);
 int				ft_nbr_flag(char *str);
 int				ft_is_gbr_valid(char *str);
+float			ft_normalize_angle(float angle);
 
 #endif

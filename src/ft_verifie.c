@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verifie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:59:29 by ahammam           #+#    #+#             */
-/*   Updated: 2022/11/29 18:51:14 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:41:51 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_body_info(char *line, int *re, int *len, int *nbr)
 
 	*re = 0;
 	split = ft_split(line, ' ');
+	if (!split)
+		ft_maloc_error(split);
 	if (ft_len_split(split) == 2 || (ft_len_split(split) == 3
 			&& split[ft_len_split(split) - 1][0] == '\n'))
 		*re = 1;

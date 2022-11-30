@@ -6,34 +6,30 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 17:00:33 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:08:56 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_mlx_wall_body(t_data *data, int *offsetx, t_image **tmp)
 {
-	char	*dst;
-	int		x_scaled;
-	int		y_scaled;
-	float	scale_factor;
-	int		minimap_end;
-
-	if (y > (data->obj_map->map_height * COLUMN_SIZE)
-		|| x > (data->obj_map->map_width * COLUMN_SIZE))
-		return ;
-	scale_factor = data->obj_plyr->minimap_scale_factor;
-	x_scaled = x * scale_factor;
-	y_scaled = y * scale_factor;
-	minimap_end = (data->obj_plyr->minimap_size - 1) * scale_factor;
-	dst = data->img_data + (y_scaled * data->line_length + x_scaled \
-		* (data->bits_per_pixel / 8));
-	if (x_scaled == 0 || y_scaled == 0 || \
-		x_scaled == minimap_end || y_scaled == minimap_end)
-		*(unsigned int *)dst = 0x10ffff;
+	if (data->obj_plyr->is_horz_intr == 1)
+	{
+		*offsetx = (int)data->v.next_horz_touch_x % TEX_WIDTH;
+		if (data->obj_plyr->is_ray_up == 1)
+			*tmp = data->obj_img->no_texture;
+		if (data->obj_plyr->is_ray_up == 0)
+			*tmp = data->obj_img->so_texture;
+	}
 	else
-		*(unsigned int *)dst = color;
+	{
+		*offsetx = (int)data->v.next_vertcl_touch_y % TEX_WIDTH;
+		if (data->obj_plyr->is_ray_right == 0)
+			*tmp = data->obj_img->we_texture;
+		if (data->obj_plyr->is_ray_right == 1)
+			*tmp = data->obj_img->ea_texture;
+	}
 }
 
 // this function draw a pixel without the scale factor
@@ -52,22 +48,7 @@ void	my_mlx_pixel_put_wall(t_data *data, int x, int y, int wall_top)
 	if (y >= (data->fix_h)
 		|| x >= (data->fix_w))
 		return ;
-	if (data->obj_plyr->is_horz_intr == 1)
-	{
-		offsetx = (int)data->v.next_horz_touch_x % TEX_WIDTH;
-		if (data->obj_plyr->is_ray_up == 1)
-			tmp = data->obj_img->no_texture;
-		if (data->obj_plyr->is_ray_up == 0)
-			tmp = data->obj_img->so_texture;
-	}
-	else
-	{
-		offsetx = (int)data->v.next_vertcl_touch_y % TEX_WIDTH;
-		if (data->obj_plyr->is_ray_right == 0)
-			tmp = data->obj_img->we_texture;
-		if (data->obj_plyr->is_ray_right == 1)
-			tmp = data->obj_img->ea_texture;
-	}
+	ft_mlx_wall_body(data, &offsetx, &tmp);
 	offsety = ((y - wall_top) * \
 		(TEX_WIDTH / (data->obj_plyr->wall_strip_height * COLUMN_SIZE)));
 	dst = data->img_data + (y * data->line_length + \

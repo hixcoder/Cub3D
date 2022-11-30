@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 21:21:25 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:41:20 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_maloc_error(void *var)
 {
-	free(var);
+	if (var)
+		free(var);
 	exit(1);
 }
 

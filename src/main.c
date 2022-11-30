@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:37 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:06:42 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:10:15 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_plyr_init(t_player *obj_plyr, t_data *data)
 	obj_plyr->rotation_speed = 3 * (M_PI / 180);
 	obj_plyr->fov_angle = 60 * (M_PI / 180);
 	obj_plyr->wall_strip_width = 0.1;
-	obj_plyr->rays_num = (data->fix_w / COLUMN_SIZE) / obj_plyr->wall_strip_width;
-	
+	obj_plyr->rays_num = (data->fix_w / COLUMN_SIZE) \
+		/ obj_plyr->wall_strip_width;
 	obj_plyr->minimap_scale_factor = 0.2;
 	obj_plyr->minimap_size = 1000;
 	obj_plyr->player_size = 30;
@@ -36,7 +36,8 @@ void	ft_plyr_init(t_player *obj_plyr, t_data *data)
 void	ft_data_init(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->fix_w, data->fix_h, "Free Fire");
+	data->win_ptr = \
+		mlx_new_window(data->mlx_ptr, data->fix_w, data->fix_h, "Free Fire");
 	data->img = mlx_new_image(data->mlx_ptr, data->fix_w, data->fix_h);
 	data->img_data = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 	&data->line_length, &data->endian);

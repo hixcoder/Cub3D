@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:05:59 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:09:53 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_render_player(t_data *data)
 	int	x;
 	int	player_size;
 	int	i;
+
 	y = data->obj_plyr->minimap_size / 2;
 	x = data->obj_plyr->minimap_size / 2;
 	i = -1;

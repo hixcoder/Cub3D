@@ -6,19 +6,34 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:01:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 16:56:19 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:05:08 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// this function limits the angle between (0~360) degree or (0~2PI) radian
-float	ft_normalize_angle(float angle)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	angle = fmod(angle, 2 * M_PI);
-	if (angle < 0)
-		angle = angle + (2 * M_PI);
-	return (angle);
+	char	*dst;
+	int		x_scaled;
+	int		y_scaled;
+	float	scale_factor;
+	int		minimap_end;
+
+	if (y > (data->obj_map->map_height * COLUMN_SIZE)
+		|| x > (data->obj_map->map_width * COLUMN_SIZE))
+		return ;
+	scale_factor = data->obj_plyr->minimap_scale_factor;
+	x_scaled = x * scale_factor;
+	y_scaled = y * scale_factor;
+	minimap_end = (data->obj_plyr->minimap_size - 1) * scale_factor;
+	dst = data->img_data + (y_scaled * data->line_length + x_scaled \
+		* (data->bits_per_pixel / 8));
+	if (x_scaled == 0 || y_scaled == 0 || \
+		x_scaled == minimap_end || y_scaled == minimap_end)
+		*(unsigned int *)dst = 0x10ffff;
+	else
+		*(unsigned int *)dst = color;
 }
 
 // this function draws a rectange on the position 
