@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:21:50 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:52:22 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-	float		x_scaled;
-	float		y_scaled;
+	int		x_scaled;
+	int		y_scaled;
 	float	scale_factor;
+	int		minimap_end;
+	
 
 	if (y > (data->obj_map->map_height * COLUMN_SIZE)
 		|| x > (data->obj_map->map_width * COLUMN_SIZE))
@@ -25,8 +27,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	scale_factor = data->obj_plyr->minimap_scale_factor;
 	x_scaled = x * scale_factor;
 	y_scaled = y * scale_factor;
-	dst = data->img_data + ((int)y_scaled * data->line_length + (int)x_scaled * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	minimap_end = (data->obj_plyr->minimap_size - 1) * scale_factor;
+	dst = data->img_data + (y_scaled * data->line_length + x_scaled * (data->bits_per_pixel / 8));
+	if (x_scaled == 0 || y_scaled == 0 || x_scaled == minimap_end || y_scaled == minimap_end)
+		*(unsigned int *)dst = 0x10ffff;
+	else
+		*(unsigned int *)dst = color;
 }
 
 // this function draw a pixel without the scale factor

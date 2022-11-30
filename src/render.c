@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:23:54 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:45:46 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	ft_render_minimap(t_data *data)
 	{
 		x = -1;
 		while (++x < map_size)
+		{
 			my_mlx_pixel_put(data, x, y, ft_get_position_color(data, x, y, map_size));
+		}
 	}
 }
 
