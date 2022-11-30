@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/28 18:49:25 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:24:20 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <math.h>
 
 #define TILE_SIZE 50
+#define TEX_WIDTH 50
+#define TEX_HEIGHT 50
 #define MINI_MAP 0.2
 #define FOV_ANGLE 60 * (M_PI / 180)
 #define WALL_STRIP_WIDTH 0.1
@@ -32,8 +34,6 @@
 #define KEY_UP 126
 #define KEY_ESC 53
 #define KEY_Q 12
-#define TEX_WIDTH 50
-#define TEX_HEIGHT 50
 
 int *text_n;
 int *text_s;
@@ -42,7 +42,11 @@ int *text_w;
 typedef struct s_inter
 {
 	double l;
+	double x;
+	double y;
 	int isVertical;
+	double ray_angle;
+	double pro_wall_height;
 } t_inter;
 
 typedef struct s_map
@@ -130,10 +134,11 @@ void render3d_projection(t_data *data, t_inter l, int i, double ray_angle);
 void my_mlx_pixel_put_v2(t_data *data, int x, int y, int color);
 void ft_wall_render(t_data *data);
 
-double ft_ver_intersection(t_data *data, double ray_angle);
-double ft_hor_intersection(t_data *data, double ray_angle);
+t_inter ft_ver_intersection(t_data *data, double ray_angle);
+t_inter ft_hor_intersection(t_data *data, double ray_angle);
 double normalise_angle(double angle);
 void update_map(t_data *data);
 
 int *get_color_from_texture(t_data *data, char *path);
+void draw_rect_wall_textur(t_data *data, int x,int y, int height, t_inter inter);
 #endif

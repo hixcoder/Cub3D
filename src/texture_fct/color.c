@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:59:26 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/28 16:17:45 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:16:46 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_imgi
 int *get_color_from_texture(t_data *data, char *path)
 {
 	int i = 0;
-	int img_width = 50;
-	int img_height = 50;
+	int img_width = TEX_WIDTH;
+	int img_height = TEX_HEIGHT;
 	t_imgi img;
 	int *result;
 

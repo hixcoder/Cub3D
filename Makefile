@@ -6,7 +6,7 @@
 #    By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 10:29:55 by hboumahd          #+#    #+#              #
-#    Updated: 2022/11/28 13:15:38 by lahammam         ###   ########.fr        #
+#    Updated: 2022/11/30 13:29:46 by lahammam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ BONUS = cub3D_bonus
 SRC_FOLDER = ./src/
 SRC = main.c error.c check_map/map.c check_map/map_check.c check_map/ft_verifie_utils.c check_map/ft_verifie.c check_map/fill_data.c \
 		draw/draw_map.c draw/draw_player.c rays_casting/ray_cast.c \
-		hook.c wall_rendring/wall_render.c texture_fct/color.c
+		hook.c wall_rendring/wall_render.c texture_fct/color.c wall_rendring/texture.c
 		
 SRCS = $(addprefix $(SRC_FOLDER), $(SRC))
 SRCOBJ = ${SRCS:.c=.o}
@@ -67,11 +67,9 @@ all : $(NAME)
 
 clean :
 	@rm -f $(LIBS) $(OTHER_OBJ) $(SRCOBJ) $(SRCOBJ_B)
-	@echo "|-| remove object files [${RED}DONE${RESET}]"
 
 fclean : clean
 	@rm -f ${NAME}
-	@echo "|-| remove the program  [${RED}DONE${RESET}]"
 
 re : fclean all
 
