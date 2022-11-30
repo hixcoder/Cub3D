@@ -6,28 +6,26 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 11:38:53 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 20:19:20 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:14:33 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// this function draw a pixel with the scale factor
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put3(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-	int		x_scaled;
-	int		y_scaled;
-	float	scale_factor;	
+	float		x_scaled;
+	float		y_scaled;
+	float	scale_factor;
 
 	if (y > (data->obj_map->map_height * COLUMN_SIZE)
 		|| x > (data->obj_map->map_width * COLUMN_SIZE))
 		return ;
 	scale_factor = data->obj_plyr->minimap_scale_factor;
-	x_scaled = scale_factor * x;
-	y_scaled = scale_factor * y;
-	dst = data->img_data + \
-	(y_scaled * data->line_length + x_scaled * (data->bits_per_pixel / 8));
+	x_scaled = x * scale_factor;
+	y_scaled = y * scale_factor;
+	dst = data->img_data + ((int)y_scaled * data->line_length + (int)x_scaled * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -39,8 +37,11 @@ void	my_mlx_pixel_put2(t_data *data, int x, int y, int color_num)
 	int		s;
 
 	s = COLUMN_SIZE;
-	if (y > (data->obj_map->map_height * s)
-		|| x > (data->obj_map->map_width * s))
+	if (y > (data->fix_h)
+		|| x > (data->fix_w))
+		return ;
+	if (y >= (data->fix_h)
+		|| x >= (data->fix_w))
 		return ;
 	if (data->obj_plyr->is_horz_intr == 1 && data->obj_plyr->is_ray_up == 1)
 		tmp = data->obj_img->no_texture;
@@ -50,8 +51,7 @@ void	my_mlx_pixel_put2(t_data *data, int x, int y, int color_num)
 		tmp = data->obj_img->we_texture;
 	if (data->obj_plyr->is_horz_intr == 0 && data->obj_plyr->is_ray_right == 1)
 		tmp = data->obj_img->ea_texture;
-	dst = data->img_data + \
-	(y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->img_data + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	if (color_num == 2)
 		*(unsigned int *)dst = *(unsigned int *)&tmp->img_data[((y % s) \
 		* tmp->line_size + (x % s) * (tmp->bits_per_pixel / 8))];
@@ -77,7 +77,7 @@ void	ft_draw_square(int y, int x, int size, t_data *data)
 		x = w - size;
 		while (x < w)
 		{
-			my_mlx_pixel_put(data, x, y, 0x00ff000);
+			my_mlx_pixel_put3(data, x , y , 0x00ff000);
 			x++;
 		}
 		y++;
@@ -92,7 +92,7 @@ void	ft_draw_one_ray(t_data *data, float ray_angle, int size)
 	j = -1;
 	while (++j < size)
 	{
-		my_mlx_pixel_put(data, (data->obj_plyr->x + cos(ray_angle) * j), \
+		my_mlx_pixel_put3(data, (data->obj_plyr->x + cos(ray_angle) * j), \
 		(data->obj_plyr->y + sin(ray_angle) * j), 0x00FF0000);
 	}
 }

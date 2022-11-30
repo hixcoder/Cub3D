@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 20:36:53 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:02:17 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_player
 	float	wall_strip_height;
 	float	rays_num;
 	float	minimap_scale_factor;
+	int		minimap_size;
+	int		player_size;
 }	t_player;
 
 typedef struct s_image
@@ -102,6 +104,9 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+
+	int			fix_h;
+	int			fix_w;	
 }	t_data;
 
 void			ft_maloc_error(void *var);
@@ -118,7 +123,7 @@ void			ft_render_rays(t_data *data);
 int				ft_is_in_wall(int new_x, int new_y, t_data *data);
 float			ft_horizontal_intersection(t_data *data, float ray_angle);
 float			ft_vertical_intersection(t_data *data, float ray_angle);
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put3(t_data *data, int x, int y, int color);
 void			ft_render(t_data *data, int key);
 void			ft_draw_one_ray(t_data *data, float ray_angle, int size);
 unsigned int	ft_trgb_to_dec(int t, int r, int g, int b);

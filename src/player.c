@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 20:39:10 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:05:59 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ void	ft_render_player(t_data *data)
 	int	x;
 	int	player_size;
 	int	i;
-
-	y = data->obj_plyr->y;
-	x = data->obj_plyr->x;
+	y = data->obj_plyr->minimap_size / 2;
+	x = data->obj_plyr->minimap_size / 2;
 	i = -1;
-	player_size = 30;
-	ft_draw_square(y, x, COLUMN_SIZE / 5, data);
-	while (++i < player_size)
-		my_mlx_pixel_put(data, x + cos(data->obj_plyr->rotate_angle) * i, \
-		y + sin(data->obj_plyr->rotate_angle) * i, 0x00FF0000);
+	player_size = data->obj_plyr->player_size;
+	ft_draw_square(y, x, player_size, data);
 }
 
 // this function checks if there is a wall in the position map[new_y][new_x]

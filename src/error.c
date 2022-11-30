@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:28:20 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:21:25 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	ft_map_errors(t_data *data, int error_num)
 	while (obj_map->map[++i])
 		free(obj_map->map[i]);
 	free(obj_map->map);
-	ft_free_textures(data);
 	exit(1);
 }

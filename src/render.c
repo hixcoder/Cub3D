@@ -6,7 +6,7 @@
 /*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:55 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 18:49:35 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:56:58 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,36 @@ void	ft_textures_init(t_data *data)
 	ft_textures_init_utile(data, 4, obj_map->so_texture_path);
 }
 
-// this function draws the map
+
+int	ft_get_position_color(t_data *data, int x, int y, int map_size)
+{
+	int	s_y;
+	int	s_x;
+	
+	s_y = data->obj_plyr->y - map_size / 2;
+	s_x = data->obj_plyr->x - map_size / 2;
+
+	if (ft_is_in_wall(s_x + x, s_y + y, data) == 1 || data->obj_map->map[(s_y + y) / 50][(s_x + x) / 50] == ' ')
+		return (0x808080);
+	return (0xffffff);
+}
+
 void	ft_render_minimap(t_data *data)
 {
 	int		y;
 	int		x;
-
+	int		map_size;
+	
+	map_size = data->obj_plyr->minimap_size;
 	y = -1;
-	while (++y < data->obj_map->map_height * COLUMN_SIZE)
+	while (++y < map_size)
 	{
 		x = -1;
-		while (++x < data->obj_map->map_width * COLUMN_SIZE)
-		{
-			if (x == (data->obj_map->map_width * COLUMN_SIZE) - 1
-				|| y == (data->obj_map->map_height * COLUMN_SIZE) - 1)
-				my_mlx_pixel_put(data, x, y, 0xffffff);
-			else if (ft_is_in_wall(x, y, data) == 1
-				|| data->obj_map->map[y / 50][x / 50] == ' ')
-				my_mlx_pixel_put(data, x, y, 0x808080);
-			else
-				my_mlx_pixel_put(data, x, y, 0xffffff);
-		}
+		while (++x < map_size)
+			my_mlx_pixel_put3(data, x, y, ft_get_position_color(data, x, y, map_size));
 	}
 }
+
 
 // this function render the game elements
 // Note: 
@@ -86,6 +93,5 @@ void	ft_render(t_data *data, int key)
 	ft_update(data, key);
 	ft_project_walls(data);
 	ft_render_minimap(data);
-	ft_render_rays(data);
 	ft_render_player(data);
 }
