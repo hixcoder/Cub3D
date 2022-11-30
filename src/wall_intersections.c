@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wall_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:23:02 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/29 20:45:24 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:52:41 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-typedef struct s_var
-{
-	float	x_intercept;
-	float	y_intercept;
-	float	x_steps;
-	float	y_steps;
-
-	int		is_ray_facing_up;
-	int		is_ray_facing_down;
-	int		is_ray_facing_right;
-	int		is_ray_facing_left;
-
-	float	next_horz_touch_x;
-	float	next_horz_touch_y;
-
-	float	next_vertcl_touch_x;
-	float	next_vertcl_touch_y;
-
-	int		window_w;
-	int		window_h;
-	float	distance;
-}	t_var;
 
 // this function for know where the ray is facing 
 void	ft_ray_facing(t_var *v, float ray_angle, t_data *data)
@@ -88,7 +65,7 @@ void	ft_init_horz_vars(t_data *data, float ray_angle, t_var *v)
 
 // this function return the distance between the player
 //  and the horizontal intersection with the wall
-float	ft_horizontal_intersection(t_data *data, float ray_angle)
+t_var	ft_horizontal_intersection(t_data *data, float ray_angle)
 {
 	t_var	v;
 
@@ -98,12 +75,13 @@ float	ft_horizontal_intersection(t_data *data, float ray_angle)
 		&& v.next_horz_touch_y >= 0 && v.next_horz_touch_y < v.window_h)
 	{
 		if (ft_is_in_wall(v.next_horz_touch_x, v.next_horz_touch_y, data) == 1)
-			return (v.distance);
+			return (v);
 		v.next_horz_touch_x += v.x_steps;
 		v.next_horz_touch_y += v.y_steps;
 		v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
 	}
-	return (v.window_w * v.window_h);
+	v.distance = v.window_w * v.window_h;
+	return (v);
 }
 
 // this function initialize the ft_vertical_intersection() function vars
@@ -134,7 +112,7 @@ void	ft_init_vertcl_vars(t_data *data, float ray_angle, t_var *v)
 
 // this function return the distance between the player 
 // and the vertical intersection with the wall
-float	ft_vertical_intersection(t_data *data, float ray_angle)
+t_var	ft_vertical_intersection(t_data *data, float ray_angle)
 {
 	t_var	v;
 
@@ -145,10 +123,11 @@ float	ft_vertical_intersection(t_data *data, float ray_angle)
 	{
 		if (ft_is_in_wall(v.next_vertcl_touch_x, \
 		v.next_vertcl_touch_y, data) == 1)
-			return (v.distance);
+			return (v);
 		v.next_vertcl_touch_x += v.x_steps;
 		v.next_vertcl_touch_y += v.y_steps;
 		v.distance += sqrt(pow(v.x_steps, 2) + pow(v.y_steps, 2));
 	}
-	return (v.window_w * v.window_h);
+	v.distance = v.window_w * v.window_h;
+	return (v);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:39:33 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 15:21:50 by hboumahd         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:22:47 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <math.h>
 
 # define COLUMN_SIZE 50
+# define TEX_WIDTH 50
+# define TEX_HEIGHT 50
 
 # define KEY_ESC	53
 # define KEY_W	13
@@ -32,6 +34,30 @@
 # define KEY_AROW_R	124
 # define KEY_AROW_L	123
 # define KEY_RANDOM	9999999
+
+typedef struct s_var
+{
+	float	x_intercept;
+	float	y_intercept;
+	float	x_steps;
+	float	y_steps;
+
+	int		is_ray_facing_up;
+	int		is_ray_facing_down;
+	int		is_ray_facing_right;
+	int		is_ray_facing_left;
+
+	float	next_horz_touch_x;
+	float	next_horz_touch_y;
+
+	float	next_vertcl_touch_x;
+	float	next_vertcl_touch_y;
+	float	ray_angle;
+
+	int		window_w;
+	int		window_h;
+	float	distance;
+}	t_var;
 
 typedef struct s_map
 {
@@ -106,7 +132,8 @@ typedef struct s_data
 	int			endian;
 
 	int			fix_h;
-	int			fix_w;	
+	int			fix_w;
+	t_var		v;
 }	t_data;
 
 void			ft_maloc_error(void *var);
@@ -121,9 +148,9 @@ void			ft_render_player(t_data *data);
 void			ft_update(t_data *data, int key);
 void			ft_render_rays(t_data *data);
 int				ft_is_in_wall(int new_x, int new_y, t_data *data);
-float			ft_horizontal_intersection(t_data *data, float ray_angle);
-float			ft_vertical_intersection(t_data *data, float ray_angle);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_var			ft_horizontal_intersection(t_data *data, float ray_angle);
+t_var			ft_vertical_intersection(t_data *data, float ray_angle);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render(t_data *data, int key);
 void			ft_draw_one_ray(t_data *data, float ray_angle, int size);
 unsigned int	ft_trgb_to_dec(int t, int r, int g, int b);
@@ -136,8 +163,7 @@ void			ft_free_textures(t_data *data);
 int				ft_exit_handler(void *n_data);
 int				ft_key_handler(int key, void *n_data);
 int				ft_mouse_handler(int key, int x, int y, void *n_data);
-
-// lhou functions
+void			my_mlx_pixel_put_wall(t_data *data, int x, int y, int wall_top);
 int				ft_verifie(char *file);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_is_exist(char *str, char c);
