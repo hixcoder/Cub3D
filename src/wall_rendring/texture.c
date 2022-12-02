@@ -6,7 +6,7 @@
 /*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:23:33 by lahammam          #+#    #+#             */
-/*   Updated: 2022/11/30 12:22:29 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:19:49 by lahammam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ unsigned get_color_text(int x, int y, t_inter inter, int walltop)
 		else
 			text = text_e;
 	}
-	else
+	else // horozintal
 	{
 		offsetx = (int)inter.x % TEX_WIDTH;
 		if (isRayFacingDown)
@@ -43,9 +43,6 @@ unsigned get_color_text(int x, int y, t_inter inter, int walltop)
 	result = result + text[offset + 2] * pow(16, 4);
 	result = result + text[offset + 1] * pow(16, 2);
 	result = result + text[offset + 0] * pow(16, 0);
-	// 
-  
-    // result = 0xff0000;
 	x++;
 	return (result);
 }

@@ -111,7 +111,6 @@ static int mouse_hook(int keycode, int x, int y, t_data *data)
 		data->obj_plyr->turn_direction = 1;
 	else if (keycode == 5 || keycode == 2)
 		data->obj_plyr->turn_direction = -1;
-	printf("x=%d y=%d-->%d---\n", x, y, keycode);
 	if (keycode == 4 || keycode == 1 || keycode == 5 || keycode == 2)
 		ft_rotate(data);
 	return (0);
