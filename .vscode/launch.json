@@ -8,9 +8,9 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "/Users/lahammam/Desktop/cub3d_hex/cub3D",
-            "args": ["./map.cub"],
-            "cwd": "/Users/lahammam/Desktop/cub3d_hex"
+            "program": "/Users/hboumahd/Desktop/cub/cub3D_bonus",
+            "args": ["map2.cub"],
+            "cwd": "/Users/hboumahd/Desktop/cub"
         }
     ]
 }

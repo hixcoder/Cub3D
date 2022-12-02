@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lahammam <lahammam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboumahd <hboumahd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:54:16 by hboumahd          #+#    #+#             */
-/*   Updated: 2022/11/30 17:09:53 by lahammam         ###   ########.fr       */
+/*   Updated: 2022/12/02 11:51:53 by hboumahd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_is_in_wall(int new_x, int new_y, t_data *data)
 
 	w = (data->obj_map->map_width) * COLUMN_SIZE;
 	h = (data->obj_map->map_height) * COLUMN_SIZE;
-	if (new_x < 0 || new_x > w || new_y < 0 || new_y > h)
+	if (new_x < 0 || new_x >= w || new_y < 0 || new_y >= h)
 		return (1);
 	if (data->obj_map->map[new_y / COLUMN_SIZE][new_x / COLUMN_SIZE] == '1')
 		return (1);
